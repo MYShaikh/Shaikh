@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Microsoft.Extensions.Configuration;
 using Shaikh.Server.Models;
+using Shaikh.Server.Services;
 using System.Data;
 
 namespace Shaikh.Server.Controllers
@@ -13,10 +14,12 @@ namespace Shaikh.Server.Controllers
     public class ViewersController : ControllerBase
     {
         private readonly string _connectionString;
+        private readonly IAttendanceEmail _attendanceEmail;
 
-        public ViewersController(IConfiguration configuration)
+        public ViewersController(IConfiguration configuration, IAttendanceEmail attendanceEmail)
         {
             _connectionString = configuration.GetConnectionString("DefaultConnection");
+            _attendanceEmail = attendanceEmail;
         }
 
         [HttpPost("increment")]
@@ -29,6 +32,9 @@ namespace Shaikh.Server.Controllers
 
             string selectSql = "SELECT ISNULL(ViewerCount, 0) FROM TotalViewers;";
             int newCount = await db.QuerySingleAsync<int>(selectSql);
+            if(newCount % 10 == 0) {
+                await _attendanceEmail.AlertMeAsync(newCount); // Alert every 10 viewers
+            }
 
             return Ok(new { viewerCount = newCount });
         }

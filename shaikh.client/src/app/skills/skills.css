@@ -73,6 +73,7 @@ main {
 }
 
 .skill-card {
+  position: relative;
   background-color: #2c2c2c;
   border: 1px solid #3d3d3d;
   border-radius: 10px;
@@ -95,6 +96,32 @@ main {
     font-size: 0.9rem;
     font-weight: 600;
   }
+
+
+.skill-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 10px;
+  width: 220px;
+  background-color: #2c2c2c;
+  border: 1px solid #4CAF50;
+  border-radius: 8px;
+  padding: 12px;
+  font-size: 0.8rem;
+  font-weight: 400;
+  line-height: 1.4;
+  color: #e0e0e0;
+  text-align: left;
+  z-index: 10;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.skill-card:hover .skill-tooltip {
+  display: block;
+}
 
   /* =========================================
    Icons
