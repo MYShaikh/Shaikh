@@ -43,6 +43,15 @@
       </div>
     </section>
 
+    <div class="info-card">
+      <div class="alumni-question" [class.faded]="alumniStatus['GSU']">
+        <p class="description">Are you a GSU alumni?</p>
+        <button class="btn" (click)="submitAlumni('GSU', true)">Yes</button>
+        <button class="btn" (click)="submitAlumni('GSU', false)">No</button>
+      </div>
+      <p class="form-status form-status-success" [class.visible]="alumniStatus['GSU']">Thanks for letting me know!</p>
+    </div>
+
     <div class="divider"></div>
 
     <!-- Jamia Hamdard University -->
@@ -77,6 +86,15 @@
 
       </div>
     </section>
+
+    <div class="info-card">
+      <div class="alumni-question" [class.faded]="alumniStatus['JHU']">
+        <p class="description">Are you a JHU alumni?</p>
+        <button class="btn" (click)="submitAlumni('JHU', true)">Yes</button>
+        <button class="btn" (click)="submitAlumni('JHU', false)">No</button>
+      </div>
+      <p class="form-status form-status-success" [class.visible]="alumniStatus['JHU']">Thanks for letting me know!</p>
+    </div>
 
   </main>
 
