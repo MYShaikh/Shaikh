@@ -19,7 +19,7 @@ string dbName = builder.Configuration["DatabaseSettings:Database"];
 string dbUser = builder.Configuration["DatabaseSettings:UserId"];
 string dbPass = builder.Configuration["DatabaseSettings:Password"];
 
-string dynamicConnectionString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPass};TrustServerCertificate=True;Encrypt=False;";
+string dynamicConnectionString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPass};TrustServerCertificate=True;Encrypt=True;";
 Console.WriteLine($"[DB] Connecting to Server={dbServer} Database={dbName}");
 
 builder.Services.AddSingleton(provider =>

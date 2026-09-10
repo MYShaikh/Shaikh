@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-contact',
@@ -21,13 +21,17 @@ export class ContactComponent {
 
   contactStatus: 'idle' | 'sending' | 'sent' | 'error' = 'idle';
 
+  constructor(private cdr: ChangeDetectorRef) { }
+
   handlePhoneClick(): void {
     navigator.clipboard.writeText(this.phoneNumber).then(() => {
       const originalText = this.phoneButtonText;
       this.phoneButtonText = 'Number Copied!';
+      this.cdr.detectChanges();
 
       setTimeout(() => {
         this.phoneButtonText = originalText;
+        this.cdr.detectChanges();
       }, 2000);
     }).catch(err => {
       console.error('Failed to copy text: ', err);
@@ -45,6 +49,7 @@ export class ContactComponent {
     }
 
     this.contactStatus = 'sending';
+    this.cdr.detectChanges();
 
     fetch('https://localhost:7154/api/contact', {
       method: 'POST',
@@ -62,10 +67,12 @@ export class ContactComponent {
       .then(() => {
         this.contactStatus = 'sent';
         this.contactForm = { name: '', email: '', subject: '', body: '' };
+        this.cdr.detectChanges();
       })
       .catch(error => {
         console.error('Failed to send message:', error);
         this.contactStatus = 'error';
+        this.cdr.detectChanges();
       });
   }
 }
