@@ -305,3 +305,198 @@
 2026-09-10 12:00:06.492 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.ContactController.SubmitContact (Shaikh.Server)'
 2026-09-10 12:00:06.494 -04:00 [INF] HTTP POST /api/contact responded 200 in 45.5350 ms
 2026-09-10 12:00:06.497 -04:00 [INF] Request finished HTTP/2 POST https://localhost:7154/api/contact - 200 null application/json; charset=utf-8 54.421ms
+2026-09-10 12:37:06.996 -04:00 [INF] Now listening on: https://localhost:7154
+2026-09-10 12:37:07.047 -04:00 [INF] Now listening on: http://localhost:5218
+2026-09-10 12:37:07.051 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-10 12:37:07.053 -04:00 [INF] Hosting environment: Development
+2026-09-10 12:37:07.055 -04:00 [INF] Content root path: C:\Users\Mohammad.Shaikh\OneDrive - Employer Solutions\Desktop\Shaikh\Shaikh.Server
+2026-09-10 12:37:07.220 -04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7154/api/viewers/increment - null null
+2026-09-10 12:37:07.287 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:07.294 -04:00 [INF] HTTP OPTIONS /api/viewers/increment responded 204 in 7.7890 ms
+2026-09-10 12:37:07.304 -04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7154/api/viewers/increment - 204 null null 91.6784ms
+2026-09-10 12:37:07.307 -04:00 [INF] Request starting HTTP/2 POST https://localhost:7154/api/viewers/increment - application/json 0
+2026-09-10 12:37:07.320 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:07.327 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.ViewersController.IncrementViewers (Shaikh.Server)'
+2026-09-10 12:37:07.359 -04:00 [INF] Route matched with {action = "IncrementViewers", controller = "Viewers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] IncrementViewers() on controller Shaikh.Server.Controllers.ViewersController (Shaikh.Server).
+2026-09-10 12:37:07.984 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType6`1[[System.Int32, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:08.006 -04:00 [INF] Executed action Shaikh.Server.Controllers.ViewersController.IncrementViewers (Shaikh.Server) in 638.5712ms
+2026-09-10 12:37:08.010 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.ViewersController.IncrementViewers (Shaikh.Server)'
+2026-09-10 12:37:08.014 -04:00 [INF] HTTP POST /api/viewers/increment responded 200 in 693.4571 ms
+2026-09-10 12:37:08.020 -04:00 [INF] Request finished HTTP/2 POST https://localhost:7154/api/viewers/increment - 200 null application/json; charset=utf-8 713.3784ms
+2026-09-10 12:37:09.909 -04:00 [INF] Request starting HTTP/1.1 POST http://localhost:64262/api/viewers/role - application/json 51
+2026-09-10 12:37:09.917 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:09.922 -04:00 [INF] HTTP POST /api/viewers/role responded 307 in 5.2822 ms
+2026-09-10 12:37:09.936 -04:00 [INF] Request finished HTTP/1.1 POST http://localhost:64262/api/viewers/role - 307 0 null 26.9085ms
+2026-09-10 12:37:09.945 -04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7154/api/viewers/role - null null
+2026-09-10 12:37:09.958 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:09.966 -04:00 [INF] HTTP OPTIONS /api/viewers/role responded 204 in 8.3151 ms
+2026-09-10 12:37:09.985 -04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7154/api/viewers/role - 204 null null 39.5041ms
+2026-09-10 12:37:09.987 -04:00 [INF] Request starting HTTP/2 POST https://localhost:7154/api/viewers/role - application/json 51
+2026-09-10 12:37:09.997 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:09.999 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.ViewersController.SaveRole (Shaikh.Server)'
+2026-09-10 12:37:10.024 -04:00 [INF] Route matched with {action = "SaveRole", controller = "Viewers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SaveRole(Shaikh.Server.Models.VisitorTypeRequest) on controller Shaikh.Server.Controllers.ViewersController (Shaikh.Server).
+2026-09-10 12:37:10.134 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType7`3[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:10.140 -04:00 [INF] Executed action Shaikh.Server.Controllers.ViewersController.SaveRole (Shaikh.Server) in 109.3191ms
+2026-09-10 12:37:10.143 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.ViewersController.SaveRole (Shaikh.Server)'
+2026-09-10 12:37:10.145 -04:00 [INF] HTTP POST /api/viewers/role responded 200 in 148.6106 ms
+2026-09-10 12:37:10.149 -04:00 [INF] Request finished HTTP/2 POST https://localhost:7154/api/viewers/role - 200 null application/json; charset=utf-8 162.3118ms
+2026-09-10 12:37:10.639 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/C Sharp (programming language) - null null
+2026-09-10 12:37:10.658 -04:00 [INF] HTTP GET /api/definition/C Sharp (programming language) responded 307 in 0.1351 ms
+2026-09-10 12:37:10.661 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/C Sharp (programming language) - 307 0 null 23.1442ms
+2026-09-10 12:37:10.667 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/C Sharp (programming language) - null null
+2026-09-10 12:37:10.673 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:10.675 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:10.688 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:10.715 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/C%20Sharp%20(programming%20language)
+2026-09-10 12:37:10.720 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/C%20Sharp%20(programming%20language)
+2026-09-10 12:37:10.932 -04:00 [INF] Received HTTP response headers after 206.4938ms - 200
+2026-09-10 12:37:10.935 -04:00 [INF] End processing HTTP request after 220.9698ms - 200
+2026-09-10 12:37:10.947 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:10.952 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 260.0314ms
+2026-09-10 12:37:10.955 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:10.957 -04:00 [INF] HTTP GET /api/definition/C Sharp (programming language) responded 200 in 283.3798 ms
+2026-09-10 12:37:10.961 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/C Sharp (programming language) - 200 null application/json; charset=utf-8 294.2532ms
+2026-09-10 12:37:10.971 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/JavaScript - null null
+2026-09-10 12:37:10.977 -04:00 [INF] HTTP GET /api/definition/JavaScript responded 307 in 0.0453 ms
+2026-09-10 12:37:10.981 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/JavaScript - 307 0 null 10.1186ms
+2026-09-10 12:37:10.988 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/WordPress - null null
+2026-09-10 12:37:10.984 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/JavaScript - null null
+2026-09-10 12:37:10.993 -04:00 [INF] HTTP GET /api/definition/WordPress responded 307 in 0.0420 ms
+2026-09-10 12:37:10.997 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:11.000 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/WordPress - 307 0 null 12.1666ms
+2026-09-10 12:37:11.001 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.003 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/WordPress - null null
+2026-09-10 12:37:11.008 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:11.013 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:11.016 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/JavaScript
+2026-09-10 12:37:11.016 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.018 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/JavaScript
+2026-09-10 12:37:11.020 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:11.025 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/WordPress
+2026-09-10 12:37:11.027 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/WordPress
+2026-09-10 12:37:11.055 -04:00 [INF] Received HTTP response headers after 32.7793ms - 200
+2026-09-10 12:37:11.057 -04:00 [INF] End processing HTTP request after 41.4018ms - 200
+2026-09-10 12:37:11.061 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:11.064 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 48.5412ms
+2026-09-10 12:37:11.066 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.074 -04:00 [INF] HTTP GET /api/definition/JavaScript responded 200 in 76.8009 ms
+2026-09-10 12:37:11.078 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/JavaScript - 200 null application/json; charset=utf-8 94.774ms
+2026-09-10 12:37:11.090 -04:00 [INF] Received HTTP response headers after 60.3271ms - 200
+2026-09-10 12:37:11.100 -04:00 [INF] End processing HTTP request after 74.7473ms - 200
+2026-09-10 12:37:11.104 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:11.107 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 82.5593ms
+2026-09-10 12:37:11.111 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.114 -04:00 [INF] HTTP GET /api/definition/WordPress responded 200 in 100.9727 ms
+2026-09-10 12:37:11.122 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/WordPress - 200 null application/json; charset=utf-8 119.3233ms
+2026-09-10 12:37:11.323 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/MySQL - null null
+2026-09-10 12:37:11.351 -04:00 [INF] HTTP GET /api/definition/MySQL responded 307 in 0.0400 ms
+2026-09-10 12:37:11.357 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/MySQL - 307 0 null 33.8747ms
+2026-09-10 12:37:11.359 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/MySQL - null null
+2026-09-10 12:37:11.370 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:11.381 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.383 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:11.386 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/MySQL
+2026-09-10 12:37:11.390 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/MySQL
+2026-09-10 12:37:11.437 -04:00 [INF] Received HTTP response headers after 39.8767ms - 200
+2026-09-10 12:37:11.439 -04:00 [INF] End processing HTTP request after 52.9621ms - 200
+2026-09-10 12:37:11.441 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:11.444 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 58.1247ms
+2026-09-10 12:37:11.447 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.448 -04:00 [INF] HTTP GET /api/definition/MySQL responded 200 in 77.9720 ms
+2026-09-10 12:37:11.452 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/MySQL - 200 null application/json; charset=utf-8 92.3313ms
+2026-09-10 12:37:11.651 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/Vector database - null null
+2026-09-10 12:37:11.657 -04:00 [INF] HTTP GET /api/definition/Vector database responded 307 in 0.0546 ms
+2026-09-10 12:37:11.661 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/Vector database - 307 0 null 9.7053ms
+2026-09-10 12:37:11.664 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/Vector database - null null
+2026-09-10 12:37:11.672 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:11.673 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.675 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:11.679 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/Vector%20database
+2026-09-10 12:37:11.681 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/Vector%20database
+2026-09-10 12:37:11.694 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/Microsoft Copilot Studio - null null
+2026-09-10 12:37:11.701 -04:00 [INF] HTTP GET /api/definition/Microsoft Copilot Studio responded 307 in 0.0518 ms
+2026-09-10 12:37:11.704 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/ElevenLabs - null null
+2026-09-10 12:37:11.705 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/Microsoft Copilot Studio - 307 0 null 10.7852ms
+2026-09-10 12:37:11.707 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/Microsoft Copilot Studio - null null
+2026-09-10 12:37:11.710 -04:00 [INF] HTTP GET /api/definition/ElevenLabs responded 307 in 0.0365 ms
+2026-09-10 12:37:11.720 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:11.722 -04:00 [INF] Received HTTP response headers after 38.1174ms - 200
+2026-09-10 12:37:11.723 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/ElevenLabs - 307 0 null 19.1307ms
+2026-09-10 12:37:11.725 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.726 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/ElevenLabs - null null
+2026-09-10 12:37:11.736 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:11.727 -04:00 [INF] End processing HTTP request after 47.7916ms - 200
+2026-09-10 12:37:11.762 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/GitHub - null null
+2026-09-10 12:37:11.762 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:11.766 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/Microsoft%20Copilot%20Studio
+2026-09-10 12:37:11.768 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:11.773 -04:00 [INF] HTTP GET /api/definition/GitHub responded 307 in 0.0426 ms
+2026-09-10 12:37:11.774 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.776 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/Microsoft%20Copilot%20Studio
+2026-09-10 12:37:11.779 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 100.1864ms
+2026-09-10 12:37:11.782 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/GitHub - 307 0 null 20.9461ms
+2026-09-10 12:37:11.784 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:11.786 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/GitHub - null null
+2026-09-10 12:37:11.789 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.798 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/ElevenLabs
+2026-09-10 12:37:11.802 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:11.804 -04:00 [INF] HTTP GET /api/definition/Vector database responded 200 in 132.0241 ms
+2026-09-10 12:37:11.806 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/ElevenLabs
+2026-09-10 12:37:11.807 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.810 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/Vector database - 200 null application/json; charset=utf-8 146.441ms
+2026-09-10 12:37:11.815 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:11.824 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/GitHub
+2026-09-10 12:37:11.826 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/GitHub
+2026-09-10 12:37:11.842 -04:00 [INF] Received HTTP response headers after 29.642ms - 200
+2026-09-10 12:37:11.845 -04:00 [INF] End processing HTTP request after 46.7395ms - 200
+2026-09-10 12:37:11.848 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:11.850 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 52.5607ms
+2026-09-10 12:37:11.853 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.855 -04:00 [INF] HTTP GET /api/definition/ElevenLabs responded 200 in 92.9811 ms
+2026-09-10 12:37:11.858 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/ElevenLabs - 200 null application/json; charset=utf-8 132.5154ms
+2026-09-10 12:37:11.877 -04:00 [INF] Received HTTP response headers after 48.8118ms - 200
+2026-09-10 12:37:11.880 -04:00 [INF] End processing HTTP request after 56.0426ms - 200
+2026-09-10 12:37:11.882 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:11.885 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 61.7934ms
+2026-09-10 12:37:11.887 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:11.889 -04:00 [INF] HTTP GET /api/definition/GitHub responded 200 in 87.1059 ms
+2026-09-10 12:37:11.893 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/GitHub - 200 null application/json; charset=utf-8 107.669ms
+2026-09-10 12:37:12.004 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/Visual Studio - null null
+2026-09-10 12:37:12.011 -04:00 [INF] HTTP GET /api/definition/Visual Studio responded 307 in 0.1498 ms
+2026-09-10 12:37:12.015 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/Visual Studio - 307 0 null 10.7032ms
+2026-09-10 12:37:12.018 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/Visual Studio - null null
+2026-09-10 12:37:12.021 -04:00 [INF] Request starting HTTP/1.1 GET http://localhost:64262/api/definition/Microsoft Windows - null null
+2026-09-10 12:37:12.026 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:12.030 -04:00 [INF] HTTP GET /api/definition/Microsoft Windows responded 307 in 0.0509 ms
+2026-09-10 12:37:12.031 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:12.035 -04:00 [INF] Request finished HTTP/1.1 GET http://localhost:64262/api/definition/Microsoft Windows - 307 0 null 14.0055ms
+2026-09-10 12:37:12.036 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:12.037 -04:00 [INF] Request starting HTTP/2 GET https://localhost:7154/api/definition/Microsoft Windows - null null
+2026-09-10 12:37:12.045 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/Visual%20Studio
+2026-09-10 12:37:12.050 -04:00 [INF] CORS policy execution successful.
+2026-09-10 12:37:12.050 -04:00 [INF] Received HTTP response headers after 263.715ms - 404
+2026-09-10 12:37:12.051 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/Visual%20Studio
+2026-09-10 12:37:12.053 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:12.055 -04:00 [INF] End processing HTTP request after 288.5112ms - 404
+2026-09-10 12:37:12.058 -04:00 [INF] Route matched with {action = "GetDefinition", controller = "Definition"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] GetDefinition(System.String) on controller Shaikh.Server.Controllers.DefinitionController (Shaikh.Server).
+2026-09-10 12:37:12.064 -04:00 [INF] Start processing HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/Microsoft%20Windows
+2026-09-10 12:37:12.163 -04:00 [INF] Sending HTTP request GET https://en.wikipedia.org/api/rest_v1/page/summary/Microsoft%20Windows
+2026-09-10 12:37:12.161 -04:00 [INF] Executing NotFoundObjectResult, writing value of type '<>f__AnonymousType1`1[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:12.160 -04:00 [INF] Received HTTP response headers after 103.8221ms - 200
+2026-09-10 12:37:12.172 -04:00 [INF] End processing HTTP request after 126.9687ms - 200
+2026-09-10 12:37:12.170 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 403.9772ms
+2026-09-10 12:37:12.177 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:12.174 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:12.180 -04:00 [INF] HTTP GET /api/definition/Microsoft Copilot Studio responded 404 in 459.4281 ms
+2026-09-10 12:37:12.182 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 137.1493ms
+2026-09-10 12:37:12.187 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/Microsoft Copilot Studio - 404 null application/json; charset=utf-8 479.4609ms
+2026-09-10 12:37:12.190 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:12.212 -04:00 [INF] HTTP GET /api/definition/Visual Studio responded 200 in 186.4953 ms
+2026-09-10 12:37:12.208 -04:00 [INF] Received HTTP response headers after 41.4154ms - 200
+2026-09-10 12:37:12.219 -04:00 [INF] End processing HTTP request after 155.0656ms - 200
+2026-09-10 12:37:12.217 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/Visual Studio - 200 null application/json; charset=utf-8 199.7354ms
+2026-09-10 12:37:12.223 -04:00 [INF] Executing OkObjectResult, writing value of type '<>f__AnonymousType2`2[[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e],[System.String, System.Private.CoreLib, Version=10.0.0.0, Culture=neutral, PublicKeyToken=7cec85d7bea7798e]]'.
+2026-09-10 12:37:12.233 -04:00 [INF] Executed action Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server) in 168.7697ms
+2026-09-10 12:37:12.236 -04:00 [INF] Executed endpoint 'Shaikh.Server.Controllers.DefinitionController.GetDefinition (Shaikh.Server)'
+2026-09-10 12:37:12.238 -04:00 [INF] HTTP GET /api/definition/Microsoft Windows responded 200 in 188.2245 ms
+2026-09-10 12:37:12.242 -04:00 [INF] Request finished HTTP/2 GET https://localhost:7154/api/definition/Microsoft Windows - 200 null application/json; charset=utf-8 204.974ms

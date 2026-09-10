@@ -1,4 +1,0 @@
-;/*FB_PKG_DELIM*/
-
-__d("CAARegistrationFormDesktopQuery_facebookRelayOperation",[],(function(t,n,r,o,a,i){a.exports="37692866870361608"}),null);
-__d("CAARegistrationFormDesktopQuery$Parameters",["CAARegistrationFormDesktopQuery_facebookRelayOperation"],(function(t,n,r,o,a,i){"use strict";var e={kind:"PreloadableConcreteRequest",params:{id:n("CAARegistrationFormDesktopQuery_facebookRelayOperation"),metadata:{},name:"CAARegistrationFormDesktopQuery",operationKind:"query",text:null}};a.exports=e}),null);
