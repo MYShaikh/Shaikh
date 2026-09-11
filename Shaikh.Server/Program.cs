@@ -31,16 +31,7 @@ builder.Services.AddSingleton(provider =>
     return new EmailClient(connectionString);
 });
 
-builder.Services.AddSingleton<IConfiguration>(provider =>
-{
-    var configBuilder = new ConfigurationBuilder()
-        .AddConfiguration(builder.Configuration)
-        .AddInMemoryCollection(new Dictionary<string, string>
-        {
-            {"ConnectionStrings:DefaultConnection", dynamicConnectionString}
-        });
-    return configBuilder.Build();
-});
+builder.Configuration["ConnectionStrings:DefaultConnection"] = dynamicConnectionString;
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
