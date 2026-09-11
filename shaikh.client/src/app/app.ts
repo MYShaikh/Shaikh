@@ -29,7 +29,6 @@ export class App implements OnInit {
       })
         .then(response => response.json())
         .then(data => {
-          console.log("New Total Viewers:", data.viewerCount);
           sessionStorage.setItem('hasVisitedHomepage', 'true');
         })
         .catch(error => {
