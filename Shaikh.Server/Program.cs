@@ -44,7 +44,7 @@ builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddSingleton<IAttendanceEmail, AttendanceEmailService>();
 builder.Services.AddDbContext<PortfolioContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
+    options.UseSqlServer(dynamicConnectionString));
 
 builder.Services.AddCors(options =>
 {
