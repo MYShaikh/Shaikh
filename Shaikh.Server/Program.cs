@@ -24,18 +24,21 @@ string dbPass = builder.Configuration["DatabaseSettings:Password"];
 string dynamicConnectionString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPass};TrustServerCertificate=True;Encrypt=True;";
 Console.WriteLine($"[DB] Connecting to Server={dbServer} Database={dbName}");
 
-builder.Services.AddSingleton(provider =>
+string emailConnectionString = builder.Configuration["EmailSettings:ConnectionString"];
+if (!string.IsNullOrWhiteSpace(emailConnectionString))
 {
-    var configuration = provider.GetRequiredService<IConfiguration>();
-    string connectionString = configuration["EmailSettings:ConnectionString"];
-    return new EmailClient(connectionString);
-});
+    builder.Services.AddSingleton(provider => new EmailClient(emailConnectionString));
+    builder.Services.AddSingleton<IAttendanceEmail, AttendanceEmailService>();
+}
+else
+{
+    builder.Services.AddSingleton<IAttendanceEmail, NoOpAttendanceEmail>();
+}
 
 builder.Configuration["ConnectionStrings:DefaultConnection"] = dynamicConnectionString;
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-builder.Services.AddSingleton<IAttendanceEmail, AttendanceEmailService>();
 builder.Services.AddDbContext<PortfolioContext>(options =>
     options.UseSqlServer(dynamicConnectionString));
 
