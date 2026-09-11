@@ -51,7 +51,7 @@ export class ContactComponent {
     this.contactStatus = 'sending';
     this.cdr.detectChanges();
 
-    fetch('https://localhost:7154/api/contact', {
+    fetch('/api/contact', {
       method: 'POST',
       headers: {
         'Content-Type': 'application/json'
