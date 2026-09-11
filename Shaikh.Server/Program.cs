@@ -32,6 +32,7 @@ if (!string.IsNullOrWhiteSpace(emailConnectionString))
 }
 else
 {
+    Log.Warning("EmailSettings:ConnectionString is not set - milestone emails are DISABLED.");
     builder.Services.AddSingleton<IAttendanceEmail, NoOpAttendanceEmail>();
 }
 
