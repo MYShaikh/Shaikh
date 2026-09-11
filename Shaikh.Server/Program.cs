@@ -7,7 +7,9 @@ using Shaikh.Server.Services;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
-    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.File(
+    Path.Combine(Environment.GetEnvironmentVariable("HOME") ?? ".", "LogFiles", "Application", "log-.txt"),
+    rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
 
