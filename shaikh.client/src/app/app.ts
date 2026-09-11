@@ -21,7 +21,7 @@ export class App implements OnInit {
   // 3. Paste the ngOnInit method inside the class
   ngOnInit() {
     if (!sessionStorage.getItem('hasVisitedHomepage')) {
-      fetch('https://localhost:7154/api/viewers/increment', {
+      fetch('/api/viewers/increment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
