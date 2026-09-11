@@ -26,13 +26,13 @@ namespace Shaikh.Server.Controllers
         public async Task<IActionResult> IncrementViewers()
         {
             using IDbConnection db = new SqlConnection(_connectionString);
+            string incrementSql = @"
+                UPDATE TotalViewers
+                SET ViewerCount = ViewerCount + 1
+                OUTPUT INSERTED.ViewerCount;";
+            int newCount = await db.QuerySingleAsync<int>(incrementSql);
 
-            string updateSql = "UPDATE TotalViewers SET ViewerCount = ViewerCount + 1;";
-            await db.ExecuteAsync(updateSql);
-
-            string selectSql = "SELECT ISNULL(ViewerCount, 0) FROM TotalViewers;";
-            int newCount = await db.QuerySingleAsync<int>(selectSql);
-            if(newCount % 10 == 0) {
+            if (newCount % 10 == 0) {
                 await _attendanceEmail.AlertMeAsync(newCount); // Alert every 10 viewers
             }
 
