@@ -7,7 +7,9 @@ using Shaikh.Server.Services;
 
 Log.Logger = new LoggerConfiguration()
     .WriteTo.Console()
-    .WriteTo.File("logs/log-.txt", rollingInterval: RollingInterval.Day)
+    .WriteTo.File(
+    Path.Combine(Environment.GetEnvironmentVariable("HOME") ?? ".", "LogFiles", "Application", "log-.txt"),
+    rollingInterval: RollingInterval.Day)
     .CreateLogger();
 
 
@@ -22,27 +24,22 @@ string dbPass = builder.Configuration["DatabaseSettings:Password"];
 string dynamicConnectionString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPass};TrustServerCertificate=True;Encrypt=True;";
 Console.WriteLine($"[DB] Connecting to Server={dbServer} Database={dbName}");
 
-builder.Services.AddSingleton(provider =>
+string emailConnectionString = builder.Configuration["EmailSettings:ConnectionString"];
+if (!string.IsNullOrWhiteSpace(emailConnectionString))
 {
-    var configuration = provider.GetRequiredService<IConfiguration>();
-    string connectionString = configuration["EmailSettings:ConnectionString"];
-    return new EmailClient(connectionString);
-});
+    builder.Services.AddSingleton(provider => new EmailClient(emailConnectionString));
+    builder.Services.AddSingleton<IAttendanceEmail, AttendanceEmailService>();
+}
+else
+{
+    Log.Warning("EmailSettings:ConnectionString is not set - milestone emails are DISABLED.");
+    builder.Services.AddSingleton<IAttendanceEmail, NoOpAttendanceEmail>();
+}
 
-builder.Services.AddSingleton<IConfiguration>(provider =>
-{
-    var configBuilder = new ConfigurationBuilder()
-        .AddConfiguration(builder.Configuration)
-        .AddInMemoryCollection(new Dictionary<string, string>
-        {
-            {"ConnectionStrings:DefaultConnection", dynamicConnectionString}
-        });
-    return configBuilder.Build();
-});
+builder.Configuration["ConnectionStrings:DefaultConnection"] = dynamicConnectionString;
 
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
-builder.Services.AddSingleton<IAttendanceEmail, AttendanceEmailService>();
 builder.Services.AddDbContext<PortfolioContext>(options =>
     options.UseSqlServer(dynamicConnectionString));
 
