@@ -1,0 +1,17 @@
+2026-09-14 11:14:36.801 -04:00 [INF] Now listening on: https://localhost:7154
+2026-09-14 11:14:36.861 -04:00 [INF] Now listening on: http://localhost:5218
+2026-09-14 11:14:36.865 -04:00 [INF] Application started. Press Ctrl+C to shut down.
+2026-09-14 11:14:36.867 -04:00 [INF] Hosting environment: Development
+2026-09-14 11:14:36.869 -04:00 [INF] Content root path: C:\Users\Mohammad.Shaikh\OneDrive - Employer Solutions\Desktop\Shaikh\Shaikh.Server
+2026-09-14 11:14:43.148 -04:00 [INF] Request starting HTTP/1.1 POST http://localhost:64262/api/viewers/role - application/json 51
+2026-09-14 11:14:43.223 -04:00 [INF] CORS policy execution successful.
+2026-09-14 11:14:43.231 -04:00 [INF] HTTP POST /api/viewers/role responded 307 in 9.4274 ms
+2026-09-14 11:14:43.248 -04:00 [INF] Request finished HTTP/1.1 POST http://localhost:64262/api/viewers/role - 307 0 null 109.593ms
+2026-09-14 11:14:43.309 -04:00 [INF] Request starting HTTP/2 OPTIONS https://localhost:7154/api/viewers/role - null null
+2026-09-14 11:14:43.315 -04:00 [INF] CORS policy execution successful.
+2026-09-14 11:14:43.316 -04:00 [INF] HTTP OPTIONS /api/viewers/role responded 204 in 1.5728 ms
+2026-09-14 11:14:43.323 -04:00 [INF] Request finished HTTP/2 OPTIONS https://localhost:7154/api/viewers/role - 204 null null 14.2534ms
+2026-09-14 11:14:43.329 -04:00 [INF] Request starting HTTP/2 POST https://localhost:7154/api/viewers/role - application/json 51
+2026-09-14 11:14:43.337 -04:00 [INF] CORS policy execution successful.
+2026-09-14 11:14:43.344 -04:00 [INF] Executing endpoint 'Shaikh.Server.Controllers.ViewersController.SaveRole (Shaikh.Server)'
+2026-09-14 11:14:43.388 -04:00 [INF] Route matched with {action = "SaveRole", controller = "Viewers"}. Executing controller action with signature System.Threading.Tasks.Task`1[Microsoft.AspNetCore.Mvc.IActionResult] SaveRole(Shaikh.Server.Models.VisitorTypeRequest) on controller Shaikh.Server.Controllers.ViewersController (Shaikh.Server).
