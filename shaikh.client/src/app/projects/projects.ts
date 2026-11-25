@@ -8,6 +8,9 @@ interface Project {
   devpost: string;
   github?: string;
   demo?: string;
+  video: string;      // YouTube demo video
+  image: string;      // cover image, saved in public/images/projects
+  imageAlt: string;
 }
 
 @Component({
@@ -32,6 +35,9 @@ export class ProjectsComponent {
       tools: ['Gemini Live', 'LiveKit', 'FastAPI', 'Next.js', 'TypeScript', 'Docker', 'axe-core'],
       devpost: 'https://devpost.com/software/granny-o0vfrj',
       github: 'https://github.com/Davila-bit/memo',
+      video: 'https://www.youtube.com/watch?v=Lc1gbXqbDP4',
+      image: 'images/projects/memo.jpg',
+      imageAlt: 'Memo: screenshot of the family check-in screen',
     },
     {
       title: 'FaceScan',
@@ -42,6 +48,9 @@ export class ProjectsComponent {
       tools: ['Python', 'OpenCV', 'AWS Rekognition', 'ElevenLabs', 'Raspberry Pi 5'],
       devpost: 'https://devpost.com/software/facescan',
       github: 'https://github.com/MYShaikh/FaceScan',
+      video: 'https://www.youtube.com/watch?v=9hbFyD95ylU',
+      image: 'images/projects/facescan.jpg',
+      imageAlt: 'FaceScan: smart glasses prototype',
     },
     {
       title: 'Good Night',
@@ -52,6 +61,9 @@ export class ProjectsComponent {
       devpost: 'https://devpost.com/software/good-night',
       github: 'https://github.com/debosmita09/Good-Night',
       demo: 'https://dash-cider-39465868.figma.site/',
+      video: 'https://www.youtube.com/watch?v=Lp9T0rcODR4',
+      image: 'images/projects/good-night.jpg',
+      imageAlt: 'Good Night: the sleep companion app with Luma the cat',
     },
     {
       title: 'Whispering Witches',
@@ -62,6 +74,9 @@ export class ProjectsComponent {
       tools: ['C#', 'Unity', 'Gemini API', 'ElevenLabs', 'Blender', 'Mixamo'],
       devpost: 'https://devpost.com/software/whispering-witches',
       github: 'https://github.com/debosmita09/UGAHacks2026_whispering_witches',
+      video: 'https://www.youtube.com/watch?v=bBjMmqgKy3M',
+      image: 'images/projects/whispering-witches.jpg',
+      imageAlt: 'Whispering Witches: screenshot of the game',
     },
     {
       title: 'MedScan',
@@ -72,6 +87,9 @@ export class ProjectsComponent {
       tools: ['Python', 'Django', 'Amazon Textract', 'Tesseract OCR'],
       devpost: 'https://devpost.com/software/medscan-7y0tze',
       github: 'https://github.com/MYShaikh/MedScan-',
+      video: 'https://www.youtube.com/watch?v=spDsU8J_9xs',
+      image: 'images/projects/medscan.jpg',
+      imageAlt: 'MedScan: screenshot of the prescription scanner',
     },
     {
       title: 'ParserPro',
@@ -81,6 +99,9 @@ export class ProjectsComponent {
       tools: ['JavaScript', 'HTML', 'CSS', 'Groq'],
       devpost: 'https://devpost.com/software/parserpro',
       github: 'https://github.com/Carson-Lam/ParserPro',
+      video: 'https://www.youtube.com/watch?v=VtjUT1SeZrQ',
+      image: 'images/projects/parserpro.jpg',
+      imageAlt: 'ParserPro: thumbnail of the demo video',
     },
   ];
 }

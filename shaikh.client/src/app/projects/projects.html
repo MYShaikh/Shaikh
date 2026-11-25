@@ -12,6 +12,12 @@
 
     @for (p of projects; track p.title) {
       <section class="project-card">
+        <a class="cover" [href]="p.video" target="_blank" rel="noopener noreferrer"
+           [attr.aria-label]="'Watch the ' + p.title + ' demo video'">
+          <img [src]="p.image" [alt]="p.imageAlt" loading="lazy">
+          <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
+        </a>
+
         <h2>{{ p.title }}</h2>
 
         @if (p.meta) {
@@ -27,6 +33,7 @@
         </div>
 
         <div class="links">
+          <a [href]="p.video" target="_blank" rel="noopener noreferrer">Watch demo</a>
           <a [href]="p.devpost" target="_blank" rel="noopener noreferrer">Devpost</a>
           @if (p.github) {
             <a [href]="p.github" target="_blank" rel="noopener noreferrer">GitHub</a>
