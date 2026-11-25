@@ -120,6 +120,15 @@ html {
   color: #EA4335;
 }
 
+.devpost-icon {
+  background-color: #ffffff; /* Devpost's mark has a dark teal centre, so it sits on a light circle */
+}
+
+  .devpost-icon svg {
+    width: 36px;
+    height: 24px;
+  }
+
 .btn {
   display: flex;
   justify-content: center;

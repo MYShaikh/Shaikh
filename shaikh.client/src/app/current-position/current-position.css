@@ -283,38 +283,61 @@ main {
   }
 
 /* =========================================
-   Job placards with a faint, translucent company logo behind the text
+   Job placards: the company logo sits in its own panel, beside the text
    ========================================= */
 .job-card {
-  position: relative;
-  overflow: hidden;
+  display: flex;
+  align-items: center;
+  gap: 22px;
   background-color: #262626;
   border: 1px solid #383838;
   border-radius: 12px;
-  padding: 24px 22px;
+  padding: 20px 22px;
   margin: 10px 0 16px;
-  text-align: center;
-  isolation: isolate;          /* keeps the watermark behind the text, inside the card */
+  text-align: left;
 }
 
-/* The logo: large, centred, and see-through so it blends into the placard */
-.job-watermark {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 72%;
-  max-width: 420px;
-  height: auto;
-  transform: translate(-50%, -50%);
-  opacity: 0.12;
-  pointer-events: none;
-  user-select: none;
-  z-index: 0;
+/* The logo panel: separate from the text, and see-through so it blends into the placard */
+.job-logo {
+  flex: 0 0 150px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 14px 10px;
+  background-color: #1f1f1f;
+  border: 1px solid #333333;
+  border-radius: 10px;
+}
+
+  .job-logo img {
+    display: block;
+    width: 100%;
+    max-width: 130px;
+    height: auto;
+    opacity: 0.6;
+    transition: opacity 0.25s ease;
+  }
+
+.job-card:hover .job-logo img {
+  opacity: 0.85;
 }
 
 .job-card-content {
-  position: relative;
-  z-index: 1;
+  flex: 1 1 auto;
+  min-width: 0;
+}
+
+@media (max-width: 560px) {
+  .job-card {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .job-logo {
+    flex-basis: auto;
+    width: 100%;
+    max-width: 220px;
+  }
 }
 
 .job-sub {
@@ -347,5 +370,15 @@ main {
 
   .job-watermark {
     width: 88%;
+  }
+}
+
+.job-card .job-links {
+  justify-content: flex-start;
+}
+
+@media (max-width: 560px) {
+  .job-card .job-links {
+    justify-content: center;
   }
 }

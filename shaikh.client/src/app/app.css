@@ -13,12 +13,27 @@
 }
 
 .hamburger {
-  background: none;
-  border: none;
-  color: #4CAF50;
-  font-size: 1.8rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 52px;
+  height: 52px;
+  background-color: #2f2f2f;
+  border: 2px solid #4CAF50;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1.7rem;
   cursor: pointer;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.18);
+  transition: background-color 0.2s ease, transform 0.2s ease;
 }
+
+  .hamburger:hover,
+  .hamburger:focus-visible {
+    background-color: #4CAF50;
+    color: #1e1e1e;
+    transform: scale(1.05);
+  }
 
 /* Link Container (Horizontal on Desktop) */
 .nav-links {

@@ -1,3 +1,56 @@
+<!-- Popup about the 3 private projects: opens once per session, then docks to the side -->
+@if (popupState() !== 'docked') {
+  <div class="pp-overlay" [class.closing]="popupState() === 'closing'" (click)="closePopup()">
+    <div class="pp-card" role="dialog" aria-modal="true" aria-labelledby="pp-title" (click)="$event.stopPropagation()">
+
+      <button type="button" class="pp-x" (click)="closePopup()" aria-label="Close">&times;</button>
+
+      <h2 id="pp-title"><i class="fas fa-lock"></i> I have 3 personal projects</h2>
+
+      <p class="pp-text">
+        These projects are private, so I don't share the details publicly.
+        If you'd like to know more about one of them, email me directly.
+      </p>
+
+      <label for="pp-select" class="pp-label">Which project would you like to talk about?</label>
+      <select id="pp-select" class="pp-select" (change)="chooseProject($any($event.target).value)">
+        <option value="">Select a project…</option>
+        @for (name of privateProjects; track name) {
+          <option [value]="name">{{ name }}</option>
+        }
+      </select>
+
+      <a class="pp-send"
+         [class.disabled]="!selectedProject()"
+         [attr.href]="selectedProject() ? gmailLink() : null"
+         [attr.aria-disabled]="!selectedProject()"
+         target="_blank" rel="noopener noreferrer">
+        <i class="fas fa-envelope"></i> Email me on Gmail
+      </a>
+
+      <p class="pp-alt">
+        @if (selectedProject()) {
+          Don't use Gmail? <a [href]="mailtoLink()">Open your mail app instead</a>
+        } @else {
+          Pick a project to enable the email button.
+        }
+      </p>
+
+      <button type="button" class="pp-close" (click)="closePopup()">
+        No thanks, I'm just looking around
+      </button>
+
+    </div>
+  </div>
+}
+
+@if (popupState() === 'docked') {
+  <button type="button" class="pp-tab" (click)="openPopup()" aria-label="Open the note about my private projects">
+    <i class="fas fa-lock"></i>
+    <span>Private projects</span>
+  </button>
+}
+
 <div class="portfolio-container">
 
   <header class="profile-header">

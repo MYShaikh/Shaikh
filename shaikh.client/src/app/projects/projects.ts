@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, HostListener, OnInit, computed, signal } from '@angular/core';
+
+type PopupState = 'open' | 'closing' | 'docked';
 
 interface Project {
   title: string;
@@ -18,9 +20,65 @@ interface Project {
   styleUrl: './projects.css',
   templateUrl: './projects.html',
 })
-export class ProjectsComponent {
+export class ProjectsComponent implements OnInit {
   readonly devpostProfile = 'https://devpost.com/myshaikh237';
   readonly githubProfile = 'https://github.com/MYShaikh';
+
+  // ---- "Private projects" popup -------------------------------------------
+  // Only the names are shown. Details are shared by email, on request.
+  readonly contactEmail = 'myshaikh237@gmail.com';
+  readonly privateProjects = [
+    'Microsoft Imagine Cup Project',
+    'Photogrammetry Drone',
+    'Trapic Mobile App',
+  ];
+
+  // 'open' = popup showing, 'closing' = sliding to the side, 'docked' = small tab on the side.
+  // Signals are used because this app runs without zone.js.
+  readonly popupState = signal<PopupState>('docked');
+  readonly selectedProject = signal('');
+
+  // Opens a Gmail compose window addressed to me, with the project as the subject.
+  readonly gmailLink = computed(() =>
+    'https://mail.google.com/mail/?view=cm&fs=1' +
+    '&to=' + encodeURIComponent(this.contactEmail) +
+    '&su=' + encodeURIComponent(this.selectedProject())
+  );
+
+  // Fallback for visitors who don't use Gmail: opens their default mail app.
+  readonly mailtoLink = computed(() =>
+    'mailto:' + this.contactEmail + '?subject=' + encodeURIComponent(this.selectedProject())
+  );
+
+  ngOnInit(): void {
+    // The popup opens by itself once per browser session. After that it stays
+    // as a small tab on the side that visitors can click to open it again.
+    if (!sessionStorage.getItem('privateProjectsPopupSeen')) {
+      sessionStorage.setItem('privateProjectsPopupSeen', 'true');
+      this.popupState.set('open');
+    } else {
+      this.popupState.set('docked');
+    }
+  }
+
+  closePopup(): void {
+    if (this.popupState() !== 'open') { return; }
+    this.popupState.set('closing');                       // plays the slide-to-the-side animation
+    setTimeout(() => this.popupState.set('docked'), 500); // then leaves just the side tab
+  }
+
+  openPopup(): void {
+    this.popupState.set('open');
+  }
+
+  chooseProject(name: string): void {
+    this.selectedProject.set(name);
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscape(): void {
+    this.closePopup();
+  }
 
   // All text is saved here, copied once from the public Devpost pages and
   // shortened. Nothing is fetched from Devpost while visitors browse.
