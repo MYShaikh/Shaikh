@@ -1,5 +1,4 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
+import { Component } from '@angular/core';
 
 @Component({
   selector: 'app-skills',
@@ -10,26 +9,53 @@ import { HttpClient } from '@angular/common/http';
 export class SkillsComponent {
   hoveredSkill = '';
   summary = '';
-  constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }
+
+  // Plain text shown in the tooltip for each skill. Saved here so nothing has to be
+  // fetched from Wikipedia while visitors hover: the tooltips appear instantly.
+  // Most of these descriptions are adapted from Wikipedia (CC BY-SA 4.0); the
+  // Copilot Studio, Photon and Convai ones were written by hand.
+  private readonly summaries: Record<string, string> = {
+    "Amazon Web Services": "Amazon Web Services, Inc. (AWS) is a subsidiary of Amazon that provides on-demand cloud computing platforms and APIs to individuals, companies, and governments, on a metered, pay-as-you-go basis.",
+    "Angular (web framework)": "Angular is a TypeScript-based free and open-source single-page web application framework. It is developed by Google and by a community of individuals and corporations. Angular is a complete rewrite from the same team that built AngularJS.",
+    "ASP.NET Core": "ASP.NET Core is an open-source modular web-application framework. It is a redesign of ASP.NET that unites the previously separate ASP.NET MVC and ASP.NET Web API into a single programming model. Despite being a new framework, built on a new web stack, it does have a high degree of concept compatibility with ASP.NET.",
+    "Blazor": "Blazor is a free and open-source web framework that enables developers to create web user interfaces (UI) based on components, using C# and HTML. It is being developed by Microsoft, as part of the ASP.NET Core web app framework.",
+    "Bootstrap (front-end framework)": "Bootstrap is a free and open-source CSS framework directed at responsive, mobile-first front-end web development. It contains HTML, CSS and (optionally) JavaScript-based design templates for typography, forms, buttons, navigation, and other interface components.",
+    "C Sharp (programming language)": "C# is a general-purpose high-level programming language supporting multiple paradigms. C# encompasses static typing, strong typing, lexically scoped, imperative, declarative, functional, generic, object-oriented (class-based), and component-oriented programming disciplines.",
+    "Convai": "Convai is a platform for creating conversational AI characters that can talk, listen and act inside games and virtual worlds. Developers use it to give non-player characters natural, voice-driven dialogue.",
+    "CSS": "Cascading Style Sheets (CSS) is a style sheet language used for specifying the presentation and styling of a document written in a markup language, such as HTML or XML. CSS is a cornerstone technology of the World Wide Web, alongside HTML and JavaScript.",
+    "Django (web framework)": "Django is a free and open-source, Python-based web framework that runs on a web server. It follows the model–template–views (MTV) architectural pattern. It is maintained by the Django Software Foundation (DSF), an independent organization established in the US as a 501(c)(3) non-profit.",
+    "Docker (software)": "Docker is a set of products that uses operating system-level virtualization to deliver software in packages called containers. Docker automates the deployment of applications within lightweight containers, enabling them to run consistently across different computing environments.",
+    "ElevenLabs": "ElevenLabs Inc. is a software company that specializes in developing natural-sounding speech synthesis software using deep learning. It was founded in 2022 by Polish entrepreneurs Piotr Dąbkowski and Mateusz Staniszewski.",
+    "Entity Framework": "Entity Framework (EF) is an open source object–relational mapping (ORM) framework for ADO.NET. It was originally shipped as an integral part of .NET Framework, however starting with Entity Framework version 6.0 it has been delivered separately from the .NET Framework.",
+    "Gemini (language model)": "Gemini is a line of multimodal large language models (LLMs) developed by Google DeepMind. Comprising Gemini Pro, Gemini Deep Think, Gemini Flash, and Gemini Flash Lite, they were announced on December 6, 2023. These models are used by the Gemini chatbot.",
+    "Git (software)": "Git is a distributed version control software system that is capable of managing versions of source code or data. It is often used to control source code by programmers who are developing software collaboratively. It was originally created by Linus Torvalds for version control in the development of the Linux kernel.",
+    "GitHub": "GitHub is a proprietary developer platform that allows developers to create, store, manage, and share their code. It uses Git to provide distributed version control, and GitHub itself provides access control, bug tracking, software feature requests, task management, continuous integration, and wikis for every project. GitHub, headquartered in San Francisco, is operated by GitHub, Inc., a subsidiary of Microsoft since 2018.",
+    "Google Play": "Google Play, also known as the Google Play Store or Play Store, and formerly known as the Android Market, is a digital distribution service operated and developed by Google. A core component of Google Mobile Services (GMS), it serves as the official app store for certified devices running on the Android operating system and its derivatives, as well as ChromeOS, allowing users to browse and download applications developed with the Android software development kit and published through Google. Google Play has also served as a digital media store, with it offering various media for purchase such as books, movies, musical singles, television programs, and video games.",
+    "HTML5": "HTML5 is a markup language used for structuring and presenting hypertext documents on the World Wide Web. It was the fifth and final major HTML version that is now a retired World Wide Web Consortium (W3C) recommendation. The current specification is known as the HTML Living Standard.",
+    "Java (programming language)": "Java is a high-level, general-purpose, memory-safe, object-oriented programming language. It is intended to let programmers write once, run anywhere (WORA), meaning that compiled Java code can run on all platforms that support Java without the need to recompile. Java applications are usually compiled to bytecode that can run on any Java virtual machine (JVM) regardless of the underlying computer architecture.",
+    "JavaScript": "JavaScript (JS) is a programming language and core technology of the Web, alongside HTML and CSS. Created by Brendan Eich in 1995, it is maintained by Ecma International\u0027s TC39 technical committee, with related Web APIs maintained by W3C and WHATWG. In 2025, JavaScript was the most widely used programming language on GitHub.",
+    "JSON": "JSON is an open standard file format and data interchange format that uses human-readable text to store and transmit data objects consisting of name–value pairs and arrays. It is a commonly used data format with diverse uses in electronic data interchange, including that of web applications with servers.",
+    "Linux": "Linux is a family of free and open-source software Unix-like operating systems based on the Linux kernel, which was first released on 17 September 1991 by Linus Torvalds. Some members of the family are typically packaged as a distribution, which includes the kernel alongside supporting system software and libraries developed by third parties—such as GNU, Red Hat, and X.Org—to create a complete operating system; however, not all Linux-based operating systems are considered distros, with Android being an example. Linux was originally designed as a clone of Unix and is distributed under the copyleft GPL license.",
+    "Microsoft Azure": "Microsoft Azure, sometimes stylized Azure, and formerly Windows Azure, is the cloud computing platform developed by Microsoft. It offers management, access and development of applications and services to individuals, companies, and governments through its global infrastructure. Microsoft Azure supports multiple programming languages, tools, and frameworks, including Microsoft-specific and third-party software and systems.",
+    "Microsoft Copilot Studio": "Microsoft Copilot Studio is a low-code platform from Microsoft for building custom AI agents and chatbots. It lets you connect them to business data, apps and workflows without writing much code.",
+    "Microsoft SQL Server": "Microsoft SQL Server is a proprietary relational database management system developed by Microsoft using Structured Query Language. As a database server, it is a software product with the primary function of storing and retrieving data as requested by other software applications—which may run either on the same computer or on another computer across a network. Microsoft markets at least a dozen different editions of Microsoft SQL Server, aimed at different audiences and for workloads ranging from small single-machine applications to large Internet-facing applications with many concurrent users.",
+    "Microsoft Windows": "Windows is a proprietary operating system developed by Microsoft. Windows is grouped into families that cater to particular sectors of the computing industry – Windows for personal computers, Windows Server for servers, and Windows IoT for embedded systems. Windows itself is further grouped into editions that cater to different users – Home for home users, Professional for advanced users, Education for schools, and Enterprise for corporations.",
+    "MySQL": "MySQL is a free and open-source relational database management system (RDBMS). Its name is a combination of \"My\", the name of co-founder Michael Widenius\u0027 daughter My, and \"SQL\", the acronym for Structured Query Language. A relational database organizes data into one or more data tables in which data may be related to each other; these relations help structure the data.",
+    "Photon Engine": "Photon Engine is a networking platform from Exit Games for building real-time multiplayer games and apps. It provides ready-made SDKs for engines such as Unity, so developers don\u0027t have to run their own game servers.",
+    "Python (programming language)": "Python is a high-level, general-purpose programming language that emphasizes code readability, simplicity, and ease-of-writing with the use of significant indentation, an extensive (\"batteries-included\") standard library, and garbage collection. Python supports multiple programming paradigms but with an emphasis on object-oriented programming and dynamic typing.",
+    "Raspberry Pi": "Raspberry Pi is a series of small single-board computers (SBCs) originally developed in the United Kingdom by the Raspberry Pi Foundation in collaboration with Broadcom. To commercialize the product and support its growing demand, the Foundation established a commercial entity, now known as Raspberry Pi Holdings.",
+    "React (software)": "React is a free and open-source front-end JavaScript library that aims to make building user interfaces based on components more \"seamless\". It is maintained by Meta and a community of individual developers and companies. According to the 2025 Stack Overflow Developer Survey, React is one of the most commonly used web technologies.",
+    "TypeScript": "TypeScript (TS) is a high-level programming language that adds static typing with optional type annotations to JavaScript. It is designed for developing large applications. It transpiles to JavaScript.",
+    "Unity (game engine)": "Unity is a cross-platform game engine developed by Unity Technologies, first announced and released in June 2005 at the Apple Worldwide Developers Conference as a Mac OS X game engine. The engine has since been gradually extended to support a variety of desktop, mobile, console, augmented reality, and virtual reality platforms. It is particularly popular for iOS and Android mobile game development, is considered easy to use for beginner developers, and is popular for indie game development.",
+    "Vector database": "A vector database, vector store or vector search engine is a database that stores and retrieves embeddings of data in vector space. Vector databases typically implement approximate nearest neighbor algorithms so users can search for records semantically similar to a given input, unlike traditional databases which primarily look up records by exact match. Use-cases for vector databases include similarity search, semantic search, multi-modal search, recommendations engines, object detection, and retrieval-augmented generation (RAG).",
+    "Visual Studio": "Visual Studio is an integrated development environment (IDE) developed by Microsoft. It is used to develop computer programs including websites, web apps, web services and mobile apps. Visual Studio uses Microsoft software development platforms including Windows API, Windows Forms, Windows Presentation Foundation (WPF), Microsoft Store and Microsoft Silverlight.",
+    "Visual Studio Code": "Visual Studio Code is an integrated development environment developed by Microsoft for Windows, Linux, macOS and web browsers. Features include support for debugging, syntax highlighting, intelligent code completion, snippets, code refactoring, and embedded version control with Git. Users can change the theme, keyboard shortcuts and preferences, as well as install extensions that add functionality, including to extend its capabilities to function as an IDE for other languages.",
+    "WebGL": "WebGL is a JavaScript API for rendering interactive 2D and 3D graphics within any compatible web browser without the use of plug-ins. WebGL is fully integrated with other web standards, allowing GPU-accelerated usage of physics, image processing, and effects in the HTML canvas. WebGL elements can be mixed with other HTML elements and composited with other parts of the page or page background.",
+    "WordPress": "WordPress is a web content management system. It was originally created as a tool to publish blogs but has evolved to support publishing other web content, including more traditional websites, mailing lists, Internet forums, media galleries, membership sites, learning management systems, and online stores. Available as free and open-source software, WordPress is among the most popular content management systems – it was used by 22.52% of the top one million websites as of December 2024.",
+  };
 
   lookup(skillName: string) {
     this.hoveredSkill = skillName;
-    this.summary = 'Getting text from Wikapedia with Webscraping!';
-
-    this.http.get<any>(`/api/definition/${skillName}`)
-      .subscribe({
-        next: data => {
-          setTimeout(() => {
-            this.summary = data.summary;
-            this.cdr.detectChanges();
-          }, 1500);
-        },
-        error: () => {
-          setTimeout(() => {
-            this.summary = 'Something went wrong loading this.';
-            this.cdr.detectChanges();
-          }, 1500);
-        }
-      });
+    this.summary = this.summaries[skillName] ?? '';
   }
 }
