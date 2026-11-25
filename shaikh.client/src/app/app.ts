@@ -16,45 +16,23 @@ export class App implements OnInit {
 
   protected readonly title = signal('shaikh.client');
 
-  // Total visitor count shown in the footer (null until it has loaded)
-  // A signal, because this app runs without zone.js: only signals tell Angular to redraw.
-  public readonly viewerCount = signal<number | null>(null);
-
   constructor() { }
 
   // 3. Paste the ngOnInit method inside the class
   ngOnInit() {
     if (!sessionStorage.getItem('hasVisitedHomepage')) {
-      // First visit in this tab: count it, and show the new total.
       fetch('/api/viewers/increment', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
         }
       })
-        .then(response => {
-          if (!response.ok) { throw new Error('increment failed: ' + response.status); }
-          return response.json();
-        })
+        .then(response => response.json())
         .then(data => {
           sessionStorage.setItem('hasVisitedHomepage', 'true');
-          this.viewerCount.set(data.viewerCount);
         })
         .catch(error => {
           console.error('Error incrementing viewers:', error);
-        });
-    } else {
-      // Already counted in this tab: just read the current total.
-      fetch('/api/viewers/count')
-        .then(response => {
-          if (!response.ok) { throw new Error('count failed: ' + response.status); }
-          return response.json();
-        })
-        .then(data => {
-          this.viewerCount.set(data.viewerCount);
-        })
-        .catch(error => {
-          console.error('Error loading viewer count:', error);
         });
     }
   }
