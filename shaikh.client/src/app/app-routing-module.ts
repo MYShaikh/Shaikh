@@ -10,7 +10,8 @@ import { SkillsComponent } from './skills/skills';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'contact', component: ContactComponent },
-  { path: 'current-position', component: CurrentPositionComponent },
+  { path: 'work-experience', component: CurrentPositionComponent },
+  { path: 'current-position', redirectTo: 'work-experience', pathMatch: 'full' },  // old address still works
   { path: 'education', component: EducationComponent },
   { path: 'home', component: HomeComponent },
   { path: 'projects', component: ProjectsComponent },

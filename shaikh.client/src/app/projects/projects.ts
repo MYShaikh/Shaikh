@@ -61,7 +61,6 @@ export class ProjectsComponent {
       tools: ['React', 'Gemini', 'Claude', 'ElevenLabs', 'Figma'],
       devpost: 'https://devpost.com/software/good-night',
       github: 'https://github.com/debosmita09/Good-Night',
-      demo: 'https://dash-cider-39465868.figma.site/',
       video: 'https://www.youtube.com/watch?v=Lp9T0rcODR4',
       image: 'images/projects/good-night.jpg',
       imageAlt: 'Good Night: the sleep companion app with Luma the cat',

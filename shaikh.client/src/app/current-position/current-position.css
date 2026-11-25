@@ -195,3 +195,72 @@ main {
     padding: 20px;
   }
 }
+
+/* =========================================
+   Job headings (Work Experience page)
+   ========================================= */
+.job-heading {
+  text-align: center;
+  width: 100%;
+  margin-bottom: 10px;
+}
+
+.job-title {
+  margin: 0 0 4px;
+  font-size: 1.5rem;
+  color: #ffffff;
+}
+
+.job-company {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 600;
+  color: #4CAF50;
+}
+
+.job-meta {
+  margin: 6px 0 0;
+  font-size: 0.85rem;
+  color: #9e9e9e;
+}
+
+.job-divider {
+  margin: 28px 0;
+}
+
+.job-bullets {
+  margin: 0 0 14px;
+  padding-left: 20px;
+  text-align: left;
+  font-size: 0.95rem;
+  line-height: 1.55;
+  color: #b0b0b0;
+}
+
+  .job-bullets li + li {
+    margin-top: 8px;
+  }
+
+.job-links {
+  display: flex;
+  justify-content: center;
+}
+
+  .job-links a {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    color: #4CAF50;
+    text-decoration: none;
+    font-size: 0.85rem;
+    font-weight: 600;
+    border: 1px solid #4CAF50;
+    border-radius: 8px;
+    padding: 6px 14px;
+    transition: background-color 0.2s ease, color 0.2s ease;
+  }
+
+    .job-links a:hover {
+      background-color: #4CAF50;
+      color: #1e1e1e;
+    }
