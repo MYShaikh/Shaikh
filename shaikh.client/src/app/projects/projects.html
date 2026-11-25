@@ -1,0 +1,54 @@
+<div class="portfolio-container">
+
+  <header class="profile-header">
+    <h1>Projects</h1>
+    <p class="subtitle">
+      <i class="fas fa-laptop-code"></i>
+      Hackathons & Side Projects
+    </p>
+  </header>
+
+  <main>
+
+    @for (p of projects; track p.title) {
+      <section class="project-card">
+        <h2>{{ p.title }}</h2>
+
+        @if (p.meta) {
+          <p class="project-meta">{{ p.meta }}</p>
+        }
+
+        <p class="description">{{ p.summary }}</p>
+
+        <div class="tags">
+          @for (t of p.tools; track t) {
+            <span class="tag">{{ t }}</span>
+          }
+        </div>
+
+        <div class="links">
+          <a [href]="p.devpost" target="_blank" rel="noopener noreferrer">Devpost</a>
+          @if (p.github) {
+            <a [href]="p.github" target="_blank" rel="noopener noreferrer">GitHub</a>
+          }
+          @if (p.demo) {
+            <a [href]="p.demo" target="_blank" rel="noopener noreferrer">Prototype</a>
+          }
+        </div>
+      </section>
+    }
+
+    <div class="divider"></div>
+
+    <p class="description more">
+      See everything on my
+      <a [href]="devpostProfile" target="_blank" rel="noopener noreferrer">Devpost profile</a>.
+    </p>
+
+  </main>
+
+  <footer>
+    <p>&copy; 2026 Mohammad Shaikh</p>
+  </footer>
+
+</div>
