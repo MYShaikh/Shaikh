@@ -39,6 +39,15 @@ namespace Shaikh.Server.Controllers
             return Ok(new { viewerCount = newCount });
         }
 
+        // Read-only: returns the current total without changing it, so the page can show it.
+        [HttpGet("count")]
+        public async Task<IActionResult> GetViewerCount()
+        {
+            using IDbConnection db = new SqlConnection(_connectionString);
+            int count = await db.QuerySingleOrDefaultAsync<int>("SELECT TOP 1 ViewerCount FROM TotalViewers;");
+            return Ok(new { viewerCount = count });
+        }
+
         [HttpPost("role")]
         public async Task<IActionResult> SaveRole([FromBody] VisitorTypeRequest request)
         {

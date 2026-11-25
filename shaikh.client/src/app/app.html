@@ -18,3 +18,9 @@
 </nav>
 
 <router-outlet></router-outlet>
+
+@if (viewerCount() !== null) {
+  <footer class="site-footer">
+    <span class="visitor-count">Visitors: {{ viewerCount() | number }}</span>
+  </footer>
+}
