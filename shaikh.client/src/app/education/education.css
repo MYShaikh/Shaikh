@@ -267,3 +267,11 @@
 .form-status-success {
   color: #4CAF50;
 }
+
+/* Small credit line under the Jamia Hamdard photos */
+.photo-credit {
+  margin: 8px 0 0;
+  text-align: center;
+  font-size: 0.72rem;
+  color: #777777;
+}

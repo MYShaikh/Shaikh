@@ -7,7 +7,6 @@ interface Project {
   tools: string[];
   devpost: string;
   github?: string;
-  demo?: string;
   video: string;      // YouTube demo video
   image: string;      // cover image, saved in public/images/projects
   imageAlt: string;
