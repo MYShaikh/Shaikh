@@ -21,6 +21,7 @@ interface Project {
 })
 export class ProjectsComponent {
   readonly devpostProfile = 'https://devpost.com/myshaikh237';
+  readonly githubProfile = 'https://github.com/MYShaikh';
 
   // All text is saved here, copied once from the public Devpost pages and
   // shortened. Nothing is fetched from Devpost while visitors browse.

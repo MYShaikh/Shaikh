@@ -47,10 +47,22 @@
 
     <div class="divider"></div>
 
-    <p class="description more">
-      See everything on my
-      <a [href]="devpostProfile" target="_blank" rel="noopener noreferrer">Devpost profile</a>.
-    </p>
+    <div class="more">
+      <p class="description">See everything on:</p>
+
+      <div class="more-links">
+        <a class="logo-link" [href]="devpostProfile" target="_blank" rel="noopener noreferrer"
+           aria-label="My Devpost profile">
+          <img src="images/devpost-logo.svg" alt="Devpost" class="devpost-logo">
+        </a>
+
+        <a class="github-link" [href]="githubProfile" target="_blank" rel="noopener noreferrer"
+           aria-label="My GitHub profile">
+          <i class="fab fa-github"></i>
+          <span>GitHub</span>
+        </a>
+      </div>
+    </div>
 
   </main>
 
