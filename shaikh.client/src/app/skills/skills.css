@@ -234,7 +234,7 @@ main {
 
 @media (max-width: 768px) {
   .skills-grid {
-    grid-template-columns: repeat(2, 1fr);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 
   .skill-card i {
@@ -243,11 +243,39 @@ main {
 }
 
 @media (max-width: 500px) {
+  /* Two skills per row on phones, more compact cards */
   .skills-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 10px;
   }
 
-  .skill-card i {
-    font-size: 2.8rem;
+  .skill-card {
+    padding: 14px 8px;
+  }
+
+    .skill-card i {
+      font-size: 2.4rem;
+    }
+
+    .skill-card p {
+      margin-top: 8px;
+      font-size: 0.85rem;
+      overflow-wrap: anywhere;
+    }
+
+  /* Keep the pop-up text on screen: left cards open to the right, right cards to the left */
+  .skill-tooltip {
+    width: min(220px, 78vw);
+  }
+
+  .skill-card:nth-child(odd) .skill-tooltip {
+    left: 0;
+    transform: none;
+  }
+
+  .skill-card:nth-child(even) .skill-tooltip {
+    left: auto;
+    right: 0;
+    transform: none;
   }
 }

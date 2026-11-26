@@ -3,23 +3,26 @@
   <header class="profile-header">
     <img src="images/headshot-2026.jpg" [alt]="i18n.t('home.photoAlt')" class="profile-image">
 
-    <h1>Mohammad Shaikh</h1>
+    <!-- On phones this sits to the right of the photo; on desktop it stacks underneath -->
+    <div class="intro">
+      <h1 class="intro-name">Mohammad Shaikh</h1>
 
-    <p class="subtitle">
-      <i class="fas fa-laptop-code" aria-hidden="true"></i>
-      <span>{{ i18n.t('home.role') }}</span>
-    </p>
+      <p class="subtitle">
+        <i class="fas fa-laptop-code" aria-hidden="true"></i>
+        <span>{{ i18n.t('home.role') }}</span>
+      </p>
+
+      <p class="tagline">{{ i18n.t('home.taglineA') }} <span>{{ i18n.t('home.taglineB') }}</span></p>
+
+      <div class="cta-row">
+        <a class="cta-btn" routerLink="/projects">
+          <i class="fas fa-rocket" aria-hidden="true"></i> {{ i18n.t('home.cta') }} <i class="fas fa-arrow-right" aria-hidden="true"></i>
+        </a>
+      </div>
+    </div>
   </header>
 
   <main>
-
-    <p class="tagline">{{ i18n.t('home.taglineA') }} <span>{{ i18n.t('home.taglineB') }}</span></p>
-
-    <div class="cta-row">
-      <a class="cta-btn" routerLink="/projects">
-        <i class="fas fa-rocket" aria-hidden="true"></i> {{ i18n.t('home.cta') }} <i class="fas fa-arrow-right" aria-hidden="true"></i>
-      </a>
-    </div>
 
     <div class="divider" aria-hidden="true"></div>
 

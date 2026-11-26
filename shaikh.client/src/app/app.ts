@@ -33,8 +33,11 @@ export class App implements OnInit {
   readonly isMenuOpen = signal(false);
 
   // The page the visitor is on, shown beside the hamburger on phones
+  // (on the homepage the bar shows my name instead of "Home")
   private readonly pageKey = signal('nav.home');
   readonly pageName = computed(() => this.i18n.t(this.pageKey()));
+  readonly barTitle = computed(() =>
+    this.pageKey() === 'nav.home' ? this.i18n.t('site.name') : this.pageName());
 
   // Text read out by screen readers when something changes (e.g. the language)
   readonly announcement = signal('');
