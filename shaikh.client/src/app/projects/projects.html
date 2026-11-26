@@ -79,6 +79,17 @@
 
         <p class="description">{{ p.summary }}</p>
 
+        @if (p.more) {
+          @if (isExpanded(p.title)) {
+            <p class="description more-text">{{ p.more }}</p>
+          }
+          <button type="button" class="read-more" (click)="toggleMore(p.title)"
+                  [attr.aria-expanded]="isExpanded(p.title)">
+            {{ isExpanded(p.title) ? 'Read less' : 'Read more' }}
+            <i class="fas fa-chevron-down" [class.flip]="isExpanded(p.title)"></i>
+          </button>
+        }
+
         <div class="tags">
           @for (t of p.tools; track t) {
             <span class="tag">{{ t }}</span>
