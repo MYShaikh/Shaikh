@@ -14,6 +14,10 @@
   overflow: hidden;
 }
 
+main {
+  width: 100%;
+}
+
 .profile-header {
   text-align: center;
   margin-bottom: 8px;
@@ -57,13 +61,24 @@
   box-shadow: 0 0 0 6px rgba(76, 175, 80, 0.12), 0 8px 24px rgba(0, 0, 0, 0.4);
 }
 
+/* "I can code (Without AI)" */
+.tagline {
+  margin: 22px 0 0;
+  text-align: center;
+  font-size: 1.6rem;
+  font-weight: 700;
+  color: #ffffff;
+}
+
+  .tagline span {
+    color: #4CAF50;
+  }
+
 .info-card {
   text-align: center;
-  margin: 10px 0;
+  margin: 10px auto;
   width: 100%;
   max-width: 550px;
-  margin-left: auto;
-  margin-right: auto;
 }
 
   .info-card h2 {
@@ -72,7 +87,7 @@
     justify-content: center;
     gap: 10px;
     font-size: 1.25rem;
-    margin-bottom: 16px;
+    margin: 0 0 16px;
     color: #ffffff;
   }
 
@@ -83,15 +98,6 @@
   background: #4CAF50;
 }
 
-.description {
-  font-size: 0.95rem;
-  line-height: 1.6;
-  color: #b0b0b0;
-  word-wrap: break-word;
-  text-align: left;
-  margin: 0;
-}
-
 .divider {
   width: 100%;
   height: 1px;
@@ -100,18 +106,17 @@
 }
 
 /* ===========================================
-   Current Focus / Quick Facts grids
+   Strongest suits + dream company cards
    =========================================== */
-.focus-grid,
-.facts-grid {
+.suit-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
   gap: 14px;
   width: 100%;
 }
 
-.focus-card,
-.fact-box {
+.suit-card,
+.dream-card {
   display: flex;
   align-items: center;
   gap: 14px;
@@ -123,42 +128,44 @@
   transition: transform 0.25s ease, border-color 0.25s ease, box-shadow 0.25s ease;
 }
 
-  .focus-card:hover,
-  .fact-box:hover {
+  .suit-card:hover,
+  .dream-card:hover {
     transform: translateY(-4px);
     border-color: #4CAF50;
     box-shadow: 0 10px 22px rgba(76, 175, 80, 0.18);
   }
 
-/* Hover text on the "Current Focus" cards (same look as the Skills page tooltips) */
-.focus-card {
-  position: relative;
+  /* The fifth card sits centred on its own row */
+  .suit-card:last-child:nth-child(odd) {
+    grid-column: 1 / -1;
+    justify-self: center;
+    width: calc(50% - 7px);
+    box-sizing: border-box;
+  }
+
+  .suit-card p,
+  .dream-card p {
+    margin: 0;
+    color: #ffffff;
+    font-weight: 600;
+    font-size: 0.95rem;
+    line-height: 1.3;
+  }
+
+.dream-card {
+  justify-content: center;
+  max-width: 260px;
+  margin: 0 auto;
 }
 
-.focus-tooltip {
-  display: none;
-  position: absolute;
-  bottom: 100%;
-  left: 50%;
-  transform: translateX(-50%);
-  margin-bottom: 10px;
-  width: 260px;
-  max-width: calc(100vw - 40px);
-  background-color: #2c2c2c;
-  border: 1px solid #4CAF50;
-  border-radius: 8px;
-  padding: 12px;
-  font-size: 0.8rem;
-  font-weight: 400;
-  line-height: 1.4;
-  color: #e0e0e0;
-  text-align: left;
-  z-index: 10;
-  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
-}
+  .dream-card p {
+    font-size: 1.15rem;
+  }
 
-.focus-card:hover .focus-tooltip {
-  display: block;
+.ms-logo {
+  width: 36px;
+  height: 36px;
+  flex-shrink: 0;
 }
 
 .icon-badge {
@@ -166,64 +173,24 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  width: 42px;
-  height: 42px;
+  width: 44px;
+  height: 44px;
   border-radius: 50%;
   background: rgba(255, 255, 255, 0.06);
 }
 
   .icon-badge i {
-    font-size: 1.25rem;
+    font-size: 1.4rem;
     line-height: 1;
   }
 
-/* Accurate brand colors per technology */
-.icon-angular {
-  background: rgba(221, 0, 49, 0.14);
+/* Brand colours */
+.icon-django {
+  background: rgba(68, 183, 139, 0.14);
 }
 
-  .icon-angular i {
-    color: #DD0031;
-  }
-
-.icon-dotnet {
-  background: rgba(81, 43, 212, 0.14);
-}
-
-  .icon-dotnet i {
-    color: #7c5cff;
-  }
-
-.icon-copilot {
-  background: rgba(0, 120, 212, 0.14);
-}
-
-  .icon-copilot i {
-    color: #3aa0ff;
-  }
-
-.icon-docker {
-  background: rgba(13, 183, 237, 0.14);
-}
-
-  .icon-docker i {
-    color: #0db7ed;
-  }
-
-.icon-code {
-  background: rgba(76, 175, 80, 0.14);
-}
-
-  .icon-code i {
-    color: #4CAF50;
-  }
-
-.icon-grad {
-  background: rgba(255, 179, 0, 0.14);
-}
-
-  .icon-grad i {
-    color: #ffb300;
+  .icon-django i {
+    color: #44b78b;
   }
 
 .icon-unity {
@@ -235,22 +202,29 @@
     color: #ffffff;
   }
 
-.icon-cloud {
-  background: rgba(79, 195, 247, 0.14);
+.icon-claude {
+  background: rgba(217, 119, 87, 0.16);
 }
 
-  .icon-cloud i {
-    color: #4fc3f7;
+  .icon-claude i {
+    color: #d97757;
   }
 
-.focus-card p,
-.fact-box span:not(.icon-badge) {
-  margin: 0;
-  color: #ffffff;
-  font-weight: 600;
-  font-size: 0.88rem;
-  line-height: 1.3;
+.icon-azure {
+  background: rgba(0, 120, 212, 0.16);
 }
+
+  .icon-azure i {
+    color: #3aa0ff;
+  }
+
+.icon-dotnet {
+  background: rgba(81, 43, 212, 0.14);
+}
+
+  .icon-dotnet i {
+    color: #7c5cff;
+  }
 
 footer {
   text-align: center;
@@ -269,159 +243,18 @@ footer {
     padding: 22px;
   }
 
-  .focus-grid,
-  .facts-grid {
-    grid-template-columns: 1fr;
-  }
-
   .profile-image {
     width: 140px;
     height: 140px;
   }
 }
 
-/* ===========================================
-   Visitor-role popup
-   (.description below is scoped to .popup-card so it
-   doesn't clash with the bio-paragraph .description above)
-   =========================================== */
-.popup-overlay {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 100%;
-  background-color: rgba(0, 0, 0, 0.8);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  z-index: 1000;
-}
-
-.popup-card {
-  width: 90%;
-  max-width: 550px;
-  padding: 30px;
-  background-color: #1e1e1e;
-  border-radius: 12px;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, .5);
-  color: #e0e0e0;
-  text-align: center;
-  animation: entrance 3s ease forwards;
-}
-
-  .popup-card h1 {
-    color: white;
-    margin-bottom: 10px;
-    opacity: 0;
-    animation: showText 0.5s ease forwards;
-    animation-delay: 4.2s;
+@media (max-width: 420px) {
+  .suit-grid {
+    grid-template-columns: 1fr;
   }
 
-  .popup-card .description {
-    color: #b0b0b0;
-    margin-bottom: 25px;
-    line-height: 1.5;
-    opacity: 0;
-    animation: showText 0.5s ease forwards;
-    animation-delay: 4.2s;
-  }
-
-.option-container {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.option-btn {
-  background-color: #2c2c2c;
-  color: #4CAF50;
-  border: 1px solid #3d3d3d;
-  padding: 12px;
-  border-radius: 8px;
-  font-size: 1rem;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  opacity: 0;
-}
-
-  .option-btn:hover {
-    background-color: #4CAF50;
-    color: white;
-    transform: translateY(-2px);
-  }
-
-  .option-btn:nth-child(1) {
-    animation: slideLeft .6s ease forwards;
-    animation-delay: 3s;
-  }
-
-  .option-btn:nth-child(2) {
-    animation: slideRight .6s ease forwards;
-    animation-delay: 3.2s;
-  }
-
-  .option-btn:nth-child(3) {
-    animation: slideLeft .6s ease forwards;
-    animation-delay: 3.4s;
-  }
-
-  .option-btn:nth-child(4) {
-    animation: slideRight .6s ease forwards;
-    animation-delay: 3.6s;
-  }
-
-@keyframes entrance {
-  0% {
-    transform: translateY(-1200px) rotate(0deg);
-    opacity: 0;
-  }
-  /* Slam toward bottom */
-  40% {
-    transform: translateY(450px) rotate(0deg);
-    opacity: 1;
-  }
-  /* Bounce upward while spinning */
-  75% {
-    transform: translateY(-100px) rotate(1080deg);
-  }
-  /* Settle in center */
-  100% {
-    transform: translateY(0) rotate(1080deg);
-  }
-}
-
-@keyframes slideLeft {
-  from {
-    transform: translateX(-500px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes slideRight {
-  from {
-    transform: translateX(500px);
-    opacity: 0;
-  }
-
-  to {
-    transform: translateX(0);
-    opacity: 1;
-  }
-}
-
-@keyframes showText {
-  from {
-    opacity: 0;
-  }
-
-  to {
-    opacity: 1;
-  }
+    .suit-card:last-child:nth-child(odd) {
+      width: 100%;
+    }
 }

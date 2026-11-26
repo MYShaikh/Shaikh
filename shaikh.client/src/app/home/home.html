@@ -1,38 +1,7 @@
-<div class="popup-overlay" *ngIf="showPopup">
-  <div class="popup-card">
-
-    <h1>Welcome!</h1>
-
-    <p class="description">
-      Before you get to know about me, I would like to know who you are.
-      Please select the option that best describes you:
-    </p>
-
-    <div class="option-container">
-      <button class="option-btn" (click)="selectRole('Recruiter')">
-        Recruiter
-      </button>
-
-      <button class="option-btn" (click)="selectRole('Colleague')">
-        Colleague
-      </button>
-
-      <button class="option-btn" (click)="selectRole('Friend/Classmate')">
-        Friend/Classmate
-      </button>
-
-      <button class="option-btn" (click)="selectRole('NPC')">
-        NPC
-      </button>
-    </div>
-
-  </div>
-</div>
-
 <div class="portfolio-container">
 
   <header class="profile-header">
-    <img src="images/Headshot.jpg" alt="Mohammad Shaikh" class="profile-image">
+    <img src="images/headshot-2026.jpg" alt="Mohammad Shaikh" class="profile-image">
 
     <h1>Mohammad Shaikh</h1>
 
@@ -44,80 +13,55 @@
 
   <main>
 
-    <section class="info-card">
-      <p class="description">
-        Hello! I'm Mohammad Shaikh, a Junior Software Developer at Venture
-        Employer Solutions and a Master's student in Computer Science at
-        Georgia State University.
-
-        I enjoy building full-stack applications using Angular, ASP.NET Core,
-        C#, SQL Server, Docker, and modern Microsoft technologies. My passion
-        lies in developing software that solves real-world problems while
-        continuously exploring AI, cloud computing, and emerging technologies.
-      </p>
-    </section>
+    <p class="tagline">I can code <span>(Without AI)</span></p>
 
     <div class="divider"></div>
 
     <section class="info-card">
-      <h2><span class="title-accent"></span>Current Focus</h2>
+      <h2><span class="title-accent"></span>My strongest suits:</h2>
 
-      <div class="focus-grid">
-
-        <div class="focus-card">
-          <span class="icon-badge icon-angular"><i class="fab fa-angular"></i></span>
-          <p>Angular Development</p>
-          <div class="focus-tooltip">{{ focusText.angular }}</div>
+      <div class="suit-grid">
+        <div class="suit-card">
+          <span class="icon-badge icon-django"><i class="devicon-django-plain"></i></span>
+          <p>Django</p>
         </div>
 
-        <div class="focus-card">
+        <div class="suit-card">
+          <span class="icon-badge icon-unity"><i class="devicon-unity-plain"></i></span>
+          <p>Unity Engine</p>
+        </div>
+
+        <div class="suit-card">
+          <span class="icon-badge icon-claude"><i class="devicon-claude-plain"></i></span>
+          <p>Claude tools</p>
+        </div>
+
+        <div class="suit-card">
+          <span class="icon-badge icon-azure"><i class="devicon-azure-plain"></i></span>
+          <p>Microsoft Azure</p>
+        </div>
+
+        <div class="suit-card">
           <span class="icon-badge icon-dotnet"><i class="devicon-dotnetcore-plain"></i></span>
-          <p>ASP.NET Core & Blazor</p>
-          <div class="focus-tooltip">{{ focusText.dotnet }}</div>
+          <p>.NET framework</p>
         </div>
-
-        <div class="focus-card">
-          <span class="icon-badge icon-copilot"><i class="fas fa-robot"></i></span>
-          <p>Copilot Studio</p>
-          <div class="focus-tooltip">{{ focusText.copilot }}</div>
-        </div>
-
-        <div class="focus-card">
-          <span class="icon-badge icon-docker"><i class="fab fa-docker"></i></span>
-          <p>Docker & Linux</p>
-          <div class="focus-tooltip">{{ focusText.docker }}</div>
-        </div>
-
       </div>
     </section>
 
     <div class="divider"></div>
 
     <section class="info-card">
-      <h2><span class="title-accent"></span>Quick Facts</h2>
+      <h2><span class="title-accent"></span>Dream company:</h2>
 
-      <div class="facts-grid">
-
-        <div class="fact-box">
-          <span class="icon-badge icon-code"><i class="fas fa-code"></i></span>
-          <span>Full-Stack Developer</span>
-        </div>
-
-        <div class="fact-box">
-          <span class="icon-badge icon-grad"><i class="fas fa-graduation-cap"></i></span>
-          <span>Graduate Student</span>
-        </div>
-
-        <div class="fact-box">
-          <span class="icon-badge icon-unity"><i class="devicon-unity-plain"></i></span>
-          <span>Unity Developer</span>
-        </div>
-
-        <div class="fact-box">
-          <span class="icon-badge icon-cloud"><i class="fas fa-cloud"></i></span>
-          <span>Cloud & AI Enthusiast</span>
-        </div>
-
+      <div class="dream-card">
+        <!-- Microsoft four-square mark -->
+        <svg class="ms-logo" viewBox="0 0 23 23" aria-hidden="true">
+          <rect x="1" y="1" width="10" height="10" fill="#f25022" />
+          <rect x="12" y="1" width="10" height="10" fill="#7fba00" />
+          <rect x="1" y="12" width="10" height="10" fill="#00a4ef" />
+          <rect x="12" y="12" width="10" height="10" fill="#ffb900" />
+        </svg>
+        <p>Microsoft</p>
       </div>
     </section>
 

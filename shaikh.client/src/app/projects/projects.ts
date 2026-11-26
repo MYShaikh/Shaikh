@@ -1,4 +1,4 @@
-import { Component, HostListener, OnInit, computed, signal } from '@angular/core';
+import { Component, HostListener, computed, signal } from '@angular/core';
 
 type PopupState = 'open' | 'closing' | 'docked';
 
@@ -21,7 +21,7 @@ interface Project {
   styleUrl: './projects.css',
   templateUrl: './projects.html',
 })
-export class ProjectsComponent implements OnInit {
+export class ProjectsComponent {
   readonly devpostProfile = 'https://devpost.com/myshaikh237';
   readonly githubProfile = 'https://github.com/MYShaikh';
 
@@ -51,16 +51,8 @@ export class ProjectsComponent implements OnInit {
     'mailto:' + this.contactEmail + '?subject=' + encodeURIComponent(this.selectedProject())
   );
 
-  ngOnInit(): void {
-    // The popup opens by itself once per browser session. After that it stays
-    // as a small tab on the side that visitors can click to open it again.
-    if (!sessionStorage.getItem('privateProjectsPopupSeen')) {
-      sessionStorage.setItem('privateProjectsPopupSeen', 'true');
-      this.popupState.set('open');
-    } else {
-      this.popupState.set('docked');
-    }
-  }
+  // The popup never opens by itself: it stays as a small tab on the side,
+  // and opens only when a visitor clicks that tab.
 
   closePopup(): void {
     if (this.popupState() !== 'open') { return; }
