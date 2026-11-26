@@ -10,6 +10,7 @@ import { EducationComponent } from './education/education';
 import { HomeComponent } from './home/home';
 import { ProjectsComponent } from './projects/projects';
 import { SkillsComponent } from './skills/skills';
+import { TipToggleDirective } from './shared/tip-toggle.directive';
 
 @NgModule({
   declarations: [
@@ -19,7 +20,8 @@ import { SkillsComponent } from './skills/skills';
     EducationComponent,
     HomeComponent,
     ProjectsComponent,
-    SkillsComponent
+    SkillsComponent,
+    TipToggleDirective
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule],
   providers: [provideBrowserGlobalErrorListeners()],

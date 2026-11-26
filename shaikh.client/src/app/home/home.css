@@ -117,7 +117,7 @@ main {
 
 .suit-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
   width: 100%;
 }
@@ -142,14 +142,6 @@ main {
     box-shadow: 0 10px 22px rgba(76, 175, 80, 0.18);
   }
 
-  /* The fifth card sits centred on its own row */
-  .suit-card:last-child:nth-child(odd) {
-    grid-column: 1 / -1;
-    justify-self: center;
-    width: calc(50% - 7px);
-    box-sizing: border-box;
-  }
-
   .suit-card p,
   .dream-card p {
     margin: 0;
@@ -162,7 +154,7 @@ main {
 /* Dream companies: 2 x 2 grid */
 .dream-grid {
   display: grid;
-  grid-template-columns: repeat(2, 1fr);
+  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 14px;
 }
 
@@ -422,8 +414,8 @@ main {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.suit-card:hover .suit-tooltip,
-.suit-card:focus .suit-tooltip {
+/* Shown on hover; a click / tap / Enter toggles it (see TipToggleDirective) */
+.suit-card.tip-open .suit-tooltip {
   opacity: 1;
 }
 
@@ -561,12 +553,70 @@ footer {
   }
 }
 
-@media (max-width: 420px) {
-  .suit-grid {
-    grid-template-columns: 1fr;
+
+/* ===========================================
+   Phones: two cards per row
+   =========================================== */
+.suit-card,
+.dream-card {
+  min-width: 0;
+}
+
+  .suit-card p,
+  .dream-card p {
+    overflow-wrap: anywhere;
   }
 
-    .suit-card:last-child:nth-child(odd) {
-      width: 100%;
+@media (max-width: 560px) {
+  .suit-grid,
+  .dream-grid {
+    gap: 10px;
+  }
+
+  .suit-card {
+    gap: 10px;
+    padding: 12px 10px;
+  }
+
+    .suit-card p {
+      font-size: 0.85rem;
+    }
+
+    .suit-card .icon-badge {
+      width: 36px;
+      height: 36px;
+    }
+
+      .suit-card .icon-badge i {
+        font-size: 1.15rem;
+      }
+
+  /* Keep the pop-up text on screen: left cards open to the right, right cards to the left */
+  .suit-tooltip {
+    width: min(240px, 78vw);
+  }
+
+  .suit-card:nth-child(odd) .suit-tooltip {
+    left: 0;
+    transform: none;
+  }
+
+  .suit-card:nth-child(even) .suit-tooltip {
+    left: auto;
+    right: 0;
+    transform: none;
+  }
+
+  /* Dream companies: logo above the name, centred in each card */
+  .dream-card {
+    flex-direction: column;
+    justify-content: center;
+    gap: 8px;
+    padding: 14px 8px;
+    text-align: center;
+  }
+
+    .dream-card p {
+      font-size: 0.95rem;
     }
 }

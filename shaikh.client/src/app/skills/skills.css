@@ -125,8 +125,8 @@ main {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.skill-card:hover .skill-tooltip,
-.skill-card:focus .skill-tooltip {
+/* Shown on hover; a click / tap / Enter toggles it (see TipToggleDirective) */
+.skill-card.tip-open .skill-tooltip {
   opacity: 1;
 }
 

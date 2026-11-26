@@ -46,15 +46,11 @@ export class HomeComponent implements OnInit {
   readonly suits = [
     { key: 'django', name: 'Django', icon: 'devicon-django-plain' },
     { key: 'unity', name: 'Unity Engine', icon: 'devicon-unity-plain' },
-    { key: 'claude', name: '', icon: 'devicon-claude-plain' },   // name is translated
+    { key: 'claude', name: 'Claude Code', icon: 'devicon-claudecode-plain' },
+    { key: 'cloudflare', name: 'Cloudflare', icon: 'devicon-cloudflare-plain' },
     { key: 'azure', name: 'Microsoft Azure', icon: 'devicon-azure-plain' },
     { key: 'dotnet', name: '.NET framework', icon: 'devicon-dotnetcore-plain' },
-    { key: 'cloudflare', name: 'Cloudflare', icon: 'devicon-cloudflare-plain' },
   ];
-
-  suitName(suit: { key: string; name: string }): string {
-    return suit.key === 'claude' ? this.i18n.t('home.suit.claude') : suit.name;
-  }
 
   // Dream companies, each with the emoji that float up when you hover or tap it
   readonly dreamCompanies: DreamCompany[] = [

@@ -29,9 +29,9 @@
       <!-- Each card's hover text is also read by screen readers and shown on keyboard focus -->
       <ul class="suit-grid">
         @for (s of suits; track s.key) {
-          <li class="suit-card" tabindex="0">
+          <li class="suit-card" tabindex="0" appTipToggle>
             <span class="icon-badge" [class]="'icon-' + s.key" aria-hidden="true"><i [class]="s.icon"></i></span>
-            <p>{{ suitName(s) }}<span class="sr-only">: </span></p>
+            <p>{{ s.name }}<span class="sr-only">: </span></p>
             <span class="suit-tooltip">{{ i18n.t('home.tip.' + s.key) }}</span>
           </li>
         }
