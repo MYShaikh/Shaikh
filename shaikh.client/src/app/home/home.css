@@ -622,6 +622,46 @@ footer {
 }
 
 /* ===========================================
+   Header on every screen size: photo on the left, intro on the right
+   =========================================== */
+.profile-header {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  text-align: left;
+}
+
+.profile-image {
+  flex-shrink: 0;
+  margin: 0;
+}
+
+.intro {
+  min-width: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 12px;
+}
+
+  .profile-header .intro-name {
+    margin: 0;
+  }
+
+/* "I can code (Without AI 😱)" always on one line */
+.tagline {
+  margin: 0;
+  text-align: left;
+  white-space: nowrap;
+  font-size: 1.45rem;
+}
+
+.cta-row {
+  margin-top: 0;
+  justify-content: flex-start;
+}
+
+/* ===========================================
    Phones: photo on the left, intro on the right (less scrolling).
    The name is already in the top bar, so the heading is kept for
    screen readers only.
@@ -641,8 +681,8 @@ footer {
 
   .profile-image {
     flex-shrink: 0;
-    width: 112px;
-    height: 112px;
+    width: 100px;
+    height: 100px;
     margin: 0;
     border-width: 3px;
     box-shadow: 0 0 0 4px rgba(76, 175, 80, 0.12), 0 6px 16px rgba(0, 0, 0, 0.4);
@@ -672,9 +712,7 @@ footer {
   }
 
   .tagline {
-    margin: 0;
-    text-align: left;
-    font-size: 1.1rem;
+    font-size: clamp(0.8rem, 3.8vw, 1.1rem);
     line-height: 1.3;
   }
 

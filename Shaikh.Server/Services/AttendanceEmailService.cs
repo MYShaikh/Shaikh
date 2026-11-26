@@ -1,5 +1,6 @@
-﻿using Azure;
+using Azure;
 using Azure.Communication.Email;
+using System.Net;
 namespace Shaikh.Server.Services
 {
     public class AttendanceEmailService: IAttendanceEmail
@@ -27,7 +28,7 @@ namespace Shaikh.Server.Services
             try
             {
                 string subject = $"Milestone: {viewerCount} visitors!";
-                string htmlContent = $"<p>Your site just reached its {viewerCount}th visitor.</p>";
+                string htmlContent = $"<p>Your site just reached visitor number {viewerCount}.</p>";
                 await _emailClient.SendAsync(WaitUntil.Started, _senderAddress, _recipientAddress, subject, htmlContent);
                 _logger.LogInformation("Milestone email sent for viewer count {ViewerCount}", viewerCount);
             }
@@ -40,5 +41,41 @@ namespace Shaikh.Server.Services
                 _logger.LogError(ex, "Unexpected error sending milestone email for viewer count {ViewerCount}", viewerCount);
             }
         }
-    }
+    
+        public async Task<bool> NotifyContactAsync(string name, string email, string subject, string body)
+        {
+            try
+            {
+                string Enc(string v) => WebUtility.HtmlEncode(v ?? string.Empty);
+
+                string html =
+                    "<h2>New message from your website</h2>" +
+                    $"<p><b>Name:</b> {Enc(name)}<br><b>Email:</b> {Enc(email)}<br><b>Subject:</b> {Enc(subject)}</p>" +
+                    $"<p style=\"white-space:pre-wrap\">{Enc(body)}</p>" +
+                    "<p style=\"color:#888\">Reply to this email to answer them directly.</p>";
+
+                var message = new EmailMessage(
+                    _senderAddress,
+                    _recipientAddress,
+                    new EmailContent($"Website contact: {subject}") { Html = html, PlainText = $"From {name} <{email}>
+
+{body}" });
+
+                // "Reply" in Gmail goes straight to the visitor
+                if (!string.IsNullOrWhiteSpace(email) && email.Contains('@'))
+                {
+                    message.ReplyTo.Add(new EmailAddress(email.Trim(), name));
+                }
+
+                await _emailClient.SendAsync(WaitUntil.Started, message);
+                _logger.LogInformation("Contact-form email sent");
+                return true;
+            }
+            catch (Exception ex)
+            {
+                _logger.LogError(ex, "Could not send contact-form email");
+                return false;
+            }
+        }
+}
 }
