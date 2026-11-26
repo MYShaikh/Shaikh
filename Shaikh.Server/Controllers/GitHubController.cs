@@ -6,7 +6,7 @@ using Microsoft.Extensions.Caching.Memory;
 namespace Shaikh.Server.Controllers
 {
     // Serves the last ~6 months of GitHub contributions for the homepage.
-    // GitHub's public contributions page is read at most once an hour and kept in memory,
+    // GitHub's public contributions page is read at most every 10 minutes and kept in memory,
     // so visitors never wait on GitHub. If GitHub can't be reached, the last good copy is used.
     [ApiController]
     [Route("api/github")]
@@ -57,7 +57,7 @@ namespace Shaikh.Server.Controllers
                 string html = await client.GetStringAsync($"https://github.com/users/{UserName}/contributions");
                 var result = Build(html);
 
-                _cache.Set(FreshKey, result, TimeSpan.FromHours(1));
+                _cache.Set(FreshKey, result, TimeSpan.FromMinutes(10));
                 _cache.Set(LastGoodKey, result);
                 return Ok(result);
             }
