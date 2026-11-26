@@ -95,23 +95,27 @@ export class HomeComponent implements OnInit {
   readonly contributionsFailed = signal(false);
 
   // One label per week column: the month name where a new month starts, otherwise ''.
+  // Like GitHub: a month is labelled on the week that contains its 1st day.
+  // The very first column only gets a label if there's room before the next one.
   readonly monthLabels = computed(() => {
     const weeks = this.contributions()?.weeks ?? [];
     const names = MONTHS[this.i18n.lang()];
-    const labels: string[] = [];
-    let lastMonth = -1;
-    let lastLabelAt = -10;
+    const labels: string[] = weeks.map(() => '');
+
+    const starts: { col: number; month: number }[] = [];
     weeks.forEach((week, i) => {
-      const month = Number(week[0].date.slice(5, 7)) - 1;
-      // Skip a label that would sit right on top of the previous one
-      if (month !== lastMonth && i - lastLabelAt >= 3) {
-        labels.push(names[month]);
-        lastLabelAt = i;
-      } else {
-        labels.push('');
+      const firstOfMonth = week.find(d => d.date.endsWith('-01'));
+      if (firstOfMonth) {
+        starts.push({ col: i, month: Number(firstOfMonth.date.slice(5, 7)) - 1 });
       }
-      lastMonth = month;
     });
+
+    if (weeks.length && (starts.length === 0 || starts[0].col >= 3)) {
+      labels[0] = names[Number(weeks[0][0].date.slice(5, 7)) - 1];
+    }
+    for (const s of starts) {
+      labels[s.col] = names[s.month];
+    }
     return labels;
   });
 
