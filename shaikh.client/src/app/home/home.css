@@ -478,14 +478,16 @@ main {
   display: block;
   aspect-ratio: 1;
   border-radius: 2px;
-  background-color: #2f3337;
+  background-color: #161b22;
+  outline: 1px solid rgba(255, 255, 255, 0.05);
+  outline-offset: -1px;
 }
 
-  /* Brighter than GitHub's dark theme so light days stand out on this card */
-  .gh-day[data-level="1"] { background-color: #2a7a45; }
-  .gh-day[data-level="2"] { background-color: #2f9e52; }
-  .gh-day[data-level="3"] { background-color: #3fc25e; }
-  .gh-day[data-level="4"] { background-color: #6ee787; }
+  /* GitHub's own dark-theme colours, so each shade matches GitHub */
+  .gh-day[data-level="1"] { background-color: #0e4429; }
+  .gh-day[data-level="2"] { background-color: #006d32; }
+  .gh-day[data-level="3"] { background-color: #26a641; }
+  .gh-day[data-level="4"] { background-color: #39d353; }
 
 .gh-footer {
   display: flex;

@@ -1,13 +1,21 @@
 using System.Globalization;
+using System.Text.Json;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Caching.Memory;
+using Shaikh.Server.Data;
 
 namespace Shaikh.Server.Controllers
 {
-    // Serves the last ~4 months of GitHub contributions for the homepage.
-    // GitHub's public contributions page is read at most every 10 minutes and kept in memory,
-    // so visitors never wait on GitHub. If GitHub can't be reached, the last good copy is used.
+    // Serves the last ~4 months of my GitHub contributions for the homepage, matching what
+    // I see on GitHub when logged in:
+    //  - Days before GitHubSnapshot.LiveFrom come from a saved copy of my logged-in calendar
+    //    (it includes private Vensure work that GitHub never shows publicly).
+    //  - Newer days come live from GitHub's public calendar, which counts days in UTC.
+    //    GitHub's public activity times are used to move late-evening work back onto the
+    //    right Eastern-time day, like my own GitHub view.
+    //  - Shades use GitHub's rule: 4 bands relative to the busiest day of the last year.
+    // GitHub is read at most every 10 minutes and kept in memory, so visitors never wait on it.
     [ApiController]
     [Route("api/github")]
     public class GitHubController : ControllerBase
@@ -16,10 +24,12 @@ namespace Shaikh.Server.Controllers
         private const string FreshKey = "github-contributions";
         private const string LastGoodKey = "github-contributions-last-good";
 
+        private static readonly TimeZoneInfo Eastern = TimeZoneInfo.FindSystemTimeZoneById("America/New_York");
+
         private static readonly Regex DayCell = new(
             "<td\\b[^>]*\\bdata-date=\"\\d{4}-\\d{2}-\\d{2}\"[^>]*>", RegexOptions.Compiled);
         private static readonly Regex Attr = new(
-            "\\b(id|data-date|data-level)=\"([^\"]*)\"", RegexOptions.Compiled);
+            "\\b(id|data-date)=\"([^\"]*)\"", RegexOptions.Compiled);
         private static readonly Regex Tooltip = new(
             "<tool-tip\\b[^>]*\\bfor=\"([^\"]+)\"[^>]*>([^<]*)</tool-tip>", RegexOptions.Compiled);
         private static readonly Regex LeadingNumber = new("^\\s*([\\d,]+)\\s+contribution", RegexOptions.Compiled);
@@ -55,7 +65,10 @@ namespace Shaikh.Server.Controllers
                 client.DefaultRequestHeaders.UserAgent.ParseAdd("portfolio-site/1.0");
 
                 string html = await client.GetStringAsync($"https://github.com/users/{UserName}/contributions");
-                var result = Build(html);
+                var publicUtc = ParseCalendar(html);
+                var activityTimes = await GetActivityTimesAsync(client);
+
+                var result = Build(publicUtc, activityTimes);
 
                 _cache.Set(FreshKey, result, TimeSpan.FromMinutes(10));
                 _cache.Set(LastGoodKey, result);
@@ -74,9 +87,9 @@ namespace Shaikh.Server.Controllers
             }
         }
 
-        private static ContributionsResponse Build(string html)
+        /// <summary>Day → count from GitHub's public calendar (days are in UTC).</summary>
+        private static Dictionary<DateOnly, int> ParseCalendar(string html)
         {
-            // Contribution counts are in <tool-tip for="cell-id">3 contributions on ...</tool-tip>
             var counts = new Dictionary<string, int>();
             foreach (Match t in Tooltip.Matches(html))
             {
@@ -86,53 +99,131 @@ namespace Shaikh.Server.Controllers
                     : 0;
             }
 
-            // Each day is a <td data-date="yyyy-MM-dd" data-level="0-4" id="...">
-            var days = new Dictionary<DateOnly, ContributionDay>();
+            var days = new Dictionary<DateOnly, int>();
             foreach (Match cell in DayCell.Matches(html))
             {
-                string? id = null, date = null, level = null;
+                string? id = null, date = null;
                 foreach (Match a in Attr.Matches(cell.Value))
                 {
-                    switch (a.Groups[1].Value)
-                    {
-                        case "id": id = a.Groups[2].Value; break;
-                        case "data-date": date = a.Groups[2].Value; break;
-                        case "data-level": level = a.Groups[2].Value; break;
-                    }
+                    if (a.Groups[1].Value == "id") { id = a.Groups[2].Value; }
+                    else { date = a.Groups[2].Value; }
                 }
 
                 if (date == null || !DateOnly.TryParseExact(date, "yyyy-MM-dd", out var d)) { continue; }
-
-                int lvl = int.TryParse(level, out var l) ? Math.Clamp(l, 0, 4) : 0;
-                int count = id != null && counts.TryGetValue(id, out var c) ? c : 0;
-                days[d] = new ContributionDay(date, lvl, count);
+                days[d] = id != null && counts.TryGetValue(id, out var c) ? c : 0;
             }
 
             if (days.Count == 0)
             {
                 throw new InvalidOperationException("No contribution days found on the GitHub page.");
             }
+            return days;
+        }
 
-            // Last 4 months, in whole weeks that start on Sunday (like GitHub's own graph).
-            DateOnly end = days.Keys.Max();
-            DateOnly start = end.AddMonths(-4);
+        /// <summary>
+        /// Times of my recent public GitHub activity (pushes, pull requests, ...), used to tell
+        /// which Eastern-time day a UTC calendar day's work belongs to. Empty if unavailable.
+        /// </summary>
+        private async Task<List<DateTime>> GetActivityTimesAsync(HttpClient client)
+        {
+            try
+            {
+                using var request = new HttpRequestMessage(HttpMethod.Get,
+                    $"https://api.github.com/users/{UserName}/events/public?per_page=100");
+                request.Headers.Accept.ParseAdd("application/vnd.github+json");
+
+                using var response = await client.SendAsync(request);
+                if (!response.IsSuccessStatusCode) { return new(); }
+
+                using var doc = JsonDocument.Parse(await response.Content.ReadAsStringAsync());
+                var times = new List<DateTime>();
+                foreach (var e in doc.RootElement.EnumerateArray())
+                {
+                    if (e.TryGetProperty("created_at", out var t) && t.TryGetDateTime(out var when))
+                    {
+                        times.Add(when.ToUniversalTime());
+                    }
+                }
+                return times;
+            }
+            catch (Exception ex)
+            {
+                _log.LogInformation(ex, "GitHub activity times unavailable; using UTC days");
+                return new();
+            }
+        }
+
+        private static ContributionsResponse Build(Dictionary<DateOnly, int> publicUtc, List<DateTime> activityTimes)
+        {
+            DateOnly today = DateOnly.FromDateTime(TimeZoneInfo.ConvertTimeFromUtc(DateTime.UtcNow, Eastern));
+
+            // ---- Live part: move each UTC day's count onto Eastern days ----
+            var liveEastern = new Dictionary<DateOnly, int>();
+            foreach (var (utcDay, count) in publicUtc)
+            {
+                if (count == 0 || utcDay < GitHubSnapshot.LiveFrom) { continue; }
+
+                // Activity on this UTC day: how much of it was still "yesterday" in Eastern time?
+                var onDay = activityTimes.Where(t => DateOnly.FromDateTime(t) == utcDay).ToList();
+                int movedBack = 0;
+                if (onDay.Count > 0)
+                {
+                    int previousDay = onDay.Count(t => DateOnly.FromDateTime(TimeZoneInfo.ConvertTimeFromUtc(t, Eastern)) < utcDay);
+                    movedBack = (int)Math.Round(count * (double)previousDay / onDay.Count);
+                }
+
+                Add(liveEastern, utcDay.AddDays(-1), movedBack);
+                Add(liveEastern, utcDay, count - movedBack);
+            }
+
+            // ---- Combine: snapshot before LiveFrom, live from then on ----
+            int CountFor(DateOnly d)
+            {
+                if (d < GitHubSnapshot.LiveFrom)
+                {
+                    if (d >= GitHubSnapshot.CoveredFrom)
+                    {
+                        return GitHubSnapshot.Days.TryGetValue(d.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), out var s) ? s : 0;
+                    }
+                    return publicUtc.TryGetValue(d, out var p) ? p : 0;
+                }
+
+                // Anything GitHub already dates after today (UTC is ahead of Eastern) belongs to today
+                if (d == today)
+                {
+                    return liveEastern.Where(kv => kv.Key >= today).Sum(kv => kv.Value);
+                }
+                return liveEastern.TryGetValue(d, out var l) ? l : 0;
+            }
+
+            // ---- GitHub's shading: 4 equal bands up to the busiest day of the last year ----
+            int busiest = 0;
+            for (var d = today.AddDays(-364); d <= today; d = d.AddDays(1))
+            {
+                busiest = Math.Max(busiest, CountFor(d));
+            }
+
+            int LevelFor(int count) => count <= 0 || busiest == 0
+                ? 0
+                : Math.Clamp((int)Math.Ceiling(count * 4.0 / busiest), 1, 4);
+
+            // ---- Last 4 months, in whole weeks that start on Sunday (like GitHub's graph) ----
+            DateOnly start = today.AddMonths(-4);
             start = start.AddDays(-(int)start.DayOfWeek);
 
             var weeks = new List<List<ContributionDay>>();
             int total = 0;
-            for (var weekStart = start; weekStart <= end; weekStart = weekStart.AddDays(7))
+            for (var weekStart = start; weekStart <= today; weekStart = weekStart.AddDays(7))
             {
                 var week = new List<ContributionDay>();
                 for (int i = 0; i < 7; i++)
                 {
                     var d = weekStart.AddDays(i);
-                    if (d > end) { break; }
+                    if (d > today) { break; }
 
-                    var day = days.TryGetValue(d, out var found)
-                        ? found
-                        : new ContributionDay(d.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), 0, 0);
-                    total += day.Count;
-                    week.Add(day);
+                    int count = CountFor(d);
+                    total += count;
+                    week.Add(new ContributionDay(d.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture), LevelFor(count), count));
                 }
                 weeks.Add(week);
             }
@@ -141,8 +232,14 @@ namespace Shaikh.Server.Controllers
                 $"https://github.com/{UserName}",
                 total,
                 start.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
-                end.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
+                today.ToString("yyyy-MM-dd", CultureInfo.InvariantCulture),
                 weeks);
+        }
+
+        private static void Add(Dictionary<DateOnly, int> map, DateOnly day, int value)
+        {
+            if (value == 0) { return; }
+            map[day] = map.TryGetValue(day, out var v) ? v + value : value;
         }
     }
 }
