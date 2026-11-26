@@ -152,20 +152,96 @@ main {
     line-height: 1.3;
   }
 
+/* Dream companies: 2 x 2 grid */
+.dream-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 14px;
+}
+
 .dream-card {
+  position: relative;
   justify-content: center;
-  max-width: 260px;
-  margin: 0 auto;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
 }
 
   .dream-card p {
-    font-size: 1.15rem;
+    font-size: 1.05rem;
   }
 
-.ms-logo {
-  width: 36px;
-  height: 36px;
+  .dream-card:focus {
+    outline: none;
+    border-color: #4CAF50;
+  }
+
+.co-logo {
   flex-shrink: 0;
+}
+
+.ms-logo {
+  width: 32px;
+  height: 32px;
+}
+
+.xbox-logo {
+  font-size: 1.9rem;
+  color: #107c10;
+}
+
+/* IBM's striped letters, drawn with CSS */
+.ibm-logo {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 1.45rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: transparent;
+  background: repeating-linear-gradient(to bottom, #4589ff 0 3px, transparent 3px 5px);
+  -webkit-background-clip: text;
+  background-clip: text;
+}
+
+.cox-logo {
+  font-family: "Arial Black", Arial, sans-serif;
+  font-size: 1.35rem;
+  font-weight: 900;
+  letter-spacing: 1px;
+  line-height: 1;
+  color: #00a3e0;
+}
+
+/* Emoji that float up around a dream company card */
+.particle {
+  position: absolute;
+  bottom: 40%;
+  z-index: 20;
+  pointer-events: none;
+  opacity: 0;
+  animation: float-up 1.8s ease-out forwards;
+}
+
+@keyframes float-up {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0) scale(0.4);
+  }
+
+  15% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift, 0px)), -110px) scale(1.15) rotate(12deg);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .particle {
+    display: none;
+  }
 }
 
 .icon-badge {
@@ -216,6 +292,14 @@ main {
 
   .icon-azure i {
     color: #3aa0ff;
+  }
+
+.icon-cloudflare {
+  background: rgba(243, 128, 32, 0.16);
+}
+
+  .icon-cloudflare i {
+    color: #f38020;
   }
 
 .icon-dotnet {

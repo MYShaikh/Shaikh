@@ -14,6 +14,22 @@ interface Contributions {
   weeks: ContributionDay[][];
 }
 
+interface DreamCompany {
+  key: string;
+  name: string;
+  emoji: string[];
+}
+
+interface Particle {
+  id: number;
+  key: string;     // which company card it floats around
+  emoji: string;
+  x: number;
+  size: number;
+  delay: number;
+  drift: number;
+}
+
 const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
 
 @Component({
@@ -31,7 +47,47 @@ export class HomeComponent implements OnInit {
     unity: 'Learning Unity since my first year of college! Know it better than the back of my hand',
     claude: 'Did 3 certifications, know all the extensions, skills and hooks!',
     dotnet: 'This website was made with .NET framework',
+    azure: 'Studying for the AZ-900 certification, this is my go-to cloud service',
+    cloudflare: 'All my domains are bought and hosted with Cloudflare',
   };
+
+  // Dream companies, each with the emoji that float up when you hover or tap it
+  readonly dreamCompanies: DreamCompany[] = [
+    { key: 'microsoft', name: 'Microsoft', emoji: ['❤️', '💖', '💕', '💗'] },
+    { key: 'xbox', name: 'Xbox', emoji: ['🎮'] },
+    { key: 'ibm', name: 'IBM', emoji: ['📁'] },
+    { key: 'cox', name: 'Cox', emoji: ['🍑'] },
+  ];
+
+  readonly particles = signal<Particle[]>([]);
+  private nextParticleId = 0;
+  private lastBurst: Record<string, number> = {};
+
+  burst(key: string): void {
+    const co = this.dreamCompanies.find(c => c.key === key);
+    if (!co) { return; }
+
+    // Don't stack bursts when the mouse wiggles over the card
+    const now = Date.now();
+    if (now - (this.lastBurst[key] ?? 0) < 700) { return; }
+    this.lastBurst[key] = now;
+
+    const fresh: Particle[] = Array.from({ length: 9 }, (_, i) => ({
+      id: this.nextParticleId++,
+      key,
+      emoji: co.emoji[i % co.emoji.length],
+      x: 8 + Math.random() * 84,             // % across the card
+      size: 16 + Math.round(Math.random() * 12),
+      delay: Math.round(Math.random() * 450),
+      drift: Math.round(Math.random() * 60 - 30),
+    }));
+
+    this.particles.update(list => [...list, ...fresh]);
+
+    // Remove them once the float animation has finished
+    const ids = new Set(fresh.map(p => p.id));
+    setTimeout(() => this.particles.update(list => list.filter(p => !ids.has(p.id))), 2400);
+  }
 
   // GitHub contributions for the last 6 months (signals: this app runs without zone.js)
   readonly contributions = signal<Contributions | null>(null);

@@ -13,7 +13,7 @@
 
   <main>
 
-    <p class="tagline">I can code <span>(Without AI)</span></p>
+    <p class="tagline">I can code <span>(Without AI 😱)</span></p>
 
     <div class="cta-row">
       <a class="cta-btn" routerLink="/projects">
@@ -45,9 +45,10 @@
           <div class="suit-tooltip">{{ suitText.claude }}</div>
         </div>
 
-        <div class="suit-card">
+        <div class="suit-card" tabindex="0">
           <span class="icon-badge icon-azure"><i class="devicon-azure-plain"></i></span>
           <p>Microsoft Azure</p>
+          <div class="suit-tooltip">{{ suitText.azure }}</div>
         </div>
 
         <div class="suit-card" tabindex="0">
@@ -55,23 +56,12 @@
           <p>.NET framework</p>
           <div class="suit-tooltip">{{ suitText.dotnet }}</div>
         </div>
-      </div>
-    </section>
 
-    <div class="divider"></div>
-
-    <section class="info-card">
-      <h2><span class="title-accent"></span>Dream company:</h2>
-
-      <div class="dream-card">
-        <!-- Microsoft four-square mark -->
-        <svg class="ms-logo" viewBox="0 0 23 23" aria-hidden="true">
-          <rect x="1" y="1" width="10" height="10" fill="#f25022" />
-          <rect x="12" y="1" width="10" height="10" fill="#7fba00" />
-          <rect x="1" y="12" width="10" height="10" fill="#00a4ef" />
-          <rect x="12" y="12" width="10" height="10" fill="#ffb900" />
-        </svg>
-        <p>Microsoft</p>
+        <div class="suit-card" tabindex="0">
+          <span class="icon-badge icon-cloudflare"><i class="devicon-cloudflare-plain"></i></span>
+          <p>Cloudflare</p>
+          <div class="suit-tooltip">{{ suitText.cloudflare }}</div>
+        </div>
       </div>
     </section>
 
@@ -123,6 +113,54 @@
 
         <span class="gh-link"><i class="fab fa-github"></i> github.com/MYShaikh <i class="fas fa-arrow-right"></i></span>
       </a>
+    </section>
+
+    <div class="divider"></div>
+
+    <section class="info-card">
+      <h2><span class="title-accent"></span>Dream companies:</h2>
+
+      <!-- Hover or tap a company and its emoji float up around the card -->
+      <div class="dream-grid">
+        @for (co of dreamCompanies; track co.key) {
+          <div class="dream-card" tabindex="0" role="button"
+               [attr.aria-label]="co.name"
+               (mouseenter)="burst(co.key)" (click)="burst(co.key)" (keydown.enter)="burst(co.key)">
+
+            @switch (co.key) {
+              @case ('microsoft') {
+                <svg class="co-logo ms-logo" viewBox="0 0 23 23" aria-hidden="true">
+                  <rect x="1" y="1" width="10" height="10" fill="#f25022" />
+                  <rect x="12" y="1" width="10" height="10" fill="#7fba00" />
+                  <rect x="1" y="12" width="10" height="10" fill="#00a4ef" />
+                  <rect x="12" y="12" width="10" height="10" fill="#ffb900" />
+                </svg>
+              }
+              @case ('xbox') {
+                <i class="co-logo fab fa-xbox xbox-logo" aria-hidden="true"></i>
+              }
+              @case ('ibm') {
+                <span class="co-logo ibm-logo" aria-hidden="true">IBM</span>
+              }
+              @case ('cox') {
+                <span class="co-logo cox-logo" aria-hidden="true">COX</span>
+              }
+            }
+
+            <p>{{ co.name }}</p>
+
+            @for (p of particles(); track p.id) {
+              @if (p.key === co.key) {
+                <span class="particle" aria-hidden="true"
+                      [style.left.%]="p.x"
+                      [style.font-size.px]="p.size"
+                      [style.animation-delay.ms]="p.delay"
+                      [style.--drift]="p.drift + 'px'">{{ p.emoji }}</span>
+              }
+            }
+          </div>
+        }
+      </div>
     </section>
 
   </main>
