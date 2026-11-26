@@ -15,25 +15,34 @@
 
     <p class="tagline">I can code <span>(Without AI)</span></p>
 
+    <div class="cta-row">
+      <a class="cta-btn" routerLink="/projects">
+        <i class="fas fa-rocket"></i> Check out my projects <i class="fas fa-arrow-right"></i>
+      </a>
+    </div>
+
     <div class="divider"></div>
 
     <section class="info-card">
       <h2><span class="title-accent"></span>My strongest suits:</h2>
 
       <div class="suit-grid">
-        <div class="suit-card">
+        <div class="suit-card" tabindex="0">
           <span class="icon-badge icon-django"><i class="devicon-django-plain"></i></span>
           <p>Django</p>
+          <div class="suit-tooltip">{{ suitText.django }}</div>
         </div>
 
-        <div class="suit-card">
+        <div class="suit-card" tabindex="0">
           <span class="icon-badge icon-unity"><i class="devicon-unity-plain"></i></span>
           <p>Unity Engine</p>
+          <div class="suit-tooltip">{{ suitText.unity }}</div>
         </div>
 
-        <div class="suit-card">
+        <div class="suit-card" tabindex="0">
           <span class="icon-badge icon-claude"><i class="devicon-claude-plain"></i></span>
           <p>Claude tools</p>
+          <div class="suit-tooltip">{{ suitText.claude }}</div>
         </div>
 
         <div class="suit-card">
@@ -41,9 +50,10 @@
           <p>Microsoft Azure</p>
         </div>
 
-        <div class="suit-card">
+        <div class="suit-card" tabindex="0">
           <span class="icon-badge icon-dotnet"><i class="devicon-dotnetcore-plain"></i></span>
           <p>.NET framework</p>
+          <div class="suit-tooltip">{{ suitText.dotnet }}</div>
         </div>
       </div>
     </section>
@@ -63,6 +73,56 @@
         </svg>
         <p>Microsoft</p>
       </div>
+    </section>
+
+    <div class="divider"></div>
+
+    <!-- Live GitHub contributions, last 6 months. The whole card links to my GitHub. -->
+    <section class="info-card">
+      <h2><span class="title-accent"></span>My GitHub activity</h2>
+
+      <a class="gh-card" [href]="githubProfile" target="_blank" rel="noopener noreferrer"
+         aria-label="My GitHub contributions for the last 6 months. Opens my GitHub profile.">
+
+        @if (contributions(); as c) {
+          <div class="gh-graph" [style.--weeks]="c.weeks.length">
+            <div class="gh-months">
+              @for (label of monthLabels(); track $index) {
+                <span>{{ label }}</span>
+              }
+            </div>
+
+            <div class="gh-grid">
+              @for (week of c.weeks; track $index) {
+                <div class="gh-week">
+                  @for (day of week; track day.date) {
+                    <span class="gh-day" [attr.data-level]="day.level" [title]="dayTitle(day)"></span>
+                  }
+                </div>
+              }
+            </div>
+          </div>
+
+          <div class="gh-footer">
+            <span class="gh-total">{{ c.total }} contributions in the last 6 months</span>
+            <span class="gh-legend">
+              Less
+              <span class="gh-day" data-level="0"></span>
+              <span class="gh-day" data-level="1"></span>
+              <span class="gh-day" data-level="2"></span>
+              <span class="gh-day" data-level="3"></span>
+              <span class="gh-day" data-level="4"></span>
+              More
+            </span>
+          </div>
+        } @else if (contributionsFailed()) {
+          <p class="gh-message">See my latest work on GitHub</p>
+        } @else {
+          <p class="gh-message">Loading my GitHub activity…</p>
+        }
+
+        <span class="gh-link"><i class="fab fa-github"></i> github.com/MYShaikh <i class="fas fa-arrow-right"></i></span>
+      </a>
     </section>
 
   </main>

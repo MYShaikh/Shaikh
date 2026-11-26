@@ -226,6 +226,190 @@ main {
     color: #7c5cff;
   }
 
+/* ===========================================
+   "Check out my projects" button
+   =========================================== */
+.cta-row {
+  display: flex;
+  justify-content: center;
+  margin-top: 18px;
+}
+
+.cta-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  padding: 12px 24px;
+  background-color: #4CAF50;
+  border-radius: 999px;
+  color: #1a1a1a;
+  font-size: 1rem;
+  font-weight: 700;
+  text-decoration: none;
+  box-shadow: 0 6px 18px rgba(76, 175, 80, 0.35);
+  transition: transform 0.2s ease, box-shadow 0.2s ease, filter 0.2s ease;
+}
+
+  .cta-btn:hover,
+  .cta-btn:focus-visible {
+    transform: translateY(-2px);
+    filter: brightness(1.08);
+    box-shadow: 0 10px 24px rgba(76, 175, 80, 0.45);
+  }
+
+  .cta-btn .fa-arrow-right {
+    transition: transform 0.2s ease;
+  }
+
+  .cta-btn:hover .fa-arrow-right {
+    transform: translateX(4px);
+  }
+
+/* ===========================================
+   Hover text on the strongest-suit cards
+   =========================================== */
+.suit-card {
+  position: relative;
+  cursor: default;
+}
+
+.suit-tooltip {
+  display: none;
+  position: absolute;
+  bottom: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  margin-bottom: 10px;
+  width: 240px;
+  max-width: calc(100vw - 40px);
+  background-color: #2c2c2c;
+  border: 1px solid #4CAF50;
+  border-radius: 8px;
+  padding: 10px 12px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  line-height: 1.4;
+  color: #e0e0e0;
+  text-align: center;
+  z-index: 10;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
+}
+
+.suit-card:hover .suit-tooltip,
+.suit-card:focus .suit-tooltip {
+  display: block;
+}
+
+.suit-card:focus {
+  outline: none;
+  border-color: #4CAF50;
+}
+
+/* ===========================================
+   GitHub contributions (last 6 months)
+   =========================================== */
+.gh-card {
+  display: block;
+  padding: 16px 16px 12px;
+  background-color: #262626;
+  border: 1px solid #383838;
+  border-radius: 12px;
+  color: #b0b0b0;
+  text-decoration: none;
+  transition: border-color 0.25s ease, box-shadow 0.25s ease;
+}
+
+  .gh-card:hover {
+    border-color: #4CAF50;
+    box-shadow: 0 10px 22px rgba(76, 175, 80, 0.18);
+  }
+
+.gh-graph {
+  --gap: 3px;
+}
+
+.gh-months,
+.gh-grid {
+  display: grid;
+  grid-template-columns: repeat(var(--weeks), 1fr);
+  gap: var(--gap);
+}
+
+.gh-months {
+  margin-bottom: 4px;
+  font-size: 0.7rem;
+  color: #9e9e9e;
+  text-align: left;
+}
+
+  .gh-months span {
+    white-space: nowrap;
+    overflow: visible;
+    min-width: 0;
+  }
+
+.gh-week {
+  display: grid;
+  grid-template-rows: repeat(7, auto);
+  gap: var(--gap);
+  align-content: start;
+}
+
+.gh-day {
+  display: block;
+  aspect-ratio: 1;
+  border-radius: 2px;
+  background-color: #2f3337;
+}
+
+  .gh-day[data-level="1"] { background-color: #0e4429; }
+  .gh-day[data-level="2"] { background-color: #006d32; }
+  .gh-day[data-level="3"] { background-color: #26a641; }
+  .gh-day[data-level="4"] { background-color: #39d353; }
+
+.gh-footer {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  margin-top: 10px;
+  font-size: 0.75rem;
+  color: #9e9e9e;
+}
+
+.gh-legend {
+  display: inline-flex;
+  align-items: center;
+  gap: 3px;
+}
+
+  .gh-legend .gh-day {
+    width: 10px;
+    height: 10px;
+  }
+
+.gh-message {
+  margin: 8px 0;
+  font-size: 0.9rem;
+  color: #b0b0b0;
+}
+
+.gh-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  margin-top: 12px;
+  color: #4CAF50;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+  .gh-link .fa-github {
+    font-size: 1.1rem;
+    color: #ffffff;
+  }
+
 footer {
   text-align: center;
   margin-top: 28px;

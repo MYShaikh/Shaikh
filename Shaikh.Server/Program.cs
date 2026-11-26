@@ -55,6 +55,7 @@ builder.Services.AddCors(options =>
 });
 
 builder.Services.AddHttpClient();
+builder.Services.AddMemoryCache(); // GitHub contributions are cached for an hour
 var app = builder.Build();
 app.UseSerilogRequestLogging();
 
