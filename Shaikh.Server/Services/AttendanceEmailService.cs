@@ -57,9 +57,7 @@ namespace Shaikh.Server.Services
                 var message = new EmailMessage(
                     _senderAddress,
                     _recipientAddress,
-                    new EmailContent($"Website contact: {subject}") { Html = html, PlainText = $"From {name} <{email}>
-
-{body}" });
+                    new EmailContent($"Website contact: {subject}") { Html = html, PlainText = $"From {name} <{email}>\n\n{body}" });
 
                 // "Reply" in Gmail goes straight to the visitor
                 if (!string.IsNullOrWhiteSpace(email) && email.Contains('@'))
