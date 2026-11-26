@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LanguageService } from '../i18n/language.service';
 
 @Component({
   selector: 'app-current-position',
@@ -6,4 +7,6 @@ import { Component } from '@angular/core';
   styleUrl: './current-position.css',
   templateUrl: './current-position.html',
 })
-export class CurrentPositionComponent {}
+export class CurrentPositionComponent {
+  readonly i18n = inject(LanguageService);
+}

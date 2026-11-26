@@ -1,4 +1,20 @@
-import { Component, signal, OnInit } from '@angular/core';
+import { Component, ElementRef, OnInit, ViewChild, computed, effect, inject, signal } from '@angular/core';
+import { Title } from '@angular/platform-browser';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter } from 'rxjs';
+import { LanguageService } from './i18n/language.service';
+
+// Which nav label belongs to which address
+const PAGE_KEYS: Record<string, string> = {
+  '': 'nav.home',
+  'home': 'nav.home',
+  'skills': 'nav.skills',
+  'projects': 'nav.projects',
+  'work-experience': 'nav.work',
+  'current-position': 'nav.work',
+  'education': 'nav.education',
+  'contact': 'nav.contact',
+};
 
 @Component({
   selector: 'app-root',
@@ -7,57 +23,78 @@ import { Component, signal, OnInit } from '@angular/core';
   styleUrl: './app.css'
 })
 export class App implements OnInit {
-  // Phone variables
-  public phoneButtonText: string = 'Contact: (470) 886-6957';
-  public readonly phoneNumber: string = '4708866957';
+  readonly i18n = inject(LanguageService);
+  private readonly router = inject(Router);
+  private readonly title = inject(Title);
 
-  // Mobile menu variables
-  public isMenuOpen: boolean = false;
+  @ViewChild('mainContent') private mainContent?: ElementRef<HTMLElement>;
 
-  protected readonly title = signal('shaikh.client');
+  // Mobile menu
+  readonly isMenuOpen = signal(false);
 
-  constructor() { }
+  // The page the visitor is on, shown beside the hamburger on phones
+  private readonly pageKey = signal('nav.home');
+  readonly pageName = computed(() => this.i18n.t(this.pageKey()));
 
-  // 3. Paste the ngOnInit method inside the class
+  // Text read out by screen readers when something changes (e.g. the language)
+  readonly announcement = signal('');
+
+  private firstNavigation = true;
+
+  constructor() {
+    // Keep the browser tab title in sync with the page and the language
+    effect(() => {
+      const page = this.pageName();
+      const site = this.i18n.t('site.name');
+      this.title.setTitle(this.pageKey() === 'nav.home' ? site : `${page} | ${site}`);
+    });
+  }
+
   ngOnInit() {
+    this.router.events
+      .pipe(filter((e): e is NavigationEnd => e instanceof NavigationEnd))
+      .subscribe(e => {
+        const path = e.urlAfterRedirects.split(/[?#]/)[0].replace(/^\/+/, '').split('/')[0];
+        this.pageKey.set(PAGE_KEYS[path] ?? 'nav.home');
+        this.isMenuOpen.set(false);
+
+        // After moving to another page, put keyboard / screen-reader focus on the
+        // new page's content instead of leaving it on the link that was clicked.
+        if (this.firstNavigation) {
+          this.firstNavigation = false;
+        } else {
+          setTimeout(() => this.mainContent?.nativeElement.focus({ preventScroll: true }));
+          window.scrollTo({ top: 0 });
+        }
+      });
+
     if (!sessionStorage.getItem('hasVisitedHomepage')) {
       fetch('/api/viewers/increment', {
         method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        }
+        headers: { 'Content-Type': 'application/json' }
       })
-        .then(response => response.json())
-        .then(data => {
-          sessionStorage.setItem('hasVisitedHomepage', 'true');
+        .then(response => {
+          if (response.ok) { sessionStorage.setItem('hasVisitedHomepage', 'true'); }
         })
-        .catch(error => {
-          console.error('Error incrementing viewers:', error);
-        });
+        .catch(error => console.error('Error incrementing viewers:', error));
     }
   }
-  // Mobile menu click handlers
+
   toggleMenu(): void {
-    this.isMenuOpen = !this.isMenuOpen;
+    this.isMenuOpen.update(open => !open);
   }
 
   closeMenu(): void {
-    this.isMenuOpen = false;
+    this.isMenuOpen.set(false);
   }
 
-  // Portfolio phone click handler
-  handlePhoneClick(): void {
-    navigator.clipboard.writeText(this.phoneNumber).then(() => {
-      const originalText = this.phoneButtonText;
-      this.phoneButtonText = 'Number Copied!';
+  toggleLanguage(): void {
+    this.i18n.toggle();
+    this.announcement.set(this.i18n.t('lang.announce'));
+  }
 
-      setTimeout(() => {
-        this.phoneButtonText = originalText;
-      }, 2000);
-    }).catch(err => {
-      console.error('Failed to copy text: ', err);
-    });
-
-    window.location.href = `tel:${this.phoneNumber}`;
+  skipToContent(event: Event): void {
+    event.preventDefault();
+    this.mainContent?.nativeElement.focus();
   }
 }

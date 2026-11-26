@@ -1,121 +1,150 @@
 <div class="portfolio-container">
   <header class="profile-header">
-    <img src="images/headshot-2026.jpg" alt="Mohammad Yusuf I Shaikh" class="profile-img">
+    <img src="images/headshot-2026.jpg" [alt]="i18n.t('contact.photoAlt')" class="profile-img">
     <h1>Mohammad Yusuf I Shaikh</h1>
 
     <p class="subtitle">
-      <i class="fas fa-laptop-code"></i> Junior Software Developer <br /> <i class="fas fa-graduation-cap"></i> Computer Science Major
+      <i class="fas fa-laptop-code" aria-hidden="true"></i> {{ i18n.t('contact.role') }} <br />
+      <i class="fas fa-graduation-cap" aria-hidden="true"></i> {{ i18n.t('contact.major') }}
     </p>
   </header>
 
   <main>
 
-    <section class="icon-links">
-      <a href="https://www.linkedin.com/in/mohammad-shaikh/"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="icon-btn linkedin-icon"
-         aria-label="LinkedIn"
-         title="LinkedIn">
-        <i class="fab fa-linkedin"></i>
-      </a>
+    <h2 class="sr-only">{{ i18n.t('contact.links') }}</h2>
+    <ul class="icon-links">
+      <li>
+        <a href="https://www.linkedin.com/in/mohammad-shaikh/"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="icon-btn linkedin-icon"
+           [attr.aria-label]="i18n.t('contact.linkedin')"
+           title="LinkedIn">
+          <i class="fab fa-linkedin" aria-hidden="true"></i>
+        </a>
+      </li>
 
-      <a href="https://www.instagram.com/yusuf__shake?stkn=MXFjdGVuenZmam93aQ=="
-         target="_blank"
-         rel="noopener noreferrer"
-         class="icon-btn instagram-icon"
-         aria-label="Instagram"
-         title="Instagram">
-        <i class="fab fa-instagram"></i>
-      </a>
+      <li>
+        <a href="https://www.instagram.com/yusuf__shake?stkn=MXFjdGVuenZmam93aQ=="
+           target="_blank"
+           rel="noopener noreferrer"
+           class="icon-btn instagram-icon"
+           [attr.aria-label]="i18n.t('contact.instagram')"
+           title="Instagram">
+          <i class="fab fa-instagram" aria-hidden="true"></i>
+        </a>
+      </li>
 
-      <a href="mailto:myshaikh237@gmail.com"
-         class="icon-btn gmail-icon"
-         aria-label="Email"
-         title="Email">
-        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
-        </svg>
-      </a>
+      <li>
+        <a href="mailto:myshaikh237@gmail.com"
+           class="icon-btn gmail-icon"
+           [attr.aria-label]="i18n.t('contact.email') + ': myshaikh237@gmail.com'"
+           title="Email">
+          <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <path d="M24 5.457v13.909c0 .904-.732 1.636-1.636 1.636h-3.819V11.73L12 16.64l-6.545-4.91v9.273H1.636A1.636 1.636 0 0 1 0 19.366V5.457c0-2.023 2.309-3.178 3.927-1.964L5.455 4.64 12 9.548l6.545-4.91 1.528-1.145C21.69 2.28 24 3.434 24 5.457z" />
+          </svg>
+        </a>
+      </li>
 
-      <a href="https://devpost.com/myshaikh237"
-         target="_blank"
-         rel="noopener noreferrer"
-         class="icon-btn devpost-icon"
-         aria-label="Devpost"
-         title="Devpost">
-        <svg viewBox="0 0 44 29" xmlns="http://www.w3.org/2000/svg" aria-hidden="true">
-          <polygon fill="#57C1FF" points="35.936 0 29.552 0 37.616 13.997 29.552 28.018 35.936 28.018 44 13.997" />
-          <polygon fill="#57C1FF" points="8.064 0 14.448 0 6.384 13.997 14.448 28.018 8.064 28.018 0 13.997" />
-          <polygon fill="#003E54" points="12.048 28.018 3.984 13.997 12.048 0 31.952 0 40.016 13.997 31.952 28.018" />
-          <g transform="translate(15.12 5.0504)" fill="#FFFFFF">
-            <path d="M5.088 17.4599 L0 17.4599 L0 0.4569 L5.304 0.4569 C10.152 0.4569 13.752 2.7416 13.752 8.9705 C13.752 14.9347 9.432 17.4599 5.088 17.4599 Z M5.208 3.7517 L3.408 3.7517 L3.408 14.1411 L5.088 14.1411 C8.64 14.1411 10.272 12.0488 10.272 8.9464 C10.272 5.4833 8.784 3.7517 5.208 3.7517 Z" />
-          </g>
-        </svg>
-      </a>
-    </section>
+      <li>
+        <a href="https://devpost.com/myshaikh237"
+           target="_blank"
+           rel="noopener noreferrer"
+           class="icon-btn devpost-icon"
+           [attr.aria-label]="i18n.t('contact.devpost')"
+           title="Devpost">
+          <svg viewBox="0 0 44 29" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+            <polygon fill="#57C1FF" points="35.936 0 29.552 0 37.616 13.997 29.552 28.018 35.936 28.018 44 13.997" />
+            <polygon fill="#57C1FF" points="8.064 0 14.448 0 6.384 13.997 14.448 28.018 8.064 28.018 0 13.997" />
+            <polygon fill="#003E54" points="12.048 28.018 3.984 13.997 12.048 0 31.952 0 40.016 13.997 31.952 28.018" />
+            <g transform="translate(15.12 5.0504)" fill="#FFFFFF">
+              <path d="M5.088 17.4599 L0 17.4599 L0 0.4569 L5.304 0.4569 C10.152 0.4569 13.752 2.7416 13.752 8.9705 C13.752 14.9347 9.432 17.4599 5.088 17.4599 Z M5.208 3.7517 L3.408 3.7517 L3.408 14.1411 L5.088 14.1411 C8.64 14.1411 10.272 12.0488 10.272 8.9464 C10.272 5.4833 8.784 3.7517 5.208 3.7517 Z" />
+            </g>
+          </svg>
+        </a>
+      </li>
+    </ul>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <section class="contact-actions">
 
-      <button (click)="handlePhoneClick()"
-              class="btn phone-btn">
-        <i class="fas fa-phone"></i>
-        {{ phoneButtonText }}
+      <button type="button" (click)="handlePhoneClick()" class="btn phone-btn"
+              [attr.aria-label]="phoneCopied ? i18n.t('contact.copied') : i18n.t('contact.phoneLabel')">
+        <i class="fas fa-phone" aria-hidden="true"></i>
+        {{ phoneCopied ? i18n.t('contact.copied') : i18n.t('contact.phone') }}
       </button>
 
-      <button class="btn form-btn"
-              (click)="showContactForm = !showContactForm">
-        <i class="fas fa-paper-plane"></i>
-        {{ showContactForm ? 'Hide Contact Form' : 'Contact Form' }}
+      <button type="button" class="btn form-btn"
+              (click)="showContactForm = !showContactForm"
+              [attr.aria-expanded]="showContactForm"
+              aria-controls="contact-form">
+        <i class="fas fa-paper-plane" aria-hidden="true"></i>
+        {{ showContactForm ? i18n.t('contact.hideForm') : i18n.t('contact.showForm') }}
       </button>
 
     </section>
 
-    <div *ngIf="showContactForm" class="contact-form-container">
+    <div id="contact-form">
+      @if (showContactForm) {
+        <form class="contact-form-container" (submit)="submitContact(); $event.preventDefault()" novalidate>
 
-      <h3>Send Me a Message</h3>
+          <h2 class="form-title">{{ i18n.t('contact.formTitle') }}</h2>
 
-      <input type="text"
-             name="name"
-             placeholder="Your Name"
-             class="form-input"
-             [(ngModel)]="contactForm.name">
+          <label for="cf-name" class="sr-only">{{ i18n.t('contact.name') }}</label>
+          <input id="cf-name"
+                 type="text"
+                 name="name"
+                 autocomplete="name"
+                 required
+                 [placeholder]="i18n.t('contact.name')"
+                 class="form-input"
+                 [(ngModel)]="contactForm.name">
 
-      <input type="email"
-             name="email"
-             placeholder="Your Email"
-             class="form-input"
-             [(ngModel)]="contactForm.email">
+          <label for="cf-email" class="sr-only">{{ i18n.t('contact.yourEmail') }}</label>
+          <input id="cf-email"
+                 type="email"
+                 name="email"
+                 autocomplete="email"
+                 required
+                 [placeholder]="i18n.t('contact.yourEmail')"
+                 class="form-input"
+                 [(ngModel)]="contactForm.email">
 
-      <input type="text"
-             name="subject"
-             placeholder="Subject"
-             class="form-input"
-             [(ngModel)]="contactForm.subject">
+          <label for="cf-subject" class="sr-only">{{ i18n.t('contact.subject') }}</label>
+          <input id="cf-subject"
+                 type="text"
+                 name="subject"
+                 required
+                 [placeholder]="i18n.t('contact.subject')"
+                 class="form-input"
+                 [(ngModel)]="contactForm.subject">
 
-      <textarea rows="6"
-                name="body"
-                class="form-textarea"
-                placeholder="Tell me about your project, internship opportunity, full-stack development needs, software consulting, collaboration ideas, or any questions you may have."
-                [(ngModel)]="contactForm.body"></textarea>
+          <label for="cf-body" class="sr-only">{{ i18n.t('contact.message') }}</label>
+          <textarea id="cf-body"
+                    rows="6"
+                    name="body"
+                    required
+                    class="form-textarea"
+                    [placeholder]="i18n.t('contact.placeholder')"
+                    [(ngModel)]="contactForm.body"></textarea>
 
-      <button class="btn submit-btn"
-              (click)="submitContact()"
-              [disabled]="contactStatus === 'sending'">
-        <i class="fas fa-paper-plane"></i>
-        {{ contactStatus === 'sending' ? 'Sending...' : 'Send Message' }}
-      </button>
+          <button type="submit" class="btn submit-btn" [disabled]="contactStatus === 'sending'">
+            <i class="fas fa-paper-plane" aria-hidden="true"></i>
+            {{ contactStatus === 'sending' ? i18n.t('contact.sending') : i18n.t('contact.send') }}
+          </button>
 
-      <p *ngIf="contactStatus === 'sent'" class="form-status form-status-success">
-        Message sent — thanks for reaching out!
-      </p>
+          <div aria-live="polite" role="status">
+            @if (contactStatus === 'sent') {
+              <p class="form-status form-status-success">{{ i18n.t('contact.sent') }}</p>
+            }
+            @if (contactStatus === 'error') {
+              <p class="form-status form-status-error">{{ i18n.t('contact.error') }}</p>
+            }
+          </div>
 
-      <p *ngIf="contactStatus === 'error'" class="form-status form-status-error">
-        Something went wrong. Please fill out every field and try again.
-      </p>
-
+        </form>
+      }
     </div>
 
   </main>

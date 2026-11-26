@@ -1,18 +1,23 @@
-import { Component, HostListener, computed, signal } from '@angular/core';
+import { Component, ElementRef, HostListener, Injector, ViewChild, afterNextRender, computed, inject, signal } from '@angular/core';
+import { LanguageService } from '../i18n/language.service';
 
 type PopupState = 'open' | 'closing' | 'docked';
 
-interface Project {
-  title: string;
+interface ProjectText {
   meta?: string;      // event or date, when known
   summary: string;    // always shown: one short sentence
   more?: string;      // shown only after "Read more"
+  imageAlt: string;
+}
+
+interface Project extends ProjectText {
+  title: string;
+  es: ProjectText;    // Spanish version of the text
   tools: string[];
   devpost: string;
   github?: string;
   video: string;      // YouTube demo video
   image: string;      // cover image, saved in public/images/projects
-  imageAlt: string;
 }
 
 @Component({
@@ -22,16 +27,27 @@ interface Project {
   templateUrl: './projects.html',
 })
 export class ProjectsComponent {
+  readonly i18n = inject(LanguageService);
+  private readonly injector = inject(Injector);
   readonly devpostProfile = 'https://devpost.com/myshaikh237';
   readonly githubProfile = 'https://github.com/MYShaikh';
 
+  @ViewChild('ppSelect') private ppSelect?: ElementRef<HTMLSelectElement>;
+  @ViewChild('ppTab') private ppTab?: ElementRef<HTMLButtonElement>;
+
+  /** The project's text in the visitor's language. */
+  text(p: Project): ProjectText {
+    return this.i18n.lang() === 'es' ? p.es : p;
+  }
+
   // ---- "Private projects" popup -------------------------------------------
   // Only the names are shown. Details are shared by email, on request.
+  // `value` (English) is what goes in the email subject; `es` is what Spanish readers see.
   readonly contactEmail = 'myshaikh237@gmail.com';
   readonly privateProjects = [
-    'Microsoft Imagine Cup Project',
-    'Photogrammetry Drone',
-    'Trapic Mobile App',
+    { value: 'Microsoft Imagine Cup Project', es: 'Proyecto de Microsoft Imagine Cup' },
+    { value: 'Photogrammetry Drone', es: 'Dron de fotogrametría' },
+    { value: 'Trapic Mobile App', es: 'App móvil Trapic' },
   ];
 
   // 'open' = popup showing, 'closing' = sliding to the side, 'docked' = small tab on the side.
@@ -57,11 +73,15 @@ export class ProjectsComponent {
   closePopup(): void {
     if (this.popupState() !== 'open') { return; }
     this.popupState.set('closing');                       // plays the slide-to-the-side animation
-    setTimeout(() => this.popupState.set('docked'), 500); // then leaves just the side tab
+    setTimeout(() => {
+      this.popupState.set('docked');                       // then leaves just the side tab
+      afterNextRender(() => this.ppTab?.nativeElement.focus(), { injector: this.injector }); // focus back to the tab
+    }, 500);
   }
 
   openPopup(): void {
     this.popupState.set('open');
+    afterNextRender(() => this.ppSelect?.nativeElement.focus(), { injector: this.injector }); // focus into the popup
   }
 
   chooseProject(name: string): void {
@@ -104,6 +124,12 @@ export class ProjectsComponent {
       video: 'https://www.youtube.com/watch?v=Lc1gbXqbDP4',
       image: 'images/projects/memo.jpg',
       imageAlt: 'Memo: screenshot of the family check-in screen',
+      es: {
+        meta: 'Emory Hacks 2026 (otoño)',
+        summary: 'Un asistente que llama al iPad de la cocina de un padre o una madre a la hora de beber, comer y tomar sus pastillas, comprueba si lo hizo y avisa a la familia en tiempo real.',
+        more: 'Si la respuesta es no, la familia recibe sus palabras exactas y tres opciones. Me encargué de la vista semanal, la página de privacidad, el informe para el médico y la CI, y dirigí las pruebas de accesibilidad (0 errores en 59 análisis con axe-core).',
+        imageAlt: 'Memo: captura de la pantalla de seguimiento familiar',
+      },
     },
     {
       title: 'FaceScan',
@@ -119,6 +145,12 @@ export class ProjectsComponent {
       video: 'https://www.youtube.com/watch?v=9hbFyD95ylU',
       image: 'images/projects/facescan.jpg',
       imageAlt: 'FaceScan: smart glasses prototype',
+      es: {
+        meta: 'Georgia State University Hacklanta 2026 (primavera)',
+        summary: 'Gafas inteligentes para personas con discapacidad visual o ceguera facial.',
+        more: 'Reconocen un rostro en tiempo real y dicen en voz alta el nombre de la persona, además de cuándo y dónde se vieron por última vez. Las caras nuevas se nombran por voz y se recuerdan entre sesiones.',
+        imageAlt: 'FaceScan: prototipo de gafas inteligentes',
+      },
     },
     {
       title: 'Good Night',
@@ -134,6 +166,12 @@ export class ProjectsComponent {
       video: 'https://www.youtube.com/watch?v=Lp9T0rcODR4',
       image: 'images/projects/good-night.jpg',
       imageAlt: 'Good Night: the sleep companion app with Luma the cat',
+      es: {
+        meta: '2026 (primavera)',
+        summary: 'Una app de compañía para dormir, pensada para personas con insomnio o ansiedad, con una gata dormida llamada Luma.',
+        more: 'Reúne en una sola app herramientas de conducta, apoyo emocional, sonidos relajantes, recordatorios de salud y compromiso con la comunidad, en lugar de solo una de esas cosas.',
+        imageAlt: 'Good Night: la app para dormir con la gata Luma',
+      },
     },
     {
       title: 'Whispering Witches',
@@ -148,6 +186,12 @@ export class ProjectsComponent {
       video: 'https://www.youtube.com/watch?v=bBjMmqgKy3M',
       image: 'images/projects/whispering-witches.jpg',
       imageAlt: 'Whispering Witches: screenshot of the game',
+      es: {
+        meta: 'UGAHacks 2026 (primavera)',
+        summary: 'Un juego en 3D al estilo battle royale en el que una bruja restaura un mundo destruido venciendo a duendes con hechizos de su grimorio.',
+        more: 'Tiene personajes con los que puedes hablar, impulsados por modelos de lenguaje, y enemigos con IA NavMesh, en un mundo en ruinas que anima a pensar en la sostenibilidad.',
+        imageAlt: 'Whispering Witches: captura del juego',
+      },
     },
     {
       title: 'MedScan',
@@ -162,6 +206,12 @@ export class ProjectsComponent {
       video: 'https://www.youtube.com/watch?v=spDsU8J_9xs',
       image: 'images/projects/medscan.jpg',
       imageAlt: 'MedScan: screenshot of the prescription scanner',
+      es: {
+        meta: 'Emory Hacks 2025 (otoño) · en solitario',
+        summary: 'Lee recetas impresas y escritas a mano, explica la dosis, los efectos secundarios y los riesgos, y puede traducirlas.',
+        more: 'Lo creé después de ver a una farmacéutica explicar lo mismo una y otra vez, para ahorrarles tiempo a los farmacéuticos.',
+        imageAlt: 'MedScan: captura del lector de recetas',
+      },
     },
     {
       title: 'ParserPro',
@@ -177,6 +227,12 @@ export class ProjectsComponent {
       video: 'https://www.youtube.com/watch?v=VtjUT1SeZrQ',
       image: 'images/projects/parserpro.jpg',
       imageAlt: 'ParserPro: thumbnail of the demo video',
+      es: {
+        meta: 'Emory Hacks 2024 (otoño)',
+        summary: 'Un intérprete de código todo en uno para estudiantes y equipos.',
+        more: 'Selecciona cualquier parte de tu código y te explica exactamente esa sección, con visualizaciones y árboles binarios, para que no tengas que buscar entre enlaces y pestañas para entender el código de otra persona.',
+        imageAlt: 'ParserPro: miniatura del video de demostración',
+      },
     },
   ];
 }

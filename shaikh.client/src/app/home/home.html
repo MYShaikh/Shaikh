@@ -1,81 +1,54 @@
 <div class="portfolio-container">
 
   <header class="profile-header">
-    <img src="images/headshot-2026.jpg" alt="Mohammad Shaikh" class="profile-image">
+    <img src="images/headshot-2026.jpg" [alt]="i18n.t('home.photoAlt')" class="profile-image">
 
     <h1>Mohammad Shaikh</h1>
 
     <p class="subtitle">
-      <i class="fas fa-laptop-code"></i>
-      <span>Junior Software Developer</span>
+      <i class="fas fa-laptop-code" aria-hidden="true"></i>
+      <span>{{ i18n.t('home.role') }}</span>
     </p>
   </header>
 
   <main>
 
-    <p class="tagline">I can code <span>(Without AI 😱)</span></p>
+    <p class="tagline">{{ i18n.t('home.taglineA') }} <span>{{ i18n.t('home.taglineB') }}</span></p>
 
     <div class="cta-row">
       <a class="cta-btn" routerLink="/projects">
-        <i class="fas fa-rocket"></i> Check out my projects <i class="fas fa-arrow-right"></i>
+        <i class="fas fa-rocket" aria-hidden="true"></i> {{ i18n.t('home.cta') }} <i class="fas fa-arrow-right" aria-hidden="true"></i>
       </a>
     </div>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
-    <section class="info-card">
-      <h2><span class="title-accent"></span>My strongest suits:</h2>
+    <section class="info-card" aria-labelledby="suits-heading">
+      <h2 id="suits-heading"><span class="title-accent" aria-hidden="true"></span>{{ i18n.t('home.suits') }}</h2>
 
-      <div class="suit-grid">
-        <div class="suit-card" tabindex="0">
-          <span class="icon-badge icon-django"><i class="devicon-django-plain"></i></span>
-          <p>Django</p>
-          <div class="suit-tooltip">{{ suitText.django }}</div>
-        </div>
-
-        <div class="suit-card" tabindex="0">
-          <span class="icon-badge icon-unity"><i class="devicon-unity-plain"></i></span>
-          <p>Unity Engine</p>
-          <div class="suit-tooltip">{{ suitText.unity }}</div>
-        </div>
-
-        <div class="suit-card" tabindex="0">
-          <span class="icon-badge icon-claude"><i class="devicon-claude-plain"></i></span>
-          <p>Claude tools</p>
-          <div class="suit-tooltip">{{ suitText.claude }}</div>
-        </div>
-
-        <div class="suit-card" tabindex="0">
-          <span class="icon-badge icon-azure"><i class="devicon-azure-plain"></i></span>
-          <p>Microsoft Azure</p>
-          <div class="suit-tooltip">{{ suitText.azure }}</div>
-        </div>
-
-        <div class="suit-card" tabindex="0">
-          <span class="icon-badge icon-dotnet"><i class="devicon-dotnetcore-plain"></i></span>
-          <p>.NET framework</p>
-          <div class="suit-tooltip">{{ suitText.dotnet }}</div>
-        </div>
-
-        <div class="suit-card" tabindex="0">
-          <span class="icon-badge icon-cloudflare"><i class="devicon-cloudflare-plain"></i></span>
-          <p>Cloudflare</p>
-          <div class="suit-tooltip">{{ suitText.cloudflare }}</div>
-        </div>
-      </div>
+      <!-- Each card's hover text is also read by screen readers and shown on keyboard focus -->
+      <ul class="suit-grid">
+        @for (s of suits; track s.key) {
+          <li class="suit-card" tabindex="0">
+            <span class="icon-badge" [class]="'icon-' + s.key" aria-hidden="true"><i [class]="s.icon"></i></span>
+            <p>{{ suitName(s) }}<span class="sr-only">: </span></p>
+            <span class="suit-tooltip">{{ i18n.t('home.tip.' + s.key) }}</span>
+          </li>
+        }
+      </ul>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <!-- Live GitHub contributions, last 6 months. The whole card links to my GitHub. -->
-    <section class="info-card">
-      <h2><span class="title-accent"></span>My GitHub activity</h2>
+    <section class="info-card" aria-labelledby="github-heading">
+      <h2 id="github-heading"><span class="title-accent" aria-hidden="true"></span>{{ i18n.t('home.github') }}</h2>
 
       <a class="gh-card" [href]="githubProfile" target="_blank" rel="noopener noreferrer"
-         aria-label="My GitHub contributions for the last 6 months. Opens my GitHub profile.">
+         [attr.aria-label]="contributions() ? i18n.t('home.ghLabel', { n: contributions()!.total }) : i18n.t('home.ghLabelPlain')">
 
         @if (contributions(); as c) {
-          <div class="gh-graph" [style.--weeks]="c.weeks.length">
+          <div class="gh-graph" [style.--weeks]="c.weeks.length" aria-hidden="true">
             <div class="gh-months">
               @for (label of monthLabels(); track $index) {
                 <span>{{ label }}</span>
@@ -93,39 +66,39 @@
             </div>
           </div>
 
-          <div class="gh-footer">
-            <span class="gh-total">{{ c.total }} contributions in the last 6 months</span>
+          <div class="gh-footer" aria-hidden="true">
+            <span class="gh-total">{{ i18n.t('home.ghTotal', { n: c.total }) }}</span>
             <span class="gh-legend">
-              Less
+              {{ i18n.t('home.ghLess') }}
               <span class="gh-day" data-level="0"></span>
               <span class="gh-day" data-level="1"></span>
               <span class="gh-day" data-level="2"></span>
               <span class="gh-day" data-level="3"></span>
               <span class="gh-day" data-level="4"></span>
-              More
+              {{ i18n.t('home.ghMore') }}
             </span>
           </div>
         } @else if (contributionsFailed()) {
-          <p class="gh-message">See my latest work on GitHub</p>
+          <p class="gh-message">{{ i18n.t('home.ghFallback') }}</p>
         } @else {
-          <p class="gh-message">Loading my GitHub activity…</p>
+          <p class="gh-message">{{ i18n.t('home.ghLoading') }}</p>
         }
 
-        <span class="gh-link"><i class="fab fa-github"></i> github.com/MYShaikh <i class="fas fa-arrow-right"></i></span>
+        <span class="gh-link" aria-hidden="true"><i class="fab fa-github"></i> github.com/MYShaikh <i class="fas fa-arrow-right"></i></span>
       </a>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
-    <section class="info-card">
-      <h2><span class="title-accent"></span>Dream companies:</h2>
+    <section class="info-card" aria-labelledby="dream-heading">
+      <h2 id="dream-heading"><span class="title-accent" aria-hidden="true"></span>{{ i18n.t('home.dream') }}</h2>
 
-      <!-- Hover or tap a company and its emoji float up around the card -->
-      <div class="dream-grid">
+      <!-- Hover, tap or press Enter on a company and its emoji float up around the card -->
+      <ul class="dream-grid">
         @for (co of dreamCompanies; track co.key) {
-          <div class="dream-card" tabindex="0" role="button"
-               [attr.aria-label]="co.name"
-               (mouseenter)="burst(co.key)" (click)="burst(co.key)" (keydown.enter)="burst(co.key)">
+          <li class="dream-card" tabindex="0"
+              (mouseenter)="burst(co.key)" (click)="burst(co.key)"
+              (keydown.enter)="burst(co.key)" (keydown.space)="burst(co.key); $event.preventDefault()">
 
             @switch (co.key) {
               @case ('microsoft') {
@@ -143,7 +116,10 @@
                 <span class="co-logo ibm-logo" aria-hidden="true">IBM</span>
               }
               @case ('cox') {
-                <span class="co-logo cox-logo" aria-hidden="true">COX</span>
+                <span class="co-logo cox-logo" aria-hidden="true">
+                  <span class="cox-word">COX</span>
+                  <span class="cox-sub">ENTERPRISES</span>
+                </span>
               }
             }
 
@@ -158,9 +134,9 @@
                       [style.--drift]="p.drift + 'px'">{{ p.emoji }}</span>
               }
             }
-          </div>
+          </li>
         }
-      </div>
+      </ul>
     </section>
 
   </main>

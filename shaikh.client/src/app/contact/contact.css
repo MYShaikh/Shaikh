@@ -183,7 +183,7 @@ html {
 footer {
   margin-top: 15px;
   font-size: 0.8rem;
-  color: #777777;
+  color: #a0a0a0;
   text-align: center;
   width: 100%;
 }
@@ -207,6 +207,20 @@ footer {
   display: flex;
   flex-direction: column;
   gap: 12px;
+}
+
+  .contact-form-container .form-title {
+    margin: 16px 0 4px;
+    font-size: 1.17em;
+    color: #ffffff;
+    text-align: center;
+  }
+
+/* The social icons are a list now; keep them in one row without bullets */
+.icon-links {
+  list-style: none;
+  padding: 0;
+  margin-top: 0;
 }
 
 .form-input,

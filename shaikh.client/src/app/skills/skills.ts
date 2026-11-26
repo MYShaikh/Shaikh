@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { LanguageService } from '../i18n/language.service';
 
 @Component({
   selector: 'app-skills',
@@ -7,8 +8,7 @@ import { Component } from '@angular/core';
   templateUrl: './skills.html',
 })
 export class SkillsComponent {
-  hoveredSkill = '';
-  summary = '';
+  readonly i18n = inject(LanguageService);
 
   // Plain text shown in the tooltip for each skill. Saved here so nothing has to be
   // fetched from Wikipedia while visitors hover: the tooltips appear instantly.
@@ -54,8 +54,50 @@ export class SkillsComponent {
     "WordPress": "WordPress is a web content management system. It was originally created as a tool to publish blogs but has evolved to support publishing other web content, including more traditional websites, mailing lists, Internet forums, media galleries, membership sites, learning management systems, and online stores. Available as free and open-source software, WordPress is among the most popular content management systems – it was used by 22.52% of the top one million websites as of December 2024.",
   };
 
-  lookup(skillName: string) {
-    this.hoveredSkill = skillName;
-    this.summary = this.summaries[skillName] ?? '';
+  // Spanish versions of the same descriptions (shorter, written for this site)
+  private readonly summariesEs: Record<string, string> = {
+    "Amazon Web Services": "Amazon Web Services (AWS) es una filial de Amazon que ofrece plataformas de computación en la nube y APIs bajo demanda a personas, empresas y gobiernos, con pago según el uso.",
+    "Angular (web framework)": "Angular es un framework gratuito y de código abierto, basado en TypeScript, para crear aplicaciones web de una sola página. Lo desarrollan Google y una comunidad de personas y empresas.",
+    "ASP.NET Core": "ASP.NET Core es un framework modular de código abierto para aplicaciones web. Es un rediseño de ASP.NET que une ASP.NET MVC y ASP.NET Web API en un solo modelo de programación.",
+    "Blazor": "Blazor es un framework web gratuito y de código abierto para crear interfaces de usuario basadas en componentes con C# y HTML. Lo desarrolla Microsoft como parte de ASP.NET Core.",
+    "Bootstrap (front-end framework)": "Bootstrap es un framework CSS gratuito y de código abierto para crear sitios web adaptables a móviles. Incluye plantillas de diseño para tipografía, formularios, botones, navegación y otros componentes.",
+    "C Sharp (programming language)": "C# es un lenguaje de programación de alto nivel y propósito general que admite varios paradigmas: tipado estático y fuerte, programación imperativa, declarativa, funcional, genérica y orientada a objetos.",
+    "Convai": "Convai es una plataforma para crear personajes con IA conversacional que pueden hablar, escuchar y actuar dentro de videojuegos y mundos virtuales.",
+    "CSS": "CSS (hojas de estilo en cascada) es un lenguaje para definir la presentación y el estilo de documentos HTML o XML. Es una tecnología fundamental de la web, junto con HTML y JavaScript.",
+    "Django (web framework)": "Django es un framework web gratuito y de código abierto basado en Python. Sigue el patrón modelo–plantilla–vista (MTV) y lo mantiene la Django Software Foundation, una organización sin fines de lucro.",
+    "Docker (software)": "Docker es un conjunto de productos que usa virtualización a nivel del sistema operativo para entregar software en paquetes llamados contenedores, que funcionan igual en distintos entornos.",
+    "ElevenLabs": "ElevenLabs es una empresa de software especializada en síntesis de voz de sonido natural mediante aprendizaje profundo. Fue fundada en 2022.",
+    "Entity Framework": "Entity Framework (EF) es un framework de mapeo objeto-relacional (ORM) de código abierto para .NET, que permite trabajar con bases de datos usando objetos de C#.",
+    "Gemini (language model)": "Gemini es una familia de modelos de lenguaje multimodales desarrollada por Google DeepMind, anunciada el 6 de diciembre de 2023. Son los modelos que usa el chatbot Gemini.",
+    "Git (software)": "Git es un sistema distribuido de control de versiones para gestionar el código fuente. Lo creó Linus Torvalds para el desarrollo del kernel de Linux y se usa para programar en equipo.",
+    "GitHub": "GitHub es una plataforma para que los desarrolladores creen, guarden, gestionen y compartan su código. Usa Git para el control de versiones y añade seguimiento de errores, integración continua y wikis. Pertenece a Microsoft desde 2018.",
+    "Google Play": "Google Play es la tienda oficial de aplicaciones de Google para dispositivos Android y ChromeOS. Google Play Console es la herramienta para publicar y gestionar apps en ella.",
+    "HTML5": "HTML5 es un lenguaje de marcado para estructurar y presentar documentos en la web. Fue la quinta versión principal de HTML; hoy la especificación se llama HTML Living Standard.",
+    "Java (programming language)": "Java es un lenguaje de programación de alto nivel, de propósito general y orientado a objetos. Su idea es «escribir una vez, ejecutar en cualquier lugar»: el código compilado funciona en cualquier máquina virtual de Java.",
+    "JavaScript": "JavaScript (JS) es un lenguaje de programación y una tecnología central de la web, junto con HTML y CSS. Lo creó Brendan Eich en 1995 y en 2025 fue el lenguaje más usado en GitHub.",
+    "JSON": "JSON es un formato abierto de archivos y de intercambio de datos que usa texto legible para guardar y transmitir objetos con pares nombre–valor y listas. Es muy común entre aplicaciones web y servidores.",
+    "Linux": "Linux es una familia de sistemas operativos libres y de código abierto, similares a Unix, basados en el kernel de Linux que Linus Torvalds publicó por primera vez en 1991.",
+    "Microsoft Azure": "Microsoft Azure es la plataforma de computación en la nube de Microsoft. Ofrece gestión, acceso y desarrollo de aplicaciones y servicios a través de su infraestructura global.",
+    "Microsoft Copilot Studio": "Microsoft Copilot Studio es una plataforma de poco código de Microsoft para crear agentes de IA y chatbots personalizados, conectados a datos, apps y flujos de trabajo de una empresa.",
+    "Microsoft SQL Server": "Microsoft SQL Server es un sistema de gestión de bases de datos relacionales de Microsoft que usa el lenguaje SQL. Su función principal es guardar y entregar datos a otras aplicaciones.",
+    "Microsoft Windows": "Windows es un sistema operativo de Microsoft. Tiene versiones para computadoras personales, servidores y sistemas integrados, y ediciones para hogares, profesionales, escuelas y empresas.",
+    "MySQL": "MySQL es un sistema de gestión de bases de datos relacionales gratuito y de código abierto. Organiza los datos en tablas que pueden relacionarse entre sí.",
+    "Photon Engine": "Photon Engine es una plataforma de red de Exit Games para crear juegos y apps multijugador en tiempo real, con SDK listos para motores como Unity.",
+    "Python (programming language)": "Python es un lenguaje de programación de alto nivel y propósito general que da prioridad a un código legible y sencillo, con una amplia biblioteca estándar.",
+    "Raspberry Pi": "Raspberry Pi es una serie de computadoras pequeñas de placa única desarrolladas en el Reino Unido por la Raspberry Pi Foundation junto con Broadcom.",
+    "React (software)": "React es una biblioteca de JavaScript gratuita y de código abierto para crear interfaces de usuario basadas en componentes. La mantienen Meta y una comunidad de desarrolladores.",
+    "TypeScript": "TypeScript (TS) es un lenguaje de programación que añade tipos estáticos opcionales a JavaScript. Está pensado para aplicaciones grandes y se convierte a JavaScript.",
+    "Unity (game engine)": "Unity es un motor de videojuegos multiplataforma de Unity Technologies, lanzado en 2005. Funciona en computadoras, móviles, consolas, realidad aumentada y realidad virtual, y es muy popular entre desarrolladores independientes.",
+    "Vector database": "Una base de datos vectorial guarda y busca representaciones de datos (embeddings) en un espacio vectorial, para encontrar resultados parecidos por significado. Se usa en búsqueda semántica, recomendaciones y RAG.",
+    "Visual Studio": "Visual Studio es un entorno de desarrollo integrado (IDE) de Microsoft para crear programas, sitios web, aplicaciones web, servicios web y apps móviles.",
+    "Visual Studio Code": "Visual Studio Code es un editor de código de Microsoft para Windows, Linux, macOS y navegadores web, con depuración, resaltado de sintaxis, autocompletado, Git integrado y extensiones.",
+    "WebGL": "WebGL es una API de JavaScript para mostrar gráficos interactivos en 2D y 3D en el navegador, sin plugins y con aceleración por GPU.",
+    "WordPress": "WordPress es un sistema de gestión de contenidos web. Nació para publicar blogs y hoy permite crear sitios web, tiendas en línea, foros y más. Es gratuito, de código abierto y uno de los más usados del mundo.",
+  };
+
+  /** The description for a skill, in the visitor's language. */
+  summaryFor(skillName: string): string {
+    const es = this.i18n.lang() === 'es' ? this.summariesEs[skillName] : undefined;
+    return es ?? this.summaries[skillName] ?? '';
   }
 }

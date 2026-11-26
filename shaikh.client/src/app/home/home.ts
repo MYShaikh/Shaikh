@@ -1,4 +1,6 @@
-import { Component, OnInit, computed, signal } from '@angular/core';
+import { Component, OnInit, computed, inject, signal } from '@angular/core';
+import { LanguageService } from '../i18n/language.service';
+import { MONTHS } from '../i18n/strings';
 
 interface ContributionDay {
   date: string;   // yyyy-MM-dd
@@ -30,8 +32,6 @@ interface Particle {
   drift: number;
 }
 
-const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-
 @Component({
   selector: 'app-home',
   standalone: false,
@@ -39,24 +39,29 @@ const MONTHS = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', '
   templateUrl: './home.html',
 })
 export class HomeComponent implements OnInit {
+  readonly i18n = inject(LanguageService);
   readonly githubProfile = 'https://github.com/MYShaikh';
 
-  // Hover text for the "strongest suits" cards
-  readonly suitText = {
-    django: '90% of my projects are made with Django',
-    unity: 'Learning Unity since my first year of college! Know it better than the back of my hand',
-    claude: 'Did 3 certifications, know all the extensions, skills and hooks!',
-    dotnet: 'This website was made with .NET framework',
-    azure: 'Studying for the AZ-900 certification, this is my go-to cloud service',
-    cloudflare: 'All my domains are bought and hosted with Cloudflare',
-  };
+  // Strongest suits. The hover text is in i18n/strings.ts under home.tip.<key>.
+  readonly suits = [
+    { key: 'django', name: 'Django', icon: 'devicon-django-plain' },
+    { key: 'unity', name: 'Unity Engine', icon: 'devicon-unity-plain' },
+    { key: 'claude', name: '', icon: 'devicon-claude-plain' },   // name is translated
+    { key: 'azure', name: 'Microsoft Azure', icon: 'devicon-azure-plain' },
+    { key: 'dotnet', name: '.NET framework', icon: 'devicon-dotnetcore-plain' },
+    { key: 'cloudflare', name: 'Cloudflare', icon: 'devicon-cloudflare-plain' },
+  ];
+
+  suitName(suit: { key: string; name: string }): string {
+    return suit.key === 'claude' ? this.i18n.t('home.suit.claude') : suit.name;
+  }
 
   // Dream companies, each with the emoji that float up when you hover or tap it
   readonly dreamCompanies: DreamCompany[] = [
     { key: 'microsoft', name: 'Microsoft', emoji: ['❤️', '💖', '💕', '💗'] },
     { key: 'xbox', name: 'Xbox', emoji: ['🎮'] },
     { key: 'ibm', name: 'IBM', emoji: ['📁'] },
-    { key: 'cox', name: 'Cox', emoji: ['🍑'] },
+    { key: 'cox', name: 'Cox Enterprises', emoji: ['🍑'] },
   ];
 
   readonly particles = signal<Particle[]>([]);
@@ -77,7 +82,7 @@ export class HomeComponent implements OnInit {
       key,
       emoji: co.emoji[i % co.emoji.length],
       x: 8 + Math.random() * 84,             // % across the card
-      size: 16 + Math.round(Math.random() * 12),
+      size: 18 + Math.round(Math.random() * 12),
       delay: Math.round(Math.random() * 450),
       drift: Math.round(Math.random() * 60 - 30),
     }));
@@ -86,16 +91,17 @@ export class HomeComponent implements OnInit {
 
     // Remove them once the float animation has finished
     const ids = new Set(fresh.map(p => p.id));
-    setTimeout(() => this.particles.update(list => list.filter(p => !ids.has(p.id))), 2400);
+    setTimeout(() => this.particles.update(list => list.filter(p => !ids.has(p.id))), 2600);
   }
 
-  // GitHub contributions for the last 6 months (signals: this app runs without zone.js)
+  // ---- GitHub contributions, last 6 months (signals: this app runs without zone.js) ----
   readonly contributions = signal<Contributions | null>(null);
   readonly contributionsFailed = signal(false);
 
   // One label per week column: the month name where a new month starts, otherwise ''.
   readonly monthLabels = computed(() => {
     const weeks = this.contributions()?.weeks ?? [];
+    const names = MONTHS[this.i18n.lang()];
     const labels: string[] = [];
     let lastMonth = -1;
     let lastLabelAt = -10;
@@ -103,7 +109,7 @@ export class HomeComponent implements OnInit {
       const month = Number(week[0].date.slice(5, 7)) - 1;
       // Skip a label that would sit right on top of the previous one
       if (month !== lastMonth && i - lastLabelAt >= 3) {
-        labels.push(MONTHS[month]);
+        labels.push(names[month]);
         lastLabelAt = i;
       } else {
         labels.push('');
@@ -121,7 +127,7 @@ export class HomeComponent implements OnInit {
   }
 
   dayTitle(day: ContributionDay): string {
-    const n = day.count === 0 ? 'No' : day.count;
-    return `${n} contribution${day.count === 1 ? '' : 's'} on ${day.date}`;
+    const key = day.count === 0 ? 'home.ghDay0' : day.count === 1 ? 'home.ghDay1' : 'home.ghDayN';
+    return this.i18n.t(key, { n: day.count, date: day.date });
   }
 }

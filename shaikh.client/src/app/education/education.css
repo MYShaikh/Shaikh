@@ -197,9 +197,17 @@
     height: auto;
   }
 
-  .info-card h1 {
+  .info-card h1,
+  .info-card .school-name {
     font-size: 1.2rem;
   }
+}
+
+/* School names (h2 for a correct heading order; looks like the old h1) */
+.school-name {
+  font-size: 2em;
+  margin: 0.67em 0;
+  color: #ffffff;
 }
 
 @media (max-width: 768px) {
@@ -273,5 +281,5 @@
   margin: 8px 0 0;
   text-align: center;
   font-size: 0.72rem;
-  color: #777777;
+  color: #a0a0a0;
 }

@@ -1,20 +1,58 @@
-<nav class="main-nav">
-  <div class="nav-mobile-header">
-    <button class="hamburger" (click)="toggleMenu()">
-      <i class="fas fa-bars"></i>
-    </button>
-  </div>
+<a class="skip-link" href="#main-content" (click)="skipToContent($event)">{{ i18n.t('nav.skip') }}</a>
 
-  <div class="nav-links" [class.open]="isMenuOpen">
-    <a routerLink="/" (click)="closeMenu()">Home</a>
-    <a routerLink="/skills" (click)="closeMenu()">Skills</a>
-    <a routerLink="/projects" (click)="closeMenu()">Projects</a>
-    <a routerLink="/work-experience" (click)="closeMenu()">Work Experience</a>
-    <a routerLink="/education" (click)="closeMenu()">Education</a>
-    <a routerLink="/contact" (click)="closeMenu()">Contact</a>
-    <a href="assets/Mohammad_Shaikh_resume.pdf" target="_blank" class="resume-btn" (click)="closeMenu()">Resume Download</a>
+<header class="site-header">
+  <nav class="main-nav" [attr.aria-label]="i18n.t('nav.label')">
 
-  </div>
-</nav>
+    <!-- Phone / small-screen bar: page name on the left, language + menu on the right -->
+    <div class="nav-mobile-header">
+      <span class="page-name" aria-hidden="true">{{ pageName() }}</span>
 
-<router-outlet></router-outlet>
+      <div class="nav-mobile-actions">
+        <button type="button" class="lang-btn" (click)="toggleLanguage()"
+                [attr.aria-label]="i18n.t('lang.label')"
+                [attr.lang]="i18n.lang() === 'en' ? 'es' : 'en'">
+          <i class="fas fa-globe" aria-hidden="true"></i>
+          <span aria-hidden="true">{{ i18n.t('lang.button') }}</span>
+        </button>
+
+        <button type="button" class="hamburger" (click)="toggleMenu()"
+                [attr.aria-expanded]="isMenuOpen()"
+                aria-controls="nav-links"
+                [attr.aria-label]="isMenuOpen() ? i18n.t('nav.closeMenu') : i18n.t('nav.openMenu')">
+          <i class="fas" [class.fa-bars]="!isMenuOpen()" [class.fa-times]="isMenuOpen()" aria-hidden="true"></i>
+        </button>
+      </div>
+    </div>
+
+    <ul id="nav-links" class="nav-links" [class.open]="isMenuOpen()">
+      <li><a routerLink="/" routerLinkActive="active" ariaCurrentWhenActive="page"
+             [routerLinkActiveOptions]="{ exact: true }" (click)="closeMenu()">{{ i18n.t('nav.home') }}</a></li>
+      <li><a routerLink="/skills" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeMenu()">{{ i18n.t('nav.skills') }}</a></li>
+      <li><a routerLink="/projects" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeMenu()">{{ i18n.t('nav.projects') }}</a></li>
+      <li><a routerLink="/work-experience" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeMenu()">{{ i18n.t('nav.work') }}</a></li>
+      <li><a routerLink="/education" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeMenu()">{{ i18n.t('nav.education') }}</a></li>
+      <li><a routerLink="/contact" routerLinkActive="active" ariaCurrentWhenActive="page" (click)="closeMenu()">{{ i18n.t('nav.contact') }}</a></li>
+      <li>
+        <a href="assets/Mohammad_Shaikh_resume.pdf" target="_blank" rel="noopener" class="resume-btn" (click)="closeMenu()">
+          {{ i18n.t('nav.resume') }}<span class="sr-only"> {{ i18n.t('nav.resumeNote') }}</span>
+        </a>
+      </li>
+      <!-- Desktop: the language button sits at the end of the menu -->
+      <li class="desktop-only">
+        <button type="button" class="lang-btn" (click)="toggleLanguage()"
+                [attr.aria-label]="i18n.t('lang.label')"
+                [attr.lang]="i18n.lang() === 'en' ? 'es' : 'en'">
+          <i class="fas fa-globe" aria-hidden="true"></i>
+          <span aria-hidden="true">{{ i18n.t('lang.button') }}</span>
+        </button>
+      </li>
+    </ul>
+  </nav>
+</header>
+
+<div id="main-content" class="main-content" tabindex="-1" #mainContent>
+  <router-outlet></router-outlet>
+</div>
+
+<!-- Screen readers announce messages placed here (e.g. "The site is now in English") -->
+<div class="sr-only" aria-live="polite">{{ announcement() }}</div>

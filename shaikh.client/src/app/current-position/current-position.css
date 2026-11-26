@@ -93,6 +93,9 @@ main {
 }
 
 .marquee-track {
+  list-style: none;
+  margin: 0;
+  padding: 0;
   display: flex;
   gap: 15px;
   width: max-content;
@@ -113,6 +116,17 @@ main {
   .tech-badge i {
     margin-right: 5px;
   }
+
+/* Pause the scrolling strip when hovered, and for visitors who prefer less motion */
+.marquee-container:hover .marquee-track {
+  animation-play-state: paused;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .marquee-track {
+    animation-duration: 60s;
+  }
+}
 
 @keyframes slideLeftToRight {
   0% {
@@ -361,7 +375,7 @@ main {
   margin: 8px 0 0;
   text-align: center;
   font-size: 0.72rem;
-  color: #777777;
+  color: #a0a0a0;
 }
 
 .job-card ~ .map-embed,

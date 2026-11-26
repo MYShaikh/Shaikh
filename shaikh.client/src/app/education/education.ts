@@ -1,5 +1,6 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, inject } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
+import { LanguageService } from '../i18n/language.service';
 
 @Component({
   selector: 'app-education',
@@ -8,6 +9,7 @@ import { HttpClient } from '@angular/common/http';
   templateUrl: './education.html',
 })
 export class EducationComponent {
+  readonly i18n = inject(LanguageService);
   alumniStatus: { [key: string]: boolean } = {};
 
   constructor(private http: HttpClient, private cdr: ChangeDetectorRef) { }

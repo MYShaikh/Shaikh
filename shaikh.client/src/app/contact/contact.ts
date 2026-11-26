@@ -1,4 +1,5 @@
-import { Component, ChangeDetectorRef } from '@angular/core';
+import { Component, ChangeDetectorRef, inject } from '@angular/core';
+import { LanguageService } from '../i18n/language.service';
 
 @Component({
   selector: 'app-contact',
@@ -7,10 +8,11 @@ import { Component, ChangeDetectorRef } from '@angular/core';
   standalone: false
 })
 export class ContactComponent {
+  readonly i18n = inject(LanguageService);
   showContactForm = false;
 
   public readonly phoneNumber: string = '4708866957';
-  public phoneButtonText: string = 'Contact: (470) 886-6957';
+  phoneCopied = false;   // shows "Number Copied!" for 2 seconds
 
   contactForm = {
     name: '',
@@ -25,12 +27,11 @@ export class ContactComponent {
 
   handlePhoneClick(): void {
     navigator.clipboard.writeText(this.phoneNumber).then(() => {
-      const originalText = this.phoneButtonText;
-      this.phoneButtonText = 'Number Copied!';
+      this.phoneCopied = true;
       this.cdr.detectChanges();
 
       setTimeout(() => {
-        this.phoneButtonText = originalText;
+        this.phoneCopied = false;
         this.cdr.detectChanges();
       }, 2000);
     }).catch(err => {

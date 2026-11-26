@@ -1,10 +1,10 @@
 <div class="portfolio-container">
 
   <header class="profile-header">
-    <h1>Skills</h1>
+    <h1>{{ i18n.t('skills.title') }}</h1>
     <p class="subtitle">
-      <i class="fas fa-code"></i>
-      Technologies & Tools
+      <i class="fas fa-code" aria-hidden="true"></i>
+      {{ i18n.t('skills.subtitle') }}
     </p>
   </header>
 
@@ -12,140 +12,140 @@
 
     <!-- Core Technologies -->
     <section class="info-card">
-      <h2>Technologies I use at work</h2>
+      <h2>{{ i18n.t('skills.work') }}</h2>
 
-      <div class="skills-grid">
+      <ul class="skills-grid">
 
-        <div class="skill-card" (mouseenter)="lookup('Angular (web framework)')"><i class="devicon-angular-plain colored"></i><p>Angular</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('C Sharp (programming language)')"><i class="devicon-csharp-plain colored"></i><p>C#</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Microsoft SQL Server')"><i class="devicon-microsoftsqlserver-plain colored"></i><p>SQL Server</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Microsoft Azure')"><i class="devicon-azure-plain colored"></i><p>Azure</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Docker (software)')"><i class="devicon-docker-plain colored"></i><p>Docker</p><div class="skill-tooltip">{{ summary }}</div></div>
+        <li class="skill-card" tabindex="0"><i class="devicon-angular-plain colored" aria-hidden="true"></i><p>Angular<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Angular (web framework)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-csharp-plain colored" aria-hidden="true"></i><p>C#<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('C Sharp (programming language)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-microsoftsqlserver-plain colored" aria-hidden="true"></i><p>SQL Server<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Microsoft SQL Server') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-azure-plain colored" aria-hidden="true"></i><p>Azure<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Microsoft Azure') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-docker-plain colored" aria-hidden="true"></i><p>Docker<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Docker (software)') }}</span></li>
 
-      </div>
+      </ul>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <!-- Frontend -->
     <section class="info-card">
-      <h2>Frontend Development</h2>
+      <h2>{{ i18n.t('skills.frontend') }}</h2>
 
-      <div class="skills-grid">
+      <ul class="skills-grid">
 
-        <div class="skill-card" (mouseenter)="lookup('Angular (web framework)')"><i class="devicon-angular-plain colored"></i><p>Angular</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('TypeScript')"><i class="devicon-typescript-plain colored"></i><p>TypeScript</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('HTML5')"><i class="devicon-html5-plain colored"></i><p>HTML5</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('CSS')"><i class="devicon-css3-plain colored"></i><p>CSS3</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('JavaScript')"><i class="devicon-javascript-plain colored"></i><p>JavaScript</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('React (software)')"><i class="devicon-react-original colored"></i><p>React</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Bootstrap (front-end framework)')"><i class="devicon-bootstrap-plain colored"></i><p>Bootstrap</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('WordPress')"><i class="devicon-wordpress-plain colored"></i><p>WordPress</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Blazor')"><i class="devicon-blazor-plain colored"></i><p>Blazor</p><div class="skill-tooltip">{{ summary }}</div></div>
+        <li class="skill-card" tabindex="0"><i class="devicon-angular-plain colored" aria-hidden="true"></i><p>Angular<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Angular (web framework)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-typescript-plain colored" aria-hidden="true"></i><p>TypeScript<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('TypeScript') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-html5-plain colored" aria-hidden="true"></i><p>HTML5<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('HTML5') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-css3-plain colored" aria-hidden="true"></i><p>CSS3<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('CSS') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-javascript-plain colored" aria-hidden="true"></i><p>JavaScript<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('JavaScript') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-react-original colored" aria-hidden="true"></i><p>React<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('React (software)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-bootstrap-plain colored" aria-hidden="true"></i><p>Bootstrap<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Bootstrap (front-end framework)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-wordpress-plain colored" aria-hidden="true"></i><p>WordPress<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('WordPress') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-blazor-plain colored" aria-hidden="true"></i><p>Blazor<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Blazor') }}</span></li>
 
-      </div>
+      </ul>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <!-- Backend -->
     <section class="info-card">
-      <h2>Backend Development</h2>
+      <h2>{{ i18n.t('skills.backend') }}</h2>
 
-      <div class="skills-grid">
+      <ul class="skills-grid">
 
-        <div class="skill-card" (mouseenter)="lookup('C Sharp (programming language)')"><i class="devicon-csharp-plain colored"></i><p>C#</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('ASP.NET Core')"><i class="devicon-dotnetcore-plain colored"></i><p>ASP.NET Core</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Java (programming language)')"><i class="devicon-java-plain colored"></i><p>Java</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Python (programming language)')"><i class="devicon-python-plain colored"></i><p>Python</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Django (web framework)')"><i class="devicon-django-plain colored"></i><p>Django</p><div class="skill-tooltip">{{ summary }}</div></div>
+        <li class="skill-card" tabindex="0"><i class="devicon-csharp-plain colored" aria-hidden="true"></i><p>C#<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('C Sharp (programming language)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-dotnetcore-plain colored" aria-hidden="true"></i><p>ASP.NET Core<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('ASP.NET Core') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-java-plain colored" aria-hidden="true"></i><p>Java<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Java (programming language)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-python-plain colored" aria-hidden="true"></i><p>Python<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Python (programming language)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-django-plain colored" aria-hidden="true"></i><p>Django<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Django (web framework)') }}</span></li>
 
-      </div>
+      </ul>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <!-- Database -->
     <section class="info-card">
-      <h2>Database Technologies</h2>
+      <h2>{{ i18n.t('skills.database') }}</h2>
 
-      <div class="skills-grid">
+      <ul class="skills-grid">
 
-        <div class="skill-card" (mouseenter)="lookup('Microsoft SQL Server')"><i class="devicon-microsoftsqlserver-plain colored"></i><p>SQL Server</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('MySQL')"><i class="devicon-mysql-plain colored"></i><p>MySQL</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Entity Framework')"><i class="devicon-entityframeworkcore-plain colored"></i><p>Entity Framework</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('JSON')"><i class="fas fa-code"></i><p>JSON</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Vector database')"><i class="fas fa-project-diagram"></i><p>Vector DB</p><div class="skill-tooltip">{{ summary }}</div></div>
+        <li class="skill-card" tabindex="0"><i class="devicon-microsoftsqlserver-plain colored" aria-hidden="true"></i><p>SQL Server<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Microsoft SQL Server') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-mysql-plain colored" aria-hidden="true"></i><p>MySQL<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('MySQL') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-entityframeworkcore-plain colored" aria-hidden="true"></i><p>Entity Framework<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Entity Framework') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fas fa-code" aria-hidden="true"></i><p>JSON<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('JSON') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fas fa-project-diagram" aria-hidden="true"></i><p>Vector DB<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Vector database') }}</span></li>
 
-      </div>
+      </ul>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <!-- Cloud and AI -->
     <section class="info-card">
-      <h2>Cloud & AI Technologies</h2>
+      <h2>{{ i18n.t('skills.cloud') }}</h2>
 
-      <div class="skills-grid">
-        <div class="skill-card" (mouseenter)="lookup('Microsoft Azure')"><i class="devicon-azure-plain colored"></i><p>Azure</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Microsoft Copilot Studio')"><i class="fas fa-robot"></i><p>Copilot Studio</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Amazon Web Services')"><i class="fab fa-aws"></i><p>AWS</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Gemini (language model)')"><i class="fab fa-google"></i><p>Gemini API</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('ElevenLabs')"><i class="fas fa-volume-up"></i><p>ElevenLabs</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Google Play')"><i class="fab fa-google-play"></i><p>Google Play Console</p><div class="skill-tooltip">{{ summary }}</div></div>
+      <ul class="skills-grid">
+        <li class="skill-card" tabindex="0"><i class="devicon-azure-plain colored" aria-hidden="true"></i><p>Azure<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Microsoft Azure') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fas fa-robot" aria-hidden="true"></i><p>Copilot Studio<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Microsoft Copilot Studio') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fab fa-aws" aria-hidden="true"></i><p>AWS<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Amazon Web Services') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fab fa-google" aria-hidden="true"></i><p>Gemini API<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Gemini (language model)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fas fa-volume-up" aria-hidden="true"></i><p>ElevenLabs<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('ElevenLabs') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fab fa-google-play" aria-hidden="true"></i><p>Google Play Console<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Google Play') }}</span></li>
 
-      </div>
+      </ul>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <!-- Tools -->
     <section class="info-card">
-      <h2>Tools & Platforms</h2>
+      <h2>{{ i18n.t('skills.tools') }}</h2>
 
-      <div class="skills-grid">
+      <ul class="skills-grid">
 
-        <div class="skill-card" (mouseenter)="lookup('Git (software)')"><i class="devicon-git-plain colored"></i><p>Git</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('GitHub')"><i class="fab fa-github"></i><p>GitHub</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Docker (software)')"><i class="devicon-docker-plain colored"></i><p>Docker</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Visual Studio Code')"><i class="devicon-vscode-plain colored"></i><p>VS Code</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Visual Studio')"><i class="devicon-visualstudio-plain colored"></i><p>Visual Studio</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Microsoft Windows')"><i class="fab fa-windows"></i><p>Windows</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Linux')"><i class="fab fa-linux"></i><p>Linux</p><div class="skill-tooltip">{{ summary }}</div></div>
+        <li class="skill-card" tabindex="0"><i class="devicon-git-plain colored" aria-hidden="true"></i><p>Git<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Git (software)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fab fa-github" aria-hidden="true"></i><p>GitHub<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('GitHub') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-docker-plain colored" aria-hidden="true"></i><p>Docker<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Docker (software)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-vscode-plain colored" aria-hidden="true"></i><p>VS Code<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Visual Studio Code') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-visualstudio-plain colored" aria-hidden="true"></i><p>Visual Studio<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Visual Studio') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fab fa-windows" aria-hidden="true"></i><p>Windows<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Microsoft Windows') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fab fa-linux" aria-hidden="true"></i><p>Linux<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Linux') }}</span></li>
 
-      </div>
+      </ul>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <!-- Game Development -->
     <section class="info-card">
-      <h2>Game Development</h2>
+      <h2>{{ i18n.t('skills.games') }}</h2>
 
-      <div class="skills-grid">
+      <ul class="skills-grid">
 
-        <div class="skill-card" (mouseenter)="lookup('Unity (game engine)')"><i class="devicon-unity-plain"></i><p>Unity Engine</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Unity (game engine)')"><i class="devicon-unity-plain"></i><p>Unity 2D</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Unity (game engine)')"><i class="devicon-unity-plain"></i><p>Unity 3D</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Photon Engine')"><i class="fas fa-bolt"></i><p>Photon</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Convai')"><i class="fas fa-comments"></i><p>Convai</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('WebGL')"><i class="fas fa-globe"></i><p>WebGL</p><div class="skill-tooltip">{{ summary }}</div></div>
+        <li class="skill-card" tabindex="0"><i class="devicon-unity-plain" aria-hidden="true"></i><p>Unity Engine<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Unity (game engine)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-unity-plain" aria-hidden="true"></i><p>Unity 2D<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Unity (game engine)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="devicon-unity-plain" aria-hidden="true"></i><p>Unity 3D<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Unity (game engine)') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fas fa-bolt" aria-hidden="true"></i><p>Photon<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Photon Engine') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fas fa-comments" aria-hidden="true"></i><p>Convai<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Convai') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fas fa-globe" aria-hidden="true"></i><p>WebGL<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('WebGL') }}</span></li>
 
-      </div>
+      </ul>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <!-- Hardware -->
     <section class="info-card">
-      <h2>Hardware & IoT</h2>
+      <h2>{{ i18n.t('skills.hardware') }}</h2>
 
-      <div class="skills-grid">
+      <ul class="skills-grid">
 
-        <div class="skill-card" (mouseenter)="lookup('Raspberry Pi')"><i class="fab fa-raspberry-pi"></i><p>Raspberry Pi 5</p><div class="skill-tooltip">{{ summary }}</div></div>
-        <div class="skill-card" (mouseenter)="lookup('Raspberry Pi')"><i class="fas fa-camera"></i><p>Camera Module 3</p><div class="skill-tooltip">{{ summary }}</div></div>
+        <li class="skill-card" tabindex="0"><i class="fab fa-raspberry-pi" aria-hidden="true"></i><p>Raspberry Pi 5<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Raspberry Pi') }}</span></li>
+        <li class="skill-card" tabindex="0"><i class="fas fa-camera" aria-hidden="true"></i><p>{{ i18n.t('skills.camera') }}<span class="sr-only">: </span></p><span class="skill-tooltip">{{ summaryFor('Raspberry Pi') }}</span></li>
 
-      </div>
+      </ul>
     </section>
 
   </main>

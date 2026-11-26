@@ -65,6 +65,9 @@ main {
    ========================================= */
 
 .skills-grid {
+  list-style: none;
+  padding: 0;
+  margin-bottom: 0;
   display: grid;
   grid-template-columns: repeat(3, 1fr);
   gap: 15px;
@@ -98,8 +101,11 @@ main {
   }
 
 
+/* Invisible (but still read by screen readers) until hover or keyboard focus */
 .skill-tooltip {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
   position: absolute;
   bottom: 100%;
   left: 50%;
@@ -119,8 +125,14 @@ main {
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.4);
 }
 
-.skill-card:hover .skill-tooltip {
-  display: block;
+.skill-card:hover .skill-tooltip,
+.skill-card:focus .skill-tooltip {
+  opacity: 1;
+}
+
+.skill-card:focus {
+  outline: none;
+  border-color: #4CAF50;
 }
 
   /* =========================================

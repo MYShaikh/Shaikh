@@ -108,6 +108,13 @@ main {
 /* ===========================================
    Strongest suits + dream company cards
    =========================================== */
+.suit-grid,
+.dream-grid {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
 .suit-grid {
   display: grid;
   grid-template-columns: repeat(2, 1fr);
@@ -203,14 +210,29 @@ main {
   background-clip: text;
 }
 
+/* Cox Enterprises (Atlanta, GA) wordmark, drawn with CSS */
 .cox-logo {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: center;
   font-family: "Arial Black", Arial, sans-serif;
-  font-size: 1.35rem;
-  font-weight: 900;
-  letter-spacing: 1px;
   line-height: 1;
-  color: #00a3e0;
+  color: #4da3ff;
 }
+
+  .cox-word {
+    font-size: 1.3rem;
+    font-weight: 900;
+    letter-spacing: 2px;
+  }
+
+  .cox-sub {
+    margin-top: 2px;
+    font-family: Arial, sans-serif;
+    font-size: 0.42rem;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+  }
 
 /* Emoji that float up around a dream company card */
 .particle {
@@ -238,9 +260,27 @@ main {
   }
 }
 
+/* Devices set to "reduce motion" (e.g. Windows with Animation effects off)
+   still get the emoji, with a shorter, gentler float */
+@keyframes float-up-gentle {
+  0% {
+    opacity: 0;
+    transform: translate(-50%, 0);
+  }
+
+  25% {
+    opacity: 1;
+  }
+
+  100% {
+    opacity: 0;
+    transform: translate(calc(-50% + var(--drift, 0px) / 3), -45px);
+  }
+}
+
 @media (prefers-reduced-motion: reduce) {
   .particle {
-    display: none;
+    animation: float-up-gentle 2s ease-out forwards;
   }
 }
 
@@ -357,8 +397,11 @@ main {
   cursor: default;
 }
 
+/* Invisible (but still read by screen readers) until hover or keyboard focus */
 .suit-tooltip {
-  display: none;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
   position: absolute;
   bottom: 100%;
   left: 50%;
@@ -381,7 +424,7 @@ main {
 
 .suit-card:hover .suit-tooltip,
 .suit-card:focus .suit-tooltip {
-  display: block;
+  opacity: 1;
 }
 
 .suit-card:focus {
@@ -498,7 +541,7 @@ main {
 footer {
   text-align: center;
   margin-top: 28px;
-  color: #666666;
+  color: #9e9e9e;
   font-size: 0.85rem;
 }
 

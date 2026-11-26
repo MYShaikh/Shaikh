@@ -1,157 +1,154 @@
 <div class="portfolio-container">
   <header class="profile-header">
-    <h1>Work Experience</h1>
+    <h1>{{ i18n.t('work.title') }}</h1>
     <p class="subtitle">
-      <i class="fas fa-briefcase"></i> Where I've worked
+      <i class="fas fa-briefcase" aria-hidden="true"></i> {{ i18n.t('work.subtitle') }}
     </p>
   </header>
 
   <main>
     <!-- ===== Vensure Employer Solutions ===== -->
-    <article class="job-card">
+    <article class="job-card" aria-labelledby="job-vensure">
       <div class="job-logo">
-        <img src="images/logo.png" alt="Vensure Employer Solutions logo">
+        <img src="images/logo.png" [alt]="i18n.t('work.logo', { company: 'Vensure Employer Solutions' })">
       </div>
 
       <div class="job-card-content">
-        <h2 class="job-title">Junior Software Developer</h2>
+        <h2 class="job-title" id="job-vensure">{{ i18n.t('work.vensure.title') }}</h2>
         <p class="job-company">
-          <i class="fas fa-building"></i> Vensure Employer Solutions
+          <i class="fas fa-building" aria-hidden="true"></i> Vensure Employer Solutions
         </p>
-        <p class="job-meta">Jul 2026 &ndash; Oct 2026</p>
+        <p class="job-meta">{{ i18n.t('work.vensure.dates') }}</p>
 
-        <h3 class="job-sub">Role & Responsibilities</h3>
-        <p class="description">
-          Developed and maintained robust software solutions, collaborated on backend architectures, and optimized full-stack workflows in a dynamic enterprise environment.
-        </p>
+        <h3 class="job-sub">{{ i18n.t('work.role') }}</h3>
+        <p class="description">{{ i18n.t('work.vensure.desc') }}</p>
       </div>
     </article>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
-    <section class="tech-stack-section">
-      <h3>Tech Stack & Tools</h3>
+    <section class="tech-stack-section" aria-labelledby="stack-vensure">
+      <h3 id="stack-vensure">{{ i18n.t('work.stack') }}</h3>
       <div class="marquee-container">
-        <div class="marquee-track">
-          <span class="tech-badge"><i class="fab fa-csharp"></i> C# / .NET</span>
-          <span class="tech-badge"><i class="fab fa-angular"></i> Angular</span>
-          <!--<span class="tech-badge"><i class="fab fa-python"></i> Python</span>-->
-          <span class="tech-badge"><i class="fas fa-database"></i> MSSQL Server</span>
-          <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span>
-          <span class="tech-badge"><i class="fab fa-git-alt"></i> Git</span>
-          <span class="tech-badge"><i class="fab fa-microsoft"></i> Azure</span>
+        <ul class="marquee-track">
+          <li class="tech-badge"><i class="fab fa-csharp" aria-hidden="true"></i> C# / .NET</li>
+          <li class="tech-badge"><i class="fab fa-angular" aria-hidden="true"></i> Angular</li>
+          <li class="tech-badge"><i class="fas fa-database" aria-hidden="true"></i> MSSQL Server</li>
+          <li class="tech-badge"><i class="fab fa-docker" aria-hidden="true"></i> Docker</li>
+          <li class="tech-badge"><i class="fab fa-git-alt" aria-hidden="true"></i> Git</li>
+          <li class="tech-badge"><i class="fab fa-microsoft" aria-hidden="true"></i> Azure</li>
 
-          <span class="tech-badge"><i class="fab fa-csharp"></i> C# / .NET</span>
-          <span class="tech-badge"><i class="fab fa-angular"></i> Angular</span>
-          <!--<span class="tech-badge"><i class="fab fa-python"></i> Python</span>-->
-          <span class="tech-badge"><i class="fas fa-database"></i> MSSQL Server</span>
-          <span class="tech-badge"><i class="fab fa-docker"></i> Docker</span>
-          <span class="tech-badge"><i class="fab fa-git-alt"></i> Git</span>
-          <span class="tech-badge"><i class="fab fa-microsoft"></i> Azure</span>
-        </div>
+          <!-- second copy only makes the scroll loop seamless -->
+          <li class="tech-badge" aria-hidden="true"><i class="fab fa-csharp"></i> C# / .NET</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fab fa-angular"></i> Angular</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fas fa-database"></i> MSSQL Server</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fab fa-docker"></i> Docker</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fab fa-git-alt"></i> Git</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fab fa-microsoft"></i> Azure</li>
+        </ul>
       </div>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
-    <section class="image-grid-section">
-      <h3>Project & Workspace Snapshots</h3>
+    <section class="image-grid-section" aria-labelledby="snaps-vensure">
+      <h3 id="snaps-vensure">{{ i18n.t('work.snapshots') }}</h3>
       <div class="image-grid">
         <div class="image-wrapper">
-          <img src="images/vensure-car.jpg" alt="Workspace Snapshot 1" class="responsive-img">
+          <img src="images/vensure-car.jpg" [alt]="i18n.t('work.snap1')" class="responsive-img">
         </div>
         <div class="image-wrapper">
-          <img src="images/wework.jpg" alt="Workspace Snapshot 2" class="responsive-img">
+          <img src="images/wework.jpg" [alt]="i18n.t('work.snap2')" class="responsive-img">
         </div>
         <div class="image-wrapper">
-          <img src="images/lobby.jpg" alt="Workspace Snapshot 3" class="responsive-img">
+          <img src="images/lobby.jpg" [alt]="i18n.t('work.snap3')" class="responsive-img">
         </div>
       </div>
     </section>
 
-    <div class="divider job-divider"></div>
+    <div class="divider job-divider" aria-hidden="true"></div>
 
     <!-- ===== Flat Rock Archive Museum ===== -->
-    <article class="job-card">
+    <article class="job-card" aria-labelledby="job-flatrock">
       <div class="job-logo">
-        <img src="images/work/flatrock-logo.png" alt="Flat Rock Archive logo">
+        <img src="images/work/flatrock-logo.png" [alt]="i18n.t('work.logo', { company: 'Flat Rock Archive' })">
       </div>
 
       <div class="job-card-content">
-        <h2 class="job-title">Web Developer Intern</h2>
+        <h2 class="job-title" id="job-flatrock">{{ i18n.t('work.flat.title') }}</h2>
         <p class="job-company">
-          <i class="fas fa-landmark"></i> Flat Rock Archive Museum
+          <i class="fas fa-landmark" aria-hidden="true"></i> Flat Rock Archive Museum
         </p>
-        <p class="job-meta">Stonecrest, GA &middot; Jun 2025 &ndash; Present</p>
+        <p class="job-meta">{{ i18n.t('work.flat.dates') }}</p>
 
         <ul class="job-bullets">
-          <li>Applied for and secured a $2,000 Microsoft Azure nonprofit grant to fund the museum's cloud resources.</li>
-          <li>Maintained the museum's WordPress site: edited Elementor page layouts and configured Rank Math SEO and Cloudflare.</li>
+          <li>{{ i18n.t('work.flat.b1') }}</li>
+          <li>{{ i18n.t('work.flat.b2') }}</li>
         </ul>
 
         <div class="job-links">
           <a href="https://flatrockarchive.com/" target="_blank" rel="noopener noreferrer">
-            <i class="fas fa-external-link-alt"></i> Visit flatrockarchive.com
+            <i class="fas fa-external-link-alt" aria-hidden="true"></i> {{ i18n.t('work.flat.visit') }}<span class="sr-only"> {{ i18n.t('common.newTab') }}</span>
           </a>
         </div>
       </div>
     </article>
 
-    <section class="tech-stack-section">
-      <h3>Tech Stack & Tools</h3>
+    <section class="tech-stack-section" aria-labelledby="stack-flatrock">
+      <h3 id="stack-flatrock">{{ i18n.t('work.stack') }}</h3>
       <div class="marquee-container">
-        <div class="marquee-track">
-          <span class="tech-badge"><i class="fab fa-microsoft"></i> Microsoft Azure</span>
-          <span class="tech-badge"><i class="fab fa-wordpress"></i> WordPress</span>
-          <span class="tech-badge"><i class="fas fa-plug"></i> WordPress Plugins</span>
-          <span class="tech-badge"><i class="fas fa-hand-holding-heart"></i> Zeffy Plugins</span>
-          <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
-          <span class="tech-badge"><i class="fab fa-php"></i> PHP</span>
+        <ul class="marquee-track">
+          <li class="tech-badge"><i class="fab fa-microsoft" aria-hidden="true"></i> Microsoft Azure</li>
+          <li class="tech-badge"><i class="fab fa-wordpress" aria-hidden="true"></i> WordPress</li>
+          <li class="tech-badge"><i class="fas fa-plug" aria-hidden="true"></i> {{ i18n.t('work.wpPlugins') }}</li>
+          <li class="tech-badge"><i class="fas fa-hand-holding-heart" aria-hidden="true"></i> {{ i18n.t('work.zeffy') }}</li>
+          <li class="tech-badge"><i class="fab fa-js" aria-hidden="true"></i> JavaScript</li>
+          <li class="tech-badge"><i class="fab fa-php" aria-hidden="true"></i> PHP</li>
 
-          <span class="tech-badge"><i class="fab fa-microsoft"></i> Microsoft Azure</span>
-          <span class="tech-badge"><i class="fab fa-wordpress"></i> WordPress</span>
-          <span class="tech-badge"><i class="fas fa-plug"></i> WordPress Plugins</span>
-          <span class="tech-badge"><i class="fas fa-hand-holding-heart"></i> Zeffy Plugins</span>
-          <span class="tech-badge"><i class="fab fa-js"></i> JavaScript</span>
-          <span class="tech-badge"><i class="fab fa-php"></i> PHP</span>
-        </div>
+          <li class="tech-badge" aria-hidden="true"><i class="fab fa-microsoft"></i> Microsoft Azure</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fab fa-wordpress"></i> WordPress</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fas fa-plug"></i> {{ i18n.t('work.wpPlugins') }}</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fas fa-hand-holding-heart"></i> {{ i18n.t('work.zeffy') }}</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fab fa-js"></i> JavaScript</li>
+          <li class="tech-badge" aria-hidden="true"><i class="fab fa-php"></i> PHP</li>
+        </ul>
       </div>
     </section>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
-    <section class="image-grid-section">
-      <h3>The Museum</h3>
+    <section class="image-grid-section" aria-labelledby="museum-flatrock">
+      <h3 id="museum-flatrock">{{ i18n.t('work.flat.museum') }}</h3>
       <div class="image-grid photo-set">
         <div class="image-wrapper">
-          <img src="images/work/flatrock-sign.jpg" alt="Flat Rock Archives sign at the Historic Bryant Homestead" class="responsive-img">
+          <img src="images/work/flatrock-sign.jpg" [alt]="i18n.t('work.flat.sign')" class="responsive-img">
         </div>
         <div class="image-wrapper">
-          <img src="images/work/flatrock-house.jpg" alt="The Flat Rock Archives museum house" class="responsive-img">
+          <img src="images/work/flatrock-house.jpg" [alt]="i18n.t('work.flat.house')" class="responsive-img">
         </div>
         <div class="image-wrapper">
-          <img src="images/work/flatrock-grounds.jpg" alt="The museum house and grounds" class="responsive-img">
+          <img src="images/work/flatrock-grounds.jpg" [alt]="i18n.t('work.flat.grounds')" class="responsive-img">
         </div>
       </div>
     </section>
 
-    <div class="divider job-divider"></div>
+    <div class="divider job-divider" aria-hidden="true"></div>
 
     <!-- ===== CVS Health ===== -->
-    <article class="job-card">
+    <article class="job-card" aria-labelledby="job-cvs">
       <div class="job-logo">
-        <img src="images/work/cvs-logo.svg" alt="CVS Health logo">
+        <img src="images/work/cvs-logo.svg" [alt]="i18n.t('work.logo', { company: 'CVS Health' })">
       </div>
 
       <div class="job-card-content">
-        <h2 class="job-title">Pharmacy Technician</h2>
+        <h2 class="job-title" id="job-cvs">{{ i18n.t('work.cvs.title') }}</h2>
         <p class="job-company">
-          <i class="fas fa-clinic-medical"></i> CVS Health
+          <i class="fas fa-clinic-medical" aria-hidden="true"></i> CVS Health
         </p>
-        <p class="job-meta">Decatur, GA &middot; Jun 2024 &ndash; Aug 2026</p>
+        <p class="job-meta">{{ i18n.t('work.cvs.dates') }}</p>
 
         <ul class="job-bullets">
-          <li>Handled prescription packaging, drug disposal, and patient care as a licensed technician; CPR and immunization certified.</li>
+          <li>{{ i18n.t('work.cvs.b1') }}</li>
         </ul>
       </div>
     </article>
@@ -159,16 +156,14 @@
     <section class="image-grid-section">
       <div class="image-grid two-up">
         <div class="image-wrapper">
-          <img src="images/work/cvs-store.jpg" alt="Exterior of a CVS Pharmacy store" class="responsive-img">
+          <img src="images/work/cvs-store.jpg" [alt]="i18n.t('work.cvs.store')" class="responsive-img">
         </div>
         <div class="image-wrapper">
-          <img src="images/work/cvs-interior.jpg" alt="Inside a CVS Pharmacy store" class="responsive-img">
+          <img src="images/work/cvs-interior.jpg" [alt]="i18n.t('work.cvs.interior')" class="responsive-img">
         </div>
       </div>
 
-      <p class="photo-credit">
-        Photos of CVS Pharmacy stores in Georgia: Michael Rivera (CC0) and Harrison Keely (CC BY 4.0), via Wikimedia Commons
-      </p>
+      <p class="photo-credit">{{ i18n.t('work.cvs.credit') }}</p>
     </section>
   </main>
 

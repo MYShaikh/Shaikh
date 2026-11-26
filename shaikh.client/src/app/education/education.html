@@ -1,103 +1,85 @@
 <div class="portfolio-container">
 
   <header class="profile-header">
-    <h1>Education</h1>
+    <h1>{{ i18n.t('edu.title') }}</h1>
     <p class="subtitle">
-      <i class="fas fa-graduation-cap"></i>
-      Academic Journey
+      <i class="fas fa-graduation-cap" aria-hidden="true"></i>
+      {{ i18n.t('edu.subtitle') }}
     </p>
   </header>
 
   <main>
 
     <!-- Georgia State University -->
-    <section class="info-card">
-      <h1>Georgia State University</h1>
+    <section class="info-card" aria-labelledby="school-gsu">
+      <h2 id="school-gsu" class="school-name">Georgia State University</h2>
 
-      <img src="images/gsu.png"
-           alt="Georgia State University Logo"
-           class="school-logo">
+      <img src="images/gsu.png" [alt]="i18n.t('edu.gsu.logo')" class="school-logo">
 
-      <p class="description">
-        Master of Science in Computer Science with coursework focused on
-        software engineering, full-stack development, database systems,
-        algorithms, and cloud technologies.
-      </p>
+      <p class="description">{{ i18n.t('edu.gsu.desc') }}</p>
     </section>
 
     <section class="image-grid-section">
       <div class="image-grid">
-
         <div class="image-wrapper">
-          <img src="images/greenspace.jpeg" alt="GSU Campus" class="responsive-img">
+          <img src="images/greenspace.jpeg" [alt]="i18n.t('edu.gsu.img1')" class="responsive-img">
         </div>
-
         <div class="image-wrapper">
-          <img src="images/pounce.jpg" alt="GSU Campus 2" class="responsive-img">
+          <img src="images/pounce.jpg" [alt]="i18n.t('edu.gsu.img2')" class="responsive-img">
         </div>
-
         <div class="image-wrapper">
-          <img src="images/Student-center.jpg" alt="GSU Campus 3" class="responsive-img">
+          <img src="images/Student-center.jpg" [alt]="i18n.t('edu.gsu.img3')" class="responsive-img">
         </div>
-
       </div>
     </section>
 
     <div class="info-card">
-      <div class="alumni-question" [class.faded]="alumniStatus['GSU']">
-        <p class="description">Are you a GSU alumni?</p>
-        <button class="btn" (click)="submitAlumni('GSU', true)">Yes</button>
-        <button class="btn" (click)="submitAlumni('GSU', false)">No</button>
+      <div class="alumni-question" [class.faded]="alumniStatus['GSU']" role="group" aria-labelledby="q-gsu">
+        <p class="description" id="q-gsu">{{ i18n.t('edu.gsu.q') }}</p>
+        <button type="button" class="btn" (click)="submitAlumni('GSU', true)">{{ i18n.t('edu.yes') }}</button>
+        <button type="button" class="btn" (click)="submitAlumni('GSU', false)">{{ i18n.t('edu.no') }}</button>
       </div>
-      <p class="form-status form-status-success" [class.visible]="alumniStatus['GSU']">Thanks for letting me know!</p>
+      <p class="form-status form-status-success" [class.visible]="alumniStatus['GSU']" aria-live="polite">
+        @if (alumniStatus['GSU']) { {{ i18n.t('edu.thanks') }} }
+      </p>
     </div>
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <!-- Jamia Hamdard University -->
-    <section class="info-card">
-      <h1>Jamia Hamdard University</h1>
+    <section class="info-card" aria-labelledby="school-jhu">
+      <h2 id="school-jhu" class="school-name">Jamia Hamdard University</h2>
 
-      <img src="images/jhu.png"
-           alt="Jamia Hamdard Logo"
-           class="school-logo">
+      <img src="images/jhu.png" [alt]="i18n.t('edu.jhu.logo')" class="school-logo">
 
-      <p class="description">
-        Bachelor of Computer Applications degree with studies in programming,
-        software development, web technologies, database management systems,
-        computer networks, and data structures.
-      </p>
+      <p class="description">{{ i18n.t('edu.jhu.desc') }}</p>
     </section>
 
     <section class="image-grid-section">
       <div class="image-grid">
-
         <div class="image-wrapper">
-          <img src="images/airspace.webp" alt="Jamia Campus" class="responsive-img">
+          <img src="images/airspace.webp" [alt]="i18n.t('edu.jhu.img1')" class="responsive-img">
         </div>
-
         <div class="image-wrapper">
-          <img src="images/jamia-convocation.jpg" alt="Jamia Hamdard University convocation ceremony" class="responsive-img">
+          <img src="images/jamia-convocation.jpg" [alt]="i18n.t('edu.jhu.img2')" class="responsive-img">
         </div>
-
         <div class="image-wrapper">
-          <img src="images/greenspace-mosque.png" alt="Jamia Campus" class="responsive-img">
+          <img src="images/greenspace-mosque.png" [alt]="i18n.t('edu.jhu.img3')" class="responsive-img">
         </div>
-
       </div>
 
-      <p class="photo-credit">
-        Convocation photo: Vice President's Secretariat (GODL-India), via Wikimedia Commons
-      </p>
+      <p class="photo-credit">{{ i18n.t('edu.credit') }}</p>
     </section>
 
     <div class="info-card">
-      <div class="alumni-question" [class.faded]="alumniStatus['JHU']">
-        <p class="description">Are you a JHU alumni?</p>
-        <button class="btn" (click)="submitAlumni('JHU', true)">Yes</button>
-        <button class="btn" (click)="submitAlumni('JHU', false)">No</button>
+      <div class="alumni-question" [class.faded]="alumniStatus['JHU']" role="group" aria-labelledby="q-jhu">
+        <p class="description" id="q-jhu">{{ i18n.t('edu.jhu.q') }}</p>
+        <button type="button" class="btn" (click)="submitAlumni('JHU', true)">{{ i18n.t('edu.yes') }}</button>
+        <button type="button" class="btn" (click)="submitAlumni('JHU', false)">{{ i18n.t('edu.no') }}</button>
       </div>
-      <p class="form-status form-status-success" [class.visible]="alumniStatus['JHU']">Thanks for letting me know!</p>
+      <p class="form-status form-status-success" [class.visible]="alumniStatus['JHU']" aria-live="polite">
+        @if (alumniStatus['JHU']) { {{ i18n.t('edu.thanks') }} }
+      </p>
     </div>
 
   </main>

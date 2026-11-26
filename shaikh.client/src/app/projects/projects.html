@@ -1,22 +1,20 @@
 <!-- Popup about the 3 private projects: stays as a side tab, opens only when clicked -->
 @if (popupState() !== 'docked') {
   <div class="pp-overlay" [class.closing]="popupState() === 'closing'" (click)="closePopup()">
-    <div class="pp-card" role="dialog" aria-modal="true" aria-labelledby="pp-title" (click)="$event.stopPropagation()">
+    <div class="pp-card" role="dialog" aria-modal="true" aria-labelledby="pp-title" aria-describedby="pp-text"
+         (click)="$event.stopPropagation()">
 
-      <button type="button" class="pp-x" (click)="closePopup()" aria-label="Close">&times;</button>
+      <button type="button" class="pp-x" (click)="closePopup()" [attr.aria-label]="i18n.t('pp.x')">&times;</button>
 
-      <h2 id="pp-title"><i class="fas fa-lock"></i> I have 3 personal projects</h2>
+      <h2 id="pp-title"><i class="fas fa-lock" aria-hidden="true"></i> {{ i18n.t('pp.title') }}</h2>
 
-      <p class="pp-text">
-        These projects are private, so I don't share the details publicly.
-        If you'd like to know more about one of them, email me directly.
-      </p>
+      <p id="pp-text" class="pp-text">{{ i18n.t('pp.text') }}</p>
 
-      <label for="pp-select" class="pp-label">Which project would you like to talk about?</label>
-      <select id="pp-select" class="pp-select" (change)="chooseProject($any($event.target).value)">
-        <option value="">Select a project…</option>
-        @for (name of privateProjects; track name) {
-          <option [value]="name">{{ name }}</option>
+      <label for="pp-select" class="pp-label">{{ i18n.t('pp.which') }}</label>
+      <select id="pp-select" #ppSelect class="pp-select" (change)="chooseProject($any($event.target).value)">
+        <option value="">{{ i18n.t('pp.select') }}</option>
+        @for (pp of privateProjects; track pp.value) {
+          <option [value]="pp.value" [selected]="selectedProject() === pp.value">{{ i18n.pick(pp.value, pp.es) }}</option>
         }
       </select>
 
@@ -25,19 +23,19 @@
          [attr.href]="selectedProject() ? gmailLink() : null"
          [attr.aria-disabled]="!selectedProject()"
          target="_blank" rel="noopener noreferrer">
-        <i class="fas fa-envelope"></i> Email me on Gmail
+        <i class="fas fa-envelope" aria-hidden="true"></i> {{ i18n.t('pp.send') }}<span class="sr-only"> {{ i18n.t('common.newTab') }}</span>
       </a>
 
-      <p class="pp-alt">
+      <p class="pp-alt" aria-live="polite">
         @if (selectedProject()) {
-          Don't use Gmail? <a [href]="mailtoLink()">Open your mail app instead</a>
+          {{ i18n.t('pp.noGmail') }} <a [href]="mailtoLink()">{{ i18n.t('pp.mailApp') }}</a>
         } @else {
-          Pick a project to enable the email button.
+          {{ i18n.t('pp.pick') }}
         }
       </p>
 
       <button type="button" class="pp-close" (click)="closePopup()">
-        No thanks, I'm just looking around
+        {{ i18n.t('pp.close') }}
       </button>
 
     </div>
@@ -45,81 +43,86 @@
 }
 
 @if (popupState() === 'docked') {
-  <button type="button" class="pp-tab" (click)="openPopup()" aria-label="Open the note about my private projects">
-    <i class="fas fa-lock"></i>
-    <span>Private projects</span>
+  <button type="button" class="pp-tab" #ppTab (click)="openPopup()" [attr.aria-label]="i18n.t('pp.tabLabel')">
+    <i class="fas fa-lock" aria-hidden="true"></i>
+    <span aria-hidden="true">{{ i18n.t('pp.tab') }}</span>
   </button>
 }
 
 <div class="portfolio-container">
 
   <header class="profile-header">
-    <h1>Projects</h1>
+    <h1>{{ i18n.t('projects.title') }}</h1>
     <p class="subtitle">
-      <i class="fas fa-laptop-code"></i>
-      Hackathons & Side Projects
+      <i class="fas fa-laptop-code" aria-hidden="true"></i>
+      {{ i18n.t('projects.subtitle') }}
     </p>
   </header>
 
   <main>
 
     @for (p of projects; track p.title) {
-      <section class="project-card">
+      <article class="project-card" [attr.aria-labelledby]="'project-' + $index">
         <a class="cover" [href]="p.video" target="_blank" rel="noopener noreferrer"
-           [attr.aria-label]="'Watch the ' + p.title + ' demo video'">
-          <img [src]="p.image" [alt]="p.imageAlt" loading="lazy">
+           [attr.aria-label]="i18n.t('projects.coverLabel', { title: p.title })">
+          <img [src]="p.image" [alt]="text(p).imageAlt" loading="lazy">
           <span class="play" aria-hidden="true"><i class="fas fa-play"></i></span>
         </a>
 
-        <h2>{{ p.title }}</h2>
+        <h2 [id]="'project-' + $index">{{ p.title }}</h2>
 
-        @if (p.meta) {
-          <p class="project-meta">{{ p.meta }}</p>
+        @if (text(p).meta) {
+          <p class="project-meta">{{ text(p).meta }}</p>
         }
 
-        <p class="description">{{ p.summary }}</p>
+        <p class="description">{{ text(p).summary }}</p>
 
-        @if (p.more) {
+        @if (text(p).more) {
           @if (isExpanded(p.title)) {
-            <p class="description more-text">{{ p.more }}</p>
+            <p class="description more-text" [id]="'more-' + $index">{{ text(p).more }}</p>
           }
           <button type="button" class="read-more" (click)="toggleMore(p.title)"
-                  [attr.aria-expanded]="isExpanded(p.title)">
-            {{ isExpanded(p.title) ? 'Read less' : 'Read more' }}
-            <i class="fas fa-chevron-down" [class.flip]="isExpanded(p.title)"></i>
+                  [attr.aria-expanded]="isExpanded(p.title)"
+                  [attr.aria-controls]="'more-' + $index">
+            {{ isExpanded(p.title) ? i18n.t('projects.readLess') : i18n.t('projects.readMore') }}
+            <span class="sr-only">: {{ p.title }}</span>
+            <i class="fas fa-chevron-down" [class.flip]="isExpanded(p.title)" aria-hidden="true"></i>
           </button>
         }
 
-        <div class="tags">
+        <ul class="tags" [attr.aria-label]="i18n.t('projects.tools')">
           @for (t of p.tools; track t) {
-            <span class="tag">{{ t }}</span>
+            <li class="tag">{{ t }}</li>
           }
-        </div>
+        </ul>
 
         <div class="links">
-          <a [href]="p.video" target="_blank" rel="noopener noreferrer">Watch demo</a>
-          <a [href]="p.devpost" target="_blank" rel="noopener noreferrer">Devpost</a>
+          <a [href]="p.video" target="_blank" rel="noopener noreferrer"
+             [attr.aria-label]="i18n.t('projects.watchFor', { title: p.title })">{{ i18n.t('projects.watch') }}</a>
+          <a [href]="p.devpost" target="_blank" rel="noopener noreferrer"
+             [attr.aria-label]="i18n.t('projects.devpostFor', { title: p.title })">Devpost</a>
           @if (p.github) {
-            <a [href]="p.github" target="_blank" rel="noopener noreferrer">GitHub</a>
+            <a [href]="p.github" target="_blank" rel="noopener noreferrer"
+               [attr.aria-label]="i18n.t('projects.githubFor', { title: p.title })">GitHub</a>
           }
         </div>
-      </section>
+      </article>
     }
 
-    <div class="divider"></div>
+    <div class="divider" aria-hidden="true"></div>
 
     <div class="more">
-      <p class="description">See everything on:</p>
+      <p class="description">{{ i18n.t('projects.seeAll') }}</p>
 
       <div class="more-links">
         <a class="logo-link" [href]="devpostProfile" target="_blank" rel="noopener noreferrer"
-           aria-label="My Devpost profile">
-          <img src="images/devpost-logo.svg" alt="Devpost" class="devpost-logo">
+           [attr.aria-label]="i18n.t('projects.devpostProfile')">
+          <img src="images/devpost-logo.svg" alt="" class="devpost-logo">
         </a>
 
         <a class="github-link" [href]="githubProfile" target="_blank" rel="noopener noreferrer"
-           aria-label="My GitHub profile">
-          <i class="fab fa-github"></i>
+           [attr.aria-label]="i18n.t('projects.githubProfile')">
+          <i class="fab fa-github" aria-hidden="true"></i>
           <span>GitHub</span>
         </a>
       </div>
