@@ -683,9 +683,20 @@ footer {
     justify-content: flex-start;
   }
 
+  /* "(Without AI 😱)" stays together on one line */
+  .tagline span {
+    white-space: nowrap;
+  }
+
+  /* Button fits on one line: drop the rocket, keep the arrow */
   .cta-btn {
     gap: 7px;
     padding: 9px 14px;
     font-size: 0.85rem;
+    white-space: nowrap;
   }
+
+    .cta-btn .fa-rocket {
+      display: none;
+    }
 }
