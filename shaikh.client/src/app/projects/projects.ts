@@ -91,7 +91,7 @@ export class ProjectsComponent {
   readonly projects: Project[] = [
     {
       title: 'Memo',
-      meta: 'AI check-ins for dementia care · Oct 2026',
+      meta: 'Emory Hacks 2026 Fall',
       summary:
         'A helper that calls a parent\'s kitchen iPad at drink, meal and pill times, sees whether they drank or took their pills, ' +
         'and tells their family live.',
@@ -107,7 +107,7 @@ export class ProjectsComponent {
     },
     {
       title: 'FaceScan',
-      meta: 'Smart glasses face recognition · Mar 2026',
+      meta: 'Georgia State University Hacklanta 2026 Spring',
       summary:
         'Smart glasses for people who are visually impaired or have face blindness.',
       more:
@@ -122,6 +122,7 @@ export class ProjectsComponent {
     },
     {
       title: 'Good Night',
+      meta: '2026 Spring',
       summary:
         'A sleep companion for people with insomnia or anxiety, built around a sleeping cat named Luma.',
       more:
@@ -136,7 +137,7 @@ export class ProjectsComponent {
     },
     {
       title: 'Whispering Witches',
-      meta: 'UGAHacks 2026',
+      meta: 'UGAHacks 2026 Spring',
       summary:
         'A 3D battle-royale-style game where a witch restores a destroyed world by defeating goblins with spells from her Grimoire.',
       more:

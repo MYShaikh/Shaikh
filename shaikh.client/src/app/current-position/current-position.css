@@ -346,6 +346,12 @@ main {
   color: #ffffff;
 }
 
+/* Flat Rock photos: same shape so the row lines up */
+.image-grid.photo-set .responsive-img {
+  aspect-ratio: 4 / 3;
+  object-fit: cover;
+}
+
 /* Two photos side by side */
 .image-grid.two-up {
   grid-template-columns: repeat(2, 1fr);
