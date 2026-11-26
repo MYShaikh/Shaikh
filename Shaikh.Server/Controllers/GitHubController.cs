@@ -5,7 +5,7 @@ using Microsoft.Extensions.Caching.Memory;
 
 namespace Shaikh.Server.Controllers
 {
-    // Serves the last ~6 months of GitHub contributions for the homepage.
+    // Serves the last ~4 months of GitHub contributions for the homepage.
     // GitHub's public contributions page is read at most every 10 minutes and kept in memory,
     // so visitors never wait on GitHub. If GitHub can't be reached, the last good copy is used.
     [ApiController]
@@ -113,9 +113,9 @@ namespace Shaikh.Server.Controllers
                 throw new InvalidOperationException("No contribution days found on the GitHub page.");
             }
 
-            // Last 6 months, in whole weeks that start on Sunday (like GitHub's own graph).
+            // Last 4 months, in whole weeks that start on Sunday (like GitHub's own graph).
             DateOnly end = days.Keys.Max();
-            DateOnly start = end.AddDays(-182);
+            DateOnly start = end.AddMonths(-4);
             start = start.AddDays(-(int)start.DayOfWeek);
 
             var weeks = new List<List<ContributionDay>>();

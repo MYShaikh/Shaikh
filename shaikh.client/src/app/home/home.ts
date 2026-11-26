@@ -90,7 +90,7 @@ export class HomeComponent implements OnInit {
     setTimeout(() => this.particles.update(list => list.filter(p => !ids.has(p.id))), 2600);
   }
 
-  // ---- GitHub contributions, last 6 months (signals: this app runs without zone.js) ----
+  // ---- GitHub contributions, last 4 months (signals: this app runs without zone.js) ----
   readonly contributions = signal<Contributions | null>(null);
   readonly contributionsFailed = signal(false);
 
