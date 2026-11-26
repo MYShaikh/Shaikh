@@ -22,8 +22,8 @@ string dbUser = builder.Configuration["DatabaseSettings:UserId"];
 string dbPass = builder.Configuration["DatabaseSettings:Password"];
 
 // The free serverless database pauses after an hour without use and needs up to
-// a minute to wake up. "Connect Timeout=60" gives it time instead of failing after 15 s.
-string dynamicConnectionString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPass};TrustServerCertificate=True;Encrypt=True;Connect Timeout=60;";
+// a minute to wake up. Connections retry while it wakes (see Data/Sql.cs).
+string dynamicConnectionString = $"Server={dbServer};Database={dbName};User Id={dbUser};Password={dbPass};TrustServerCertificate=True;Encrypt=True;Connect Timeout=30;";
 Console.WriteLine($"[DB] Connecting to Server={dbServer} Database={dbName}");
 
 string emailConnectionString = builder.Configuration["EmailSettings:ConnectionString"];
@@ -43,7 +43,7 @@ builder.Configuration["ConnectionStrings:DefaultConnection"] = dynamicConnection
 builder.Services.AddControllers();
 builder.Services.AddOpenApi();
 builder.Services.AddDbContext<PortfolioContext>(options =>
-    options.UseSqlServer(dynamicConnectionString));
+    options.UseSqlServer(dynamicConnectionString, sql => sql.EnableRetryOnFailure(5, TimeSpan.FromSeconds(20), null)));
 
 builder.Services.AddCors(options =>
 {

@@ -1,3 +1,4 @@
+using Shaikh.Server.Data;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -37,7 +38,7 @@ namespace Shaikh.Server.Controllers
             bool saved = false;
             try
             {
-                using IDbConnection db = new SqlConnection(_connectionString);
+                using IDbConnection db = Sql.Connect(_connectionString);
 
                 string sql = @"
             INSERT INTO dbo.Contacts

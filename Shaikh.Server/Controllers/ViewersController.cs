@@ -1,4 +1,5 @@
 ﻿using Azure.Core;
+using Shaikh.Server.Data;
 using Dapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
@@ -25,7 +26,7 @@ namespace Shaikh.Server.Controllers
         [HttpPost("increment")]
         public async Task<IActionResult> IncrementViewers()
         {
-            using IDbConnection db = new SqlConnection(_connectionString);
+            using IDbConnection db = Sql.Connect(_connectionString);
             string incrementSql = @"
                 UPDATE TotalViewers
                 SET ViewerCount = ViewerCount + 1
@@ -43,7 +44,7 @@ namespace Shaikh.Server.Controllers
         public async Task<IActionResult> SaveRole([FromBody] VisitorTypeRequest request)
         {
             Console.WriteLine(request.VisitorType);
-            using IDbConnection db = new SqlConnection(_connectionString);
+            using IDbConnection db = Sql.Connect(_connectionString);
 
             string sql = @"
         INSERT INTO VisitorTypes

@@ -1,4 +1,5 @@
 ﻿using Dapper;
+using Shaikh.Server.Data;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Data.SqlClient;
 using Shaikh.Server.Models;
@@ -22,7 +23,7 @@ namespace Shaikh.Server.Controllers
         [HttpPost]
         public async Task<IActionResult> SaveAlumniResponse([FromBody] AlumniRequest request)
         {
-            using IDbConnection db = new SqlConnection(_connectionString);
+            using IDbConnection db = Sql.Connect(_connectionString);
 
             string sql = @"
         INSERT INTO Alumni
